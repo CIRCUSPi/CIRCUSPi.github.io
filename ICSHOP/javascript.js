@@ -1213,3 +1213,334 @@ Blockly.Arduino.huskylens_sl_model_to_sd=function() {
       return"huskylens.loadModelFromSDCard("+b+");\n";
   }
 };
+
+// PIXETTO
+Blockly.Arduino.pixetto={};
+Blockly.Arduino.pixetto_uart_init=function() {
+  var a=this.getFieldValue("RX_PIN"),
+      b=this.getFieldValue("TX_PIN");
+  Blockly.Arduino.definitions_.define_pixetto="#include <SoftwareSerial.h>\n\n#define PXT_PACKET_START   0xFD\n#define PXT_PACKET_END    0xFE\n\n#define PXT_CMD_STREAMON  0x79\n#define PXT_CMD_STREAMOFF 0x7A\n#define PXT_CMD_ENABLEFUNC  0x7D\n#define PXT_CMD_DETMODE   0x7E\n\n#define PXT_RET_CAM_SUCCESS 0xE0\n#define PXT_RET_CAM_ERROR 0xE1\n\n#define PXT_RET_OBJNUM    0x46\n\n#define PXT_BUF_SIZE    40\n\n#define MAX_OPENCAM_ERROR   2\n#define MAX_HEX_ERROR     30\n\nenum EFunc {\n  FUNC_COLOR_DETECTION		= 1,\n  FUNC_COLOR_CODE_DETECTION	= 2,\n  FUNC_SHAPE_DETECTION		= 3,\n  FUNC_SPHERE_DETECTION		= 4,\n  FUNC_TEMPLATE_MATCHING		= 6,\n  FUNC_KEYPOINTS				= 8,\n  FUNC_NEURAL_NETWORK			= 9,\n  FUNC_APRILTAG				= 10,\n  FUNC_FACE_DETECTION			= 11,\n  FUNC_TRAFFIC_SIGN_DETECTION	= 12,\n  FUNC_HANDWRITTEN_DIGITS_DETECTION	= 13,\n  FUNC_HANDWRITTEN_LETTERS_DETECTION	= 14,\n  FUNC_CLOUD_DETECTION		= 15,\n  FUNC_LANES_DETECTION		= 16,\n  FUNC_EQUATION_DETECTION		= 17,\n  FUNC_SIMPLE_CLASSIFIER		= 18,\n  FUNC_VOICE_COMMAND			= 19\n};\nenum EColor {\n  COLOR_RED = 1,\n  COLOR_YELLOW,\n  COLOR_GREEN,\n  COLOR_BLUE,\n  COLOR_PURPLE,\n  COLOR_BLACK\n};\nenum EShape {\n  SHAPE_ROUND = 1,\n  SHAPE_RECTANGLE,\n  SHAPE_TRIANGLE,\n  SHAPE_PENTAGON\n};\nenum ETrafficSign {\n  SIGN_NO_ENTRE = 0,\n  SIGN_NO_LEFT_TURN,\n  SIGN_NO_RIGHT_TURN,\n  SIGN_WRONG_WAY,\n  SIGN_NO_U_TURN,\n  SIGN_MAX_SPEED,\n  SIGN_ONEWAY_TRAFFIC,\n  SIGN_LEFT_TURN,\n  SIGN_RIGHT_TURN,\n  SIGN_MIN_SPEED,\n  SIGN_U_TURN,\n  SIGN_TUNNEL_AHEAD,\n  SIGN_BEWARE_OF_CHILDREN,\n  SIGN_ROUNDABOUT,\n  SIGN_YIELD_TO_PEDESTRIAN,\n  SIGN_RED_LIGHT,\n  SIGN_GREEN_LIGHT\n};\nenum ELetters {\n  LETTER_A=0,\n  LETTER_B,\n  LETTER_C,\n  LETTER_D,\n  LETTER_E,\n  LETTER_F,\n  LETTER_G,\n  LETTER_H,\n  LETTER_I,\n  LETTER_J,\n  LETTER_K,\n  LETTER_L,\n  LETTER_M,\n  LETTER_N,\n  LETTER_O,\n  LETTER_P,\n  LETTER_Q,\n  LETTER_R,\n  LETTER_S,\n  LETTER_T,\n  LETTER_U,\n  LETTER_V,\n  LETTER_W,\n  LETTER_X,\n  LETTER_Y,\n  LETTER_Z\n};\nenum EVoiceCommand {\n  VOICE_Hello = 1,\n  VOICE_Thanks,\n  VOICE_Bye,\n  VOICE_WhatsThis,\n  VOICE_WhatTime,\n  VOICE_HowOld,\n  VOICE_WhatDay,\n  VOICE_TellStory,\n  VOICE_TellJoke,\n  VOICE_ReadPoem,\n  VOICE_TurnOnLight,\n  VOICE_TurnOffLight,\n  VOICE_TurnLeft,\n  VOICE_TurnRight,\n  VOICE_GoAhead,\n  VOICE_MoveBack,\n  VOICE_Stop,\n  VOICE_Open,\n  VOICE_Close,\n  VOICE_OpenEyes1,\n  VOICE_OpenEyes2,\n  VOICE_CloseEyes1,\n  VOICE_CloseEyes2,\n  VOICE_Jump,\n  VOICE_StandUp,\n  VOICE_SquatDown\n};\nenum EApriltagField {\n  APRILTAG_POS_X=1,\n  APRILTAG_POS_Y,\n  APRILTAG_POS_Z,\n  APRILTAG_ROT_X,\n  APRILTAG_ROT_Y,\n  APRILTAG_ROT_Z,\n  APRILTAG_CENTER_X,\n  APRILTAG_CENTER_Y\n};\nenum ELanesField {\n    LANES_LX1=1,\n    LANES_LY1,\n    LANES_LX2,\n    LANES_LY2,\n    LANES_RX1,\n    LANES_RY1,\n    LANES_RX2,\n    LANES_RY2\n};\nbool bEnableUVC = false;\nbool bDetMode = false;\nbool isCamOpened;\nbool bSendStreamOn;\nbool hasDelayed;\nint  nOpenCamFailCount;\nint  nHexErrCount;\nbool m_bDetModeDone;\nbool m_bFuncDone = true;\nint  m_nFuncID = 0;\nint m_id = 0;\nint m_type = 0;\nint m_x = 0;\nint m_y = 0;\nint m_h = 0;\nint m_w = 0;\nint m_objnum;\nfloat m_eqAnswer;\nint m_eqLen = 0;\nint m_dataLen = 0;\nunsigned long nTime4ObjNum = 0;\nfloat m_posx;\nfloat m_posy;\nfloat m_posz;\nint m_rotx;\nint m_roty;\nint m_rotz;\nint m_centerx;\nint m_centery;\nuint8_t m_inbuf[PXT_BUF_SIZE];\nint m_points[8];\nchar m_eqExpr[17];\n";
+  Blockly.Arduino.definitions_.define_pixetto_init="SoftwareSerial myPixettoSerial("+a+", "+b+");\n";
+  Blockly.Arduino.definitions_.define_pixetto_packages1="void begin() {\n  myPixettoSerial.begin(38400);\n  myPixettoSerial.setTimeout(50);\n  hasDelayed = false;\n  isCamOpened = false;\n  bSendStreamOn = false;\n  nOpenCamFailCount = 0;\n  nHexErrCount = 0;\n}\nvoid end() {\n  myPixettoSerial.end();\n}\nvoid clearDetectedData() {\n  m_id = 0; m_type = 0;\n  m_x = 0; m_y = 0; m_h = 0; m_w = 0;\n  m_eqAnswer = 0; m_eqLen = 0;\n  m_posx = 0.0; m_posy = 0.0; m_posz = 0.0; m_rotx = 0; m_roty = 0; m_rotz = 0;\n  m_centerx = 0; m_centery = 0;\n  memset(m_inbuf,  0, sizeof(m_inbuf));\n  memset(m_points, 0, sizeof(m_points));\n  memset(m_eqExpr, 0, sizeof(m_eqExpr));\n}\nint getFuncID() {\n	return m_id;\n}\nint getTypeID() {\n	return m_type;\n}\nint getPosX() {\n	return m_x;\n}\nint getPosY() {\n	return m_y;\n}\nint getH() {\n	return m_h;\n}\nint getW() {\n	return m_w;\n}\nint numObjects() {\n	if ((millis() - nTime4ObjNum) > 500)\n		m_objnum = 0;\n	return m_objnum;\n}\nvoid getEquationExpr(char *buf, int len) {\n	 strncpy(buf, m_eqExpr, m_eqLen);\n	 buf[m_eqLen] = '\\0';\n}\n";
+  Blockly.Arduino.definitions_.define_pixetto_packages2="float getEquationAnswer() {\n	return m_eqAnswer;\n}\nvoid getApriltagInfo(float* px, float* py, float* pz, int* rx, int* ry, int* rz, int* cx, int* cy) {\n	if (!px || !py || !px || !rx || !ry || !rz || !cx || !cy)\n		return;\n	*px = m_posx;\n	*py = m_posy;\n	*pz = m_posz;\n	*rx = m_rotx;\n	*ry = m_roty;\n	*rz = m_rotz;\n	*cx = m_centerx;\n	*cy = m_centery;\n}\nfloat getApriltagField(EApriltagField field) {\n	switch(field) {\n		case APRILTAG_POS_X:\n			return m_posx;\n		case APRILTAG_POS_Y:\n			return m_posy;\n		case APRILTAG_POS_Z:\n			return m_posz;\n		case APRILTAG_ROT_X:\n			return m_rotx;\n		case APRILTAG_ROT_Y:\n			return m_roty;\n		case APRILTAG_ROT_Z:\n			return m_rotz;\n		case APRILTAG_CENTER_X:\n			return m_centerx;\n		case APRILTAG_CENTER_Y:\n			return m_centery;\n		default:\n			return 0;\n	}\n}\nvoid getLanePoints(int* lx1, int* ly1, int* lx2, int* ly2, int* rx1, int* ry1, int* rx2, int* ry2) {\n  if (!lx1 || !ly1 || !lx2 || !ly2 || !rx1 || !ry1 || !rx2 || !ry2)\n    return;\n  *lx1 = m_points[0];\n  *ly1 = m_points[1];\n  *lx2 = m_points[2];\n  *ly2 = m_points[3];\n  *rx1 = m_points[4];\n  *ry1 = m_points[5];\n  *rx2 = m_points[6];\n  *ry2 = m_points[7];\n}\nfloat getLanesField(ELanesField field) {\n	switch(field) {\n		case LANES_LX1:\n			return m_points[0];\n		case LANES_LY1:\n			return m_points[1];\n		case LANES_LX2:\n			return m_points[2];\n		case LANES_LY2:\n			return m_points[3];\n		case LANES_RX1:\n			return m_points[4];\n		case LANES_RY1:\n			return m_points[5];\n		case LANES_RX2:\n			return m_points[6];\n		case LANES_RY2:\n			return m_points[7];\n		default:\n			return 0;\n	}\n}\nvoid flush() {\n  while (myPixettoSerial.available() > 0)\n    char t = myPixettoSerial.read();\n}\nvoid calcDataChecksum(uint8_t *buf, int len) {\n  uint8_t sum = 0;\n  for (int i=1; i<len-2; i++)\n    sum += buf[i];\n  sum %= 256;\n  buf[len-2] = sum;\n}\nvoid sendQueryCommand() {\n  uint8_t SENSOR_CMD[] = {PXT_PACKET_START, 0x06, PXT_CMD_ENABLEFUNC, m_nFuncID, 0, PXT_PACKET_END};\n  calcDataChecksum(SENSOR_CMD, 6);\n  myPixettoSerial.write(SENSOR_CMD, sizeof(SENSOR_CMD)/sizeof(uint8_t));\n}\nvoid sendDetModeCommand() {\n  uint8_t SENSOR_CMD[] =  {PXT_PACKET_START, 0x06, PXT_CMD_DETMODE, bDetMode?1:0, 0, PXT_PACKET_END};\n  calcDataChecksum(SENSOR_CMD, 6);\n  myPixettoSerial.write(SENSOR_CMD, sizeof(SENSOR_CMD)/sizeof(uint8_t));\n}\n";
+  Blockly.Arduino.definitions_.define_pixetto_packages3="void resetUboot() {\n  Serial.println(\"resetUboot\");\n  end();\n  delay(50);\n  myPixettoSerial.begin(115200);\n  myPixettoSerial.print(\"reset\\n\");\n  myPixettoSerial.print(\"reset\\n\");\n  myPixettoSerial.print(\"reset\\n\");\n  myPixettoSerial.flush();\n  delay(50);\n  flush();\n  myPixettoSerial.end();\n  delay(2000);\n  begin();\n}\nbool openCam() {\n  if (isCamOpened)\n    return true;\n  if (!hasDelayed) {\n    delay(3000);\n    hasDelayed = true;\n  }\n  else {\n    delay(1000);\n  }\n  if (nOpenCamFailCount > MAX_OPENCAM_ERROR) {\n    resetUboot();\n    bSendStreamOn = false;\n    nOpenCamFailCount = 0;\n    delay(2000);\n  }\n  if (!bSendStreamOn) {\n    flush();\n    uint8_t SENSOR_CMD[] =  {PXT_PACKET_START, 0x05, PXT_CMD_STREAMOFF, 0, PXT_PACKET_END};\n    calcDataChecksum(SENSOR_CMD, 5);\n    myPixettoSerial.write(SENSOR_CMD, sizeof(SENSOR_CMD)/sizeof(uint8_t));\n    delay(500);\n    flush();\n    SENSOR_CMD[2] = PXT_CMD_STREAMON;\n    calcDataChecksum(SENSOR_CMD, 5);\n    myPixettoSerial.write(SENSOR_CMD, sizeof(SENSOR_CMD)/sizeof(uint8_t));\n    bSendStreamOn = true;\n  }  if (myPixettoSerial.available() > 0) {\n    bSendStreamOn = false;\n    uint8_t buffer[10];\n    uint8_t input;\n    int i=0;\n    int nodata=0;\n    while ((input = myPixettoSerial.read()) != PXT_PACKET_START) {\n      if (input == 0xFF) {\n        nOpenCamFailCount++;\n        return false;\n      }\n      continue;\n    }\n    buffer[i++] = input;\n    while ((input = myPixettoSerial.read()) != PXT_PACKET_END) {\n      if (input == 0xFF) {\n        delay(1);\n        nodata++;\n        if (nodata > 10) {\n          nOpenCamFailCount++;\n          return false;\n        }\n        else\n          continue;\n      }\n      if (input == PXT_PACKET_START)\n        i = 0;\n      if (i >= 4) {\n        nOpenCamFailCount++;\n        return false;\n      }\n      buffer[i++] = input;\n      nodata = 0;\n    }\n    buffer[i] = input;\n    if (buffer[2] == PXT_RET_CAM_SUCCESS) {\n      isCamOpened = true;\n      if (!m_bDetModeDone) {\n        sendDetModeCommand();\n        m_bDetModeDone = true;\n      }\n      return true;\n    }\n    else {\n      nOpenCamFailCount++;\n    }\n  }\n  else {\n    nOpenCamFailCount++;\n  }\n  return false;\n}\n";
+
+  Blockly.Arduino.definitions_.define_pixetto_packages4="bool verifyDataChecksum(uint8_t *buf, int len) {\n  uint8_t sum = 0;\n  for (uint8_t i=1; i<len-2; i++)\n    sum += buf[i];\n  sum %= 256;\n  return (sum == buf[len-2]);\n}\nvoid parse_Lanes(uint8_t *buf) {\n  m_x = buf[3];\n  m_y = buf[4];\n  for (int aa=0; aa<8; aa++)\n    m_points[aa] = buf[aa+5];\n}\nvoid parse_Equation(uint8_t *buf, int len) {\n  m_x = buf[3];\n  m_y = buf[4];\n  m_w = buf[5];\n  m_h = buf[6];\n  m_eqAnswer = 0;\n  for (int i=8; i<=14; i++)\n    m_eqAnswer = m_eqAnswer * 10 + buf[i];\n  m_eqAnswer /= 100;\n  if (buf[7] == 0) m_eqAnswer = 0 - m_eqAnswer;\n  memset(m_eqExpr, 0, sizeof(m_eqExpr));\n  m_eqLen = len - 17;\n  for (int aa=0; aa<m_eqLen; aa++)\n    m_eqExpr[aa] = (char)buf[aa+15];\n}\nvoid parse_Apriltag(uint8_t *buf) {\n  m_type = buf[3];\n  m_x = buf[4];\n  m_y = buf[5];\n  m_w = buf[6];\n  m_h = buf[7];\n  int value = 0;\n  value = (short)(buf[8] * 256 + buf[9]);\n  m_posx = (float)value / 100.0;\n  value = (short)(buf[10] * 256 + buf[11]);\n  m_posy = (float)value / 100.0;\n  value = (short)(buf[12] * 256 + buf[13]);\n  m_posz = (float)value / 100.0;\n  m_rotx = (short)(buf[14] * 256 + buf[15]);\n  m_roty = (short)(buf[16] * 256 + buf[17]);\n  m_rotz = (short)(buf[18] * 256 + buf[19]);\n  m_centerx = (short)(buf[20] * 256 + buf[21]);\n  m_centery = (short)(buf[22] * 256 + buf[23]);\n}\nvoid parse_SimpleClassifier(uint8_t *buf) {\n  m_type = buf[3] * 256 + buf[4];\n  m_x = buf[5];\n  m_y = buf[6];\n  m_w = buf[7];\n  m_h = buf[8];\n}\n";
+
+  Blockly.Arduino.definitions_.define_pixetto_packages5="bool isDetected() {\n  if (bEnableUVC) {\n    sendDetModeCommand();\n  }\n  else {\n    bool ret = openCam();\n    if (!ret) {\n      return false;\n    }\n  }\n  if (!bDetMode && !m_bFuncDone) {\n    flush();\n    sendQueryCommand();\n    m_bFuncDone = true;\n  }\n  if (bDetMode == true) {\n    flush();\n    sendQueryCommand();\n  }\n  clearDetectedData();\n  if (readFromSerial()) {\n    m_id = m_inbuf[2];\n    if (m_id <= 0) {\n      return false;\n    }\n    if (m_id == FUNC_LANES_DETECTION) {\n			parse_Lanes(m_inbuf);\n			m_objnum = 1;\n		}\n		else if (m_id == FUNC_EQUATION_DETECTION) {\n		 	parse_Equation(m_inbuf, m_dataLen);\n		 	m_objnum = 1;\n		}\n		else if (m_id == FUNC_APRILTAG) {\n			parse_Apriltag(m_inbuf);\n		}\n		else if (m_id == FUNC_SIMPLE_CLASSIFIER) {\n			parse_SimpleClassifier(m_inbuf);\n		}\n		else {\n			m_type = m_inbuf[3];\n			if (m_id == PXT_RET_OBJNUM) {\n				if (m_type > 0) {\n				    m_objnum  = m_type;\n				    nTime4ObjNum = millis();\n				}\n				return isDetected();\n			}\n      m_x = m_inbuf[4];\n      m_y = m_inbuf[5];\n      m_w = m_inbuf[6];\n      m_h = m_inbuf[7];\n    }\n    return true;\n  }\n  else {\n    if (nHexErrCount > MAX_HEX_ERROR) {\n      nHexErrCount = 0;\n      resetUboot();\n    }\n    return false;\n  }\n  return false;\n}\n";
+
+  Blockly.Arduino.definitions_.define_pixetto_packages6="bool readFromSerial() {\n  uint8_t tmpbuf[PXT_BUF_SIZE];\n  int readnum = 0;\n  if (bDetMode == true) {\n    int loop=0;\n    while (myPixettoSerial.available() <= 0 && loop < 100000) loop++;\n  }\n  delay(150);\n  if (myPixettoSerial.available() > 0) {\n    memset(tmpbuf, 0 ,sizeof(tmpbuf));\n    if ((readnum = myPixettoSerial.readBytes(tmpbuf, PXT_BUF_SIZE)) != 0) {\n    }\n  }\n  if (readnum == 0)\n    return false;\n  int i = 0;\n  while (i < readnum) {\n    if (tmpbuf[i] != PXT_PACKET_START) {\n      i++;\n      continue;\n    }\n    if (i == readnum - 1) {\n      nHexErrCount++;\n      return false;\n    }\n    int len = tmpbuf[i+1];\n    if (len < 0 || len > PXT_BUF_SIZE || len > readnum - i) {\n      nHexErrCount++;\n      return false;\n    }\n    memset(m_inbuf, 0, sizeof(m_inbuf));\n    memcpy(m_inbuf, tmpbuf+i, len);\n    if (verifyDataChecksum(m_inbuf, len)) {\n      nHexErrCount = 0;\n      m_dataLen = len;\n      if (m_inbuf[2] == PXT_RET_OBJNUM) {\n        if (m_inbuf[3] > 0) {\n            m_objnum  = m_inbuf[3];\n            nTime4ObjNum = millis();\n        }\n        i += m_dataLen;\n        continue;\n      }\n      return true;\n    }\n    else {\n      memset(m_inbuf, 0, sizeof(m_inbuf));\n      i++;\n    }\n  }\n    nHexErrCount++;\n  return false;\n}\n";
+
+  Blockly.Arduino.setups_["pixetto_init"]="begin();\n";
+  return"";
+};
+
+Blockly.Arduino.pixetto_is_detection=function() {
+  return["isDetected()",Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.pixetto_count_object=function() {
+  return["numObjects()",Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.pixetto_color_detects=function() {
+  var a=this.getFieldValue("PIXETTO_COLOR");
+  if (a == "PIXETTO_RED") {
+      return["getFuncID() == FUNC_COLOR_DETECTION && getTypeID() == COLOR_RED",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_YELLOW") {
+      return["getFuncID() == FUNC_COLOR_DETECTION && getTypeID() == COLOR_YELLOW",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_GREEN") {
+      return["getFuncID() == FUNC_COLOR_DETECTION && getTypeID() == COLOR_GREEN",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_BLUE") {
+      return["getFuncID() == FUNC_COLOR_DETECTION && getTypeID() == COLOR_BLUE",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_PURPLE"){
+      return["getFuncID() == FUNC_COLOR_DETECTION && getTypeID() == COLOR_PURPLE",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else {
+      return["getFuncID() == FUNC_COLOR_DETECTION && getTypeID() == COLOR_BLACK",Blockly.Arduino.ORDER_ATOMIC];
+  }
+};
+
+Blockly.Arduino.pixetto_shape_detects=function() {
+  var a=this.getFieldValue("PIXETTO_SHAPE");
+  if (a == "PIXETTO_CIRCLE") {
+      return["getFuncID() == FUNC_SHAPE_DETECTION && getTypeID() == SHAPE_ROUND",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_RECTANGLE") {
+      return["getFuncID() == FUNC_SHAPE_DETECTION && getTypeID() == SHAPE_RECTANGLE",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_TRIANGLE") {
+      return["getFuncID() == FUNC_SHAPE_DETECTION && getTypeID() == SHAPE_TRIANGLE",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else {
+      return["getFuncID() == FUNC_SHAPE_DETECTION && getTypeID() == SHAPE_PENTAGON",Blockly.Arduino.ORDER_ATOMIC];
+  }
+};
+
+Blockly.Arduino.pixetto_sphere_detects=function() {
+  var a=this.getFieldValue("PIXETTO_SPHERE");
+  if (a == "PIXETTO_RED") {
+      return["getFuncID() == FUNC_SPHERE_DETECTION && getTypeID() == COLOR_RED",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_YELLOW") {
+      return["getFuncID() == FUNC_SPHERE_DETECTION && getTypeID() == COLOR_YELLOW",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_GREEN") {
+      return["getFuncID() == FUNC_SPHERE_DETECTION && getTypeID() == COLOR_GREEN",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_BLUE") {
+      return["getFuncID() == FUNC_SPHERE_DETECTION && getTypeID() == COLOR_BLUE",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_PURPLE"){
+      return["getFuncID() == FUNC_SPHERE_DETECTION && getTypeID() == COLOR_PURPLE",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else {
+      return["getFuncID() == FUNC_SPHERE_DETECTION && getTypeID() == COLOR_BLACK",Blockly.Arduino.ORDER_ATOMIC];
+  }
+};
+
+Blockly.Arduino.pixetto_template_matching_detects=function() {
+  var a=this.getFieldValue("PIXETTO_TEMPLATE");
+  return["getFuncID() == FUNC_TEMPLATE_MATCHING && getTypeID() == "+a,Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.pixetto_keypoint_detects=function() {
+  var a=this.getFieldValue("PIXETTO_KEYPOINT");
+  return["getFuncID() == FUNC_KEYPOINTS && getTypeID() == "+a,Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.pixetto_neural_detects=function() {
+  var a=Blockly.Arduino.valueToCode(this,"neural_count",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  return["getFuncID() == FUNC_NEURAL_NETWORK && getTypeID() == "+a,Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.pixetto_traffic_detects=function() {
+  var a=this.getFieldValue("PIXETTO_SIGN");
+  if (a == "PIXETTO_SIGN_NO_ENTRE") {
+      return["getFuncID() == FUNC_TRAFFIC_SIGN_DETECTION && getTypeID() == SIGN_NO_ENTRE",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_SIGN_NO_LEFT_TURN") {
+      return["getFuncID() == FUNC_TRAFFIC_SIGN_DETECTION && getTypeID() == SIGN_NO_LEFT_TURN",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_SIGN_NO_RIGHT_TURN") {
+      return["getFuncID() == FUNC_TRAFFIC_SIGN_DETECTION && getTypeID() == SIGN_NO_RIGHT_TURN",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_SIGN_WRONG_WAY") {
+      return["getFuncID() == FUNC_TRAFFIC_SIGN_DETECTION && getTypeID() == SIGN_WRONG_WAY",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_SIGN_NO_U_TURN"){
+      return["getFuncID() == FUNC_TRAFFIC_SIGN_DETECTION && getTypeID() == SIGN_NO_U_TURN",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_SIGN_MAX_SPEED"){
+      return["getFuncID() == FUNC_TRAFFIC_SIGN_DETECTION && getTypeID() == SIGN_MAX_SPEED",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_SIGN_ONEWAY_TRAFFIC"){
+      return["getFuncID() == FUNC_TRAFFIC_SIGN_DETECTION && getTypeID() == SIGN_ONEWAY_TRAFFIC",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_SIGN_LEFT_TURN"){
+      return["getFuncID() == FUNC_TRAFFIC_SIGN_DETECTION && getTypeID() == SIGN_LEFT_TURN",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_SIGN_RIGHT_TURN"){
+      return["getFuncID() == FUNC_TRAFFIC_SIGN_DETECTION && getTypeID() == SIGN_RIGHT_TURN",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_SIGN_MIN_SPEED"){
+      return["getFuncID() == FUNC_TRAFFIC_SIGN_DETECTION && getTypeID() == SIGN_MIN_SPEED",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_SIGN_U_TURN"){
+      return["getFuncID() == FUNC_TRAFFIC_SIGN_DETECTION && getTypeID() == SIGN_U_TURN",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_SIGN_TUNNEL_AHEAD"){
+      return["getFuncID() == FUNC_TRAFFIC_SIGN_DETECTION && getTypeID() == SIGN_TUNNEL_AHEAD",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_SIGN_BEWARE_OF_CHILDREN"){
+      return["getFuncID() == FUNC_TRAFFIC_SIGN_DETECTION && getTypeID() == SIGN_BEWARE_OF_CHILDREN",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_SIGN_ROUNDABOUT"){
+      return["getFuncID() == FUNC_TRAFFIC_SIGN_DETECTION && getTypeID() == SIGN_ROUNDABOUT",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_SIGN_YIELD_TO_PEDESTRIAN"){
+      return["getFuncID() == FUNC_TRAFFIC_SIGN_DETECTION && getTypeID() == SIGN_YIELD_TO_PEDESTRIAN",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_SIGN_RED_LIGHT"){
+      return["getFuncID() == FUNC_TRAFFIC_SIGN_DETECTION && getTypeID() == SIGN_RED_LIGHT",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else {
+      return["getFuncID() == FUNC_TRAFFIC_SIGN_DETECTION && getTypeID() == SIGN_GREEN_LIGHT",Blockly.Arduino.ORDER_ATOMIC];
+  }
+};
+
+Blockly.Arduino.pixetto_apriltag_detects=function() {
+  var a=this.getFieldValue("PIXETTO_APRILTAG");
+  if (a == "PIXETTO_APRILTAG_TYPE") {
+      return["getTypeID()",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_APRILTAG_POSX") {
+      return["getApriltagField(APRILTAG_POS_X)",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_APRILTAG_POSY") {
+      return["getApriltagField(APRILTAG_POS_Y)",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_APRILTAG_POSZ") {
+      return["getApriltagField(APRILTAG_POS_Z)",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_APRILTAG_ROTX"){
+      return["getApriltagField(APRILTAG_ROT_X)",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_APRILTAG_ROTY"){
+      return["getApriltagField(APRILTAG_ROT_Y)",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_APRILTAG_ROTZ"){
+      return["getApriltagField(APRILTAG_ROT_Z)",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_APRILTAG_CENX"){
+      return["getApriltagField(APRILTAG_CENTER_X)",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else {
+      return["getApriltagField(APRILTAG_CENTER_Y)",Blockly.Arduino.ORDER_ATOMIC];
+  }
+};
+
+Blockly.Arduino.pixetto_lanes_detection=function() {
+  var a=this.getFieldValue("PIXETTO_LANES_DETECTION");
+  if (a == "PIXETTO_LANES_GX") {
+      return["getPosX()",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_LANES_GY") {
+      return["getPosY()",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_LANES_LX1") {
+      return["getLanesField(LANES_LX1)",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_LANES_LY1") {
+      return["getLanesField(LANES_LY1)",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_LANES_LX2") {
+      return["getLanesField(LANES_LX2)",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_LANES_LY2") {
+      return["getLanesField(LANES_LY2)",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_LANES_RX1"){
+      return["getLanesField(LANES_RX1)",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_LANES_RY1"){
+      return["getLanesField(LANES_RY1)",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_LANES_RX2"){
+      return["getLanesField(LANES_RX2)",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else {
+      return["getLanesField(LANES_RY2)",Blockly.Arduino.ORDER_ATOMIC];
+  }
+};
+
+Blockly.Arduino.pixetto_object_detail=function() {
+  var a=this.getFieldValue("PIXETTO_OBJECT_DETAIL");
+  if (a == "PIXETTO_OBJECT_TYPE") {
+      return["getTypeID();",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_OBJECT_X") {
+      return["getPosX()",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_OBJECT_Y") {
+      return["getPosY()",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "PIXETTO_OBJECT_W") {
+      return["getW()",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else {
+      return["getH()",Blockly.Arduino.ORDER_ATOMIC];
+  }
+};
+
+Blockly.Arduino.pixetto_handwritten_digits=function() {
+  var a=this.getFieldValue("PIXETTO_HAND_DIGITS");
+  return["getFuncID() == FUNC_HANDWRITTEN_DIGITS_DETECTION && getTypeID() == "+a,Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.pixetto_handwritten_letters=function() {
+  var a=this.getFieldValue("PIXETTO_HAND_LETTERS");
+  return["getFuncID() == FUNC_HANDWRITTEN_LETTERS_DETECTION && getTypeID() == "+a,Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.pixetto_remote_computing_detects=function() {
+  var a=Blockly.Arduino.valueToCode(this,"computing_count",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  return["getFuncID() == FUNC_CLOUD_DETECTION && getTypeID() == "+a,Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.pixetto_remote_classifier_detects=function() {
+  var a=Blockly.Arduino.valueToCode(this,"classifier_count",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  return["getFuncID() == FUNC_SIMPLE_CLASSIFIER && getTypeID() == "+a,Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.pixetto_voice_command_detects=function() {
+  var a=this.getFieldValue("PIXETTO_VOICE_DETECTS");
+  return["getFuncID() == FUNC_VOICE_COMMAND && getTypeID() == "+a,Blockly.Arduino.ORDER_ATOMIC];
+};
+
+// EZ Start Kit Q
+Blockly.Arduino.ez_start_kit_q={};
+Blockly.Arduino.ez_start_kit_q_pca9685_init=function(){
+  Blockly.Arduino.definitions_.define_pca9685_init="#include <Wire.h>";
+  Blockly.Arduino.definitions_.define_pca9685_init2="#include <Adafruit_PWMServoDriver.h>";
+  Blockly.Arduino.definitions_["define_pca9685_init3"]="Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();\n";
+  Blockly.Arduino.definitions_["define_pca9685_init4"]="int servomin = 600;\nint servomax = 2400;\n";
+  Blockly.Arduino.setups_["setup_pac9685_"]="pwm.begin();\n  pwm.setOscillatorFrequency(27000000);\n  pwm.setPWMFreq(50);\n  Wire.setClock(400000);\n";
+  return""
+};
+
+Blockly.Arduino.ez_start_kit_q_motor=function(){
+  var a=this.getFieldValue("MotorChoose"),
+      b=Blockly.Arduino.valueToCode(this,"MOTOR",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  Blockly.Arduino.definitions_.define_pwm_write="void pwmset(int ch_, int pwm_) {  \n  pwm_ = map(pwm_,0,255,0,4095);\n  pwm.setPWM(ch_, 0, (pwm_ + (4096/16)*0) % 4096 );\n}\n";
+  if (a == "M1") {
+    if (b >=0) {
+        return"pwmset(12, "+b+");\npwmset(13, 0);\n";
+    }
+    else {
+        return"pwmset(12, 0);\npwmset(13, abs("+b+"));\n";
+    }
+  }
+  else if (a == "M2") {
+    if (b >=0) {
+        return"pwmset(14, "+b+");\npwmset(15, 0);\n";
+    }
+    else {
+        return"pwmset(14, 0);\npwmset(15, abs("+b+"));\n";
+    }
+  }
+  else if (a == "M3") {
+    if (b >=0) {
+        return"pwmset(8, "+b+");\npwmset(9, 0);\n";
+    }
+    else {
+        return"pwmset(8, 0);\npwmset(9, abs("+b+"));\n";
+    }
+  }
+  else if (a == "M4") {
+    if (b >=0) {
+        return"pwmset(10, "+b+");\npwmset(11, 0);\n";
+    }
+    else {
+        return"pwmset(10, 0);\npwmset(11, abs("+b+"));\n";
+    }
+  }
+};
+
+Blockly.Arduino.ez_start_kit_q_servo_init=function(){
+  var a=Blockly.Arduino.valueToCode(this,"pulse_min",Blockly.Arduino.ORDER_ATOMIC)||"600",
+      b=Blockly.Arduino.valueToCode(this,"pulse_max",Blockly.Arduino.ORDER_ATOMIC)||"2400";
+  Blockly.Arduino.definitions_["define_pca9685_init4"]="int servomin = "+a+";\nint servomax = "+b+";\n";
+  return""
+};
+
+Blockly.Arduino.ez_start_kit_q_servo_write=function(){
+  var a=this.getFieldValue("ServoChoose"),
+      b=Blockly.Arduino.valueToCode(this,"Degree",Blockly.Arduino.ORDER_ATOMIC)||"180";
+  Blockly.Arduino.definitions_.define_servo_write="void servoset(int ch_, int deg_) {\n  if (deg_ < 0)deg_ = 0;\n  if (deg_ > 180)deg_ = 180;\n  int pulse_ = map(deg_, 0, 180, servomin, servomax);\n  pwm.writeMicroseconds(ch_, pulse_);\n}\n";
+  return"servoset("+a+"-1, "+b+");\n";
+};

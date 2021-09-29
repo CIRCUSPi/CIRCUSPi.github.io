@@ -117,6 +117,44 @@
 				</statement>
 			</block>
 		</category>
+		<category id="category_pixetto">
+		    <block type="pixetto_uart_init"></block>
+		    <block type="pixetto_is_detection"></block>
+		    <block type="pixetto_count_object"></block>
+		    <block type="pixetto_color_detects"></block>
+		    <block type="pixetto_shape_detects"></block>
+		    <block type="pixetto_sphere_detects"></block>
+		    <block type="pixetto_template_matching_detects"></block>
+		    <block type="pixetto_keypoint_detects"></block>
+		    <block type="pixetto_neural_detects">
+		        <value name="neural_count">
+		            <block type="math_number">
+		                <field name="NUM">0</field>
+		            </block>
+		        </value>
+		    </block>
+		    <block type="pixetto_traffic_detects"></block>
+		    <block type="pixetto_apriltag_detects"></block>
+		    <block type="pixetto_lanes_detection"></block>
+		    <block type="pixetto_object_detail"></block>
+		    <block type="pixetto_handwritten_digits"></block>
+		    <block type="pixetto_handwritten_letters"></block>
+		    <block type="pixetto_remote_computing_detects">
+		        <value name="computing_count">
+		            <block type="math_number">
+		                <field name="NUM">0</field>
+		            </block>
+		        </value>
+		    </block>
+		    <block type="pixetto_remote_classifier_detects">
+		        <value name="classifier_count">
+		            <block type="math_number">
+		                <field name="NUM">0</field>
+		            </block>
+		        </value>
+		    </block>
+		    <block type="pixetto_voice_command_detects"></block>
+		</category>
 		<category id="category_huskylens" name="category_huskylens">
 			<block type="huskylens_i2c_init"></block>
 			<block type="huskylens_uart_init"></block>
@@ -323,6 +361,178 @@
 			  </value>
 			</block>
 			<block type="mooncar_face_show"></block>
+		</category>
+		<category id="category_ez_start_kit_q">
+		    <block type="ez_start_kit_button"></block>
+		    <block type="ez_start_kit_vr"></block>
+		    <block type="ez_start_kit_phr"></block>
+		    <block type="ez_start_kit_dht"></block>
+		    <block type="ez_start_kit_relay"></block>
+		    <block type="ez_start_kit_q_pca9685_init"></block>
+		    <block type="ez_start_kit_q_motor">
+		        <value name="MOTOR">
+		            <block type="math_number">
+		                <field name="NUM">0</field>
+		                </block>
+		        </value>
+		    </block>
+		    <block type="ez_start_kit_q_servo_init">
+		        <value name="pulse_min">
+		            <block type="math_number">
+		                <field name="NUM">600</field>
+		            </block>
+		        </value>
+		        <value name="pulse_max">
+		            <block type="math_number">
+		                <field name="NUM">2400</field>
+		            </block>
+		        </value>
+		    </block>
+		    <block type="ez_start_kit_q_servo_write">
+		        <value name="Degree">
+		            <block type="math_number">
+		                <field name="NUM">180</field>
+		            </block>
+		        </value>
+		    </block>
+		    <block type="ez_start_kit_remote_read"></block>
+		    <block type="ez_start_kit_ir_remote_read_value"></block>
+		    <block type="ez_start_kit_ir_remote_read_type"></block>
+		    <block type="ez_start_kit_custom_tone">
+		        <value name="FREQ">
+		            <block type="math_number">
+		                <field name="NUM">255</field>
+		            </block>
+		        </value>
+		        <value name="DURATION">
+		            <block type="math_number">
+		                <field name="NUM">300</field>
+		            </block>
+		        </value>
+		    </block>
+		    <block type="ez_start_kit_tone"></block>
+		    <block type="ez_start_kit_no_tone"></block>
+		    <block type="ez_start_kit_led">
+		        <value name="LVALUE">
+		            <block type="math_number">
+		                <field name="NUM">255</field>
+		            </block>
+		        </value>
+		    </block>
+		    <block type="ez_start_kit_neopixel_begin">
+		        <value name="NVALUE">
+		            <block type="math_number">
+		                <field name="NUM">30</field>
+		            </block>
+		        </value>
+		    </block>
+		    <block type="ez_start_kit_neopixel_setpixelcolor">
+		        <value name="TARGET">
+		            <block type="math_number">
+		                <field name="NUM">0</field>
+		            </block>
+		        </value>
+		    </block>
+		    <block type="ez_start_kit_neopixel_custom_setpixelcolor">
+		        <value name="TARGET">
+		            <block type="math_number">
+		                <field name="NUM">0</field>
+		            </block>
+		        </value>
+		        <value name="R">
+		            <block type="math_number">
+		                <field name="NUM">255</field>
+		            </block>
+		        </value>
+		        <value name="G">
+		            <block type="math_number">
+		                <field name="NUM">0</field>
+		            </block>
+		        </value>
+		        <value name="B">
+		            <block type="math_number">
+		                <field name="NUM">0</field>
+		            </block>
+		        </value>
+		    </block>
+		    <block type="ez_start_kit_neopixel_show"></block>
+		    <block type="ez_start_kit_neopixel_clear"></block>
+		    <block type="ez_start_kit_oled_display_setting"></block>
+		    <block type="ez_start_kit_oled_display_clear"></block>
+		    <block type="ez_start_kit_oled_display_draw_commands">
+		        <statement name="DRAW_CMD">
+		            <block type="oled_display_draw_text">
+		                <value name="START_X">
+		                    <block type="math_number">
+		                        <field name="NUM">0</field>
+		                    </block>
+		                </value>
+		                <value name="START_Y">
+		                    <block type="math_number">
+		                        <field name="NUM">0</field>
+		                    </block>
+		                </value>
+		                <value name="CONTENT">
+		                    <block type="text">
+		                        <field name="TEXT">HELLO</field>
+		                    </block>
+		                </value>
+		                <next>
+		                    <block type="oled_display_draw_line">
+		                        <value name="START_X">
+		                            <block type="math_number">
+		                                <field name="NUM">0</field>
+		                            </block>
+		                        </value>
+		                        <value name="START_Y">
+		                            <block type="math_number">
+		                                <field name="NUM">11</field>
+		                            </block>
+		                        </value>
+		                        <value name="END_X">
+		                            <block type="math_number">
+		                                <field name="NUM">30</field>
+		                            </block>
+		                        </value>
+		                        <value name="END_Y">
+		                            <block type="math_number">
+		                                <field name="NUM">11</field>
+		                            </block>
+		                        </value>
+		                    </block>
+		                </next>
+		            </block>
+		        </statement>
+		    </block>
+		    <block type="ez_start_kit_oled_display_set_font"></block>
+		    <block type="ez_start_kit_oled_display_set_album">
+		      <value name="ALBUM">
+		        <block type="text">
+		          <field name="TEXT">XBM</field>
+		        </block>
+		      </value>
+		    </block>
+		    <block type="ez_start_kit_oled_display_show_album"></block>
+		    <block type="ez_start_kit_oled_display_set_album2">
+		      <value name="Name">
+		          <block type="text">
+		            <field name="TEXT">Name</field>
+		          </block>
+		      </value>
+		      <value name="Data">
+		          <block type="text">
+		            <field name="TEXT">XBM</field>
+		          </block>
+		      </value>
+		    </block>
+		    <block type="ez_start_kit_oled_display_show_album2">
+		      <value name="Name">
+		          <block type="text">
+		            <field name="TEXT">Name</field>
+		          </block>
+		      </value>
+		    </block>
+		    <block type="mooncar_face_show"></block>
 		</category>
 		<category id="category_RockBot" name="category_RockBot">
 			<block type="RockBot_motor_go">
