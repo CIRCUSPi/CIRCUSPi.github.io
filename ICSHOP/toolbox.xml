@@ -117,7 +117,7 @@
 				</statement>
 			</block>
 		</category>
-		<category id="category_pixetto">
+		<category id="category_pixetto" name="category_pixetto">
 		    <block type="pixetto_uart_init"></block>
 		    <block type="pixetto_is_detection"></block>
 		    <block type="pixetto_count_object"></block>
@@ -362,7 +362,7 @@
 			</block>
 			<block type="mooncar_face_show"></block>
 		</category>
-		<category id="category_ez_start_kit_q">
+		<category id="category_ez_start_kit_q" name="category_ez_start_kit_q">
 		    <block type="ez_start_kit_button"></block>
 		    <block type="ez_start_kit_vr"></block>
 		    <block type="ez_start_kit_phr"></block>
