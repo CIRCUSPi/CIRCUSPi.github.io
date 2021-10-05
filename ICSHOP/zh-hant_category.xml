@@ -1,6 +1,7 @@
 <xml>
 <category><name>catICSHOP</name><lang>ICSHOP</lang></category>
 <category><name>category_mooncar</name><lang>登月小車</lang></category>
+<category><name>category_apollo</name><lang>APOLLO</lang></category>
 <category><name>category_pixetto</name><lang>Pixetto</lang></category>
 <category><name>category_huskylens</name><lang>HuskyLens</lang></category>
 <category><name>category_ez_start_kit</name><lang>EZ Start Kit</lang></category>

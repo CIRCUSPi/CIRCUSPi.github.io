@@ -2355,3 +2355,382 @@ Blockly.Blocks.ez_start_kit_q_servo_write={
     this.setTooltip(Blockly.Msg.EZ_TOOLTIP)
   }
 };
+
+// apollo
+Blockly.Blocks.apollo={};
+Blockly.Blocks.apollo.HUE1 = 40;
+Blockly.Blocks.apollo.HUE2 = 80;
+Blockly.Blocks.apollo.HUE3 = 120;
+Blockly.Blocks.apollo.HUE4 = 270;
+Blockly.Blocks.apollo.HUE5 = 200;
+Blockly.Blocks.apollo.HUE6 = 240;
+Blockly.Blocks.apollo.HUE7 = 360;
+Blockly.Blocks.apollo.HUE8 = 320;
+Blockly.Blocks.apollo_move_car={init:function(){
+  this.setHelpUrl(Blockly.Msg.APOLLO_HELPURL);
+  this.setColour(Blockly.Blocks.apollo.HUE1);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.MOVE_APOLLO)
+      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.FORWARD,"FORWARD"],[Blockly.Msg.BACKWARD,"BACKWARD"],[Blockly.Msg.LEFT,"LEFT"],[Blockly.Msg.RIGHT,"RIGHT"],[Blockly.Msg.STOP,"STOP"]]),"STAT");
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.MOVE_SPEED);
+  this.appendValueInput("SPEED")
+      .setCheck("Number");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.APOLLO_TOOLTIP)}
+};
+Blockly.Blocks.apollo_move_motor={init:function(){
+  this.setHelpUrl(Blockly.Msg.APOLLO_HELPURL);
+  this.setColour(Blockly.Blocks.apollo.HUE1);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.MOVE_APOLLO_MOTOR_L);
+  this.appendValueInput("SPEED_L")
+      .setCheck("Number");
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.MOVE_APOLLO_MOTOR_R);
+  this.appendValueInput("SPEED_R")
+      .setCheck("Number");
+  this.appendDummyInput()
+      .appendField("(-255~255)");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.APOLLO_TOOLTIP)}
+};
+Blockly.Blocks.apollo_tracker={init:function(){
+  this.setHelpUrl(Blockly.Msg.APOLLO_HELPURL);
+  this.setColour(Blockly.Blocks.apollo.HUE2);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.TRACKER)
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.APOLLO_TOOLTIP)}
+};
+Blockly.Blocks.apollo_sonar={init:function(){
+  this.setHelpUrl(Blockly.Msg.APOLLO_HELPURL);
+  this.setColour(Blockly.Blocks.apollo.HUE2);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.SONAR)
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.APOLLO_TOOLTIP)}
+};
+
+Blockly.Blocks.apollo_init_tcs={
+  init:function(){
+    this.setHelpUrl(Blockly.Msg.APOLLO_HELPURL);
+    this.setColour(Blockly.Blocks.apollo.HUE3);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.INIT_TCS);
+    this.appendValueInput("RANGE")
+        .setCheck("Number");
+    this.setInputsInline(!0);
+    this.setPreviousStatement(!0,null);
+    this.setNextStatement(!0,null);
+    this.setTooltip(Blockly.Msg.APOLLO_TOOLTIP)
+  }
+};
+Blockly.Blocks.apollo_read_tcs={init:function(){
+  this.setHelpUrl(Blockly.Msg.APOLLO_HELPURL);
+  this.setColour(Blockly.Blocks.apollo.HUE3);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.READ_TCS)
+      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.RED,"RED"],[Blockly.Msg.GREEN,"GREEN"],[Blockly.Msg.BLUE,"BLUE"]]),"TCS");
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.READ_VALUE);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.APOLLO_TOOLTIP)}
+};
+Blockly.Blocks.apollo_flash_light={init:function(){
+  this.setHelpUrl(Blockly.Msg.APOLLO_HELPURL);
+  this.setColour(Blockly.Blocks.apollo.HUE3);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.FLASH_LIGHT)
+      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.ON,"ON"],[Blockly.Msg.OFF,"OFF"]]),"TCS_LIGHT");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.APOLLO_TOOLTIP)}
+};
+Blockly.Blocks.apollo_record_tcs={init:function(){
+  this.setHelpUrl(Blockly.Msg.APOLLO_HELPURL);
+  this.setColour(Blockly.Blocks.apollo.HUE3);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.RECORD_TCS)
+      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.RED,"RED"],[Blockly.Msg.GREEN,"GREEN"],[Blockly.Msg.BLUE,"BLUE"],[Blockly.Msg.YELLO,"YELLO"],[Blockly.Msg.AZURE,"AZURE"],[Blockly.Msg.PURPLE,"PURPLE"],[Blockly.Msg.C1,"C1"],[Blockly.Msg.C2,"C2"],[Blockly.Msg.C3,"C3"]]),"RECORD_TCS");
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.RECORD_VALUE);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.APOLLO_TOOLTIP)}
+};
+Blockly.Blocks.apollo_chack_tcs={init:function(){
+  this.setHelpUrl(Blockly.Msg.APOLLO_HELPURL);
+  this.setColour(Blockly.Blocks.apollo.HUE3);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.CHACK_TCS)
+      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.RED,"RED"],[Blockly.Msg.GREEN,"GREEN"],[Blockly.Msg.BLUE,"BLUE"],[Blockly.Msg.YELLO,"YELLO"],[Blockly.Msg.AZURE,"AZURE"],[Blockly.Msg.PURPLE,"PURPLE"],[Blockly.Msg.C1,"C1"],[Blockly.Msg.C2,"C2"],[Blockly.Msg.C3,"C3"]]),"RECORD_TCS");
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.CHACK_VALUE);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Boolean");
+  this.setTooltip(Blockly.Msg.APOLLO_TOOLTIP)}
+};
+Blockly.Blocks.apollo_neopixel_begin={
+  init:function(){
+    this.setHelpUrl(Blockly.Msg.APOLLO_HELPURL);
+    this.setColour(Blockly.Blocks.apollo.HUE4);
+    /*
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.INITIALIZES_SETUP_APPENDTEXT)
+        .appendField(Blockly.Msg.NEOPIXEL_TITLE)
+        .appendField(Blockly.Msg.NEOPIXEL_BEGIN_NUM)
+        .appendField(new Blockly.FieldTextInput("16"),"NUM");
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.NEOPIXEL_BEGIN_PIN)
+        .appendField(new Blockly.FieldDropdown(profile["default"].digital),"PIN");
+    */
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.EZ_NEOPIXEL_BEGIN_BRIGHTNESS)
+    this.appendValueInput("NVALUE")
+        .setCheck("Number");
+    this.setInputsInline(!0);
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setTooltip(Blockly.Msg.APOLLO_TOOLTIP)},
+};
+Blockly.Blocks.apollo_oled_display_setting={
+  init:function(){
+    this.setHelpUrl(Blockly.Msg.APOLLO_HELPURL);
+    this.setColour(Blockly.Blocks.apollo.HUE5);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.INITIALIZES_SETUP_APPENDTEXT)
+        .appendField(Blockly.Msg.OLED_DISPLAY_TITLE)
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setTooltip(Blockly.Msg.APOLLO_TOOLTIP)}
+};
+Blockly.Blocks.apollo_oled_display_clear={
+  init:function(){
+    this.setHelpUrl(Blockly.Msg.APOLLO_HELPURL);
+    this.setColour(Blockly.Blocks.apollo.HUE5);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.OLED_DISPLAY_TITLE)
+        .appendField(Blockly.Msg.OLED_DISPLAY_CLEAR);
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setTooltip(Blockly.Msg.APOLLO_TOOLTIP)}
+};
+Blockly.Blocks.apollo_oled_display_show={
+  init:function(){
+    this.setHelpUrl(Blockly.Msg.APOLLO_HELPURL);
+    this.setColour(Blockly.Blocks.apollo.HUE5);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.OLED_DISPLAY_TITLE)
+        .appendField(Blockly.Msg.OLED_DISPLAY_SHOW);
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setTooltip(Blockly.Msg.APOLLO_TOOLTIP)}
+};
+Blockly.Blocks.apollo_oled_display_draw_commands={
+  init:function(){
+    this.setHelpUrl(Blockly.Msg.APOLLO_HELPURL);
+    this.setColour(Blockly.Blocks.apollo.HUE5);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.APOLLO_XAXIS);
+    this.appendValueInput("x_axis")
+        .setCheck("Number");
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.APOLLO_YAXIS);
+    this.appendValueInput("y_axis")
+        .setCheck("Number");
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.APOLLO_SHOWTEXT);
+    this.appendValueInput("show_text")
+        .setCheck("String");
+    this.setInputsInline(!0);
+    this.setPreviousStatement(!0,null);
+    this.setNextStatement(!0,null);
+    this.setTooltip(Blockly.Msg.APOLLO_TOOLTIP)
+  }
+};
+Blockly.Blocks.apollo_oled_display_set_font={
+  init:function(){
+    this.setHelpUrl(Blockly.Msg.APOLLO_HELPURL);
+    this.setColour(Blockly.Blocks.apollo.HUE5);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.SET_FONT);
+    this.appendValueInput("RANGE")
+        .setCheck("Number");
+    this.setInputsInline(!0);
+    this.setPreviousStatement(!0,null);
+    this.setNextStatement(!0,null);
+    this.setTooltip(Blockly.Msg.APOLLO_TOOLTIP)
+  }
+};
+
+Blockly.Blocks.apollo_oled_display_set_album2={
+  init:function(){
+    this.setHelpUrl(Blockly.Msg.APOLLO_HELPURL);
+    this.setColour(Blockly.Blocks.apollo.HUE5);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.EZ_OLED_DISPLAY_ALBUM_NAME);
+    this.appendValueInput("Name")
+        .setCheck("String");
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.EZ_OLED_DISPLAY_ALBUM_XBM);
+    this.appendValueInput("Data")
+        .setCheck("String");
+    this.setInputsInline(!0);
+    this.setPreviousStatement(!0,null);
+    this.setNextStatement(!0,null);
+    this.setTooltip(Blockly.Msg.APOLLO_TOOLTIP)
+  }
+};
+
+Blockly.Blocks.apollo_oled_display_show_album2={init:function(){
+  this.setHelpUrl(Blockly.Msg.APOLLO_HELPURL);
+  this.setColour(Blockly.Blocks.apollo.HUE5);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.SHOW_ALBUM_NAME);
+  this.appendValueInput("Name")
+      .setCheck("String");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.APOLLO_TOOLTIP)}
+};
+Blockly.Blocks.apollo_face_show={init:function(){
+  this.setHelpUrl(Blockly.Msg.APOLLO_HELPURL);
+  this.setColour(Blockly.Blocks.apollo.HUE5);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.FACE_SHOW)
+      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.sign_F1,"F1"],[Blockly.Msg.sign_F2,"F2"],[Blockly.Msg.sign_F3,"F3"],[Blockly.Msg.sign_F4,"F4"],[Blockly.Msg.sign_F5,"F5"],[Blockly.Msg.sign_F6,"F6"],[Blockly.Msg.sign_F7,"F7"],[Blockly.Msg.sign_F8,"F8"]]),"SIGN_SHOW");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.APOLLO_TOOLTIP)}
+};
+Blockly.Blocks.apollo_rfid_set={
+  init:function(){
+    this.setHelpUrl(Blockly.Msg.APOLLO_HELPURL);
+    this.setColour(Blockly.Blocks.apollo.HUE6);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.APOLLO_RFID_setup_TITLE);
+    this.setInputsInline(!0);
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setTooltip(Blockly.Msg.APOLLO_TOOLTIP)
+  }
+};
+Blockly.Blocks.apollo_rfid_read={
+  init:function(){
+    this.setHelpUrl(Blockly.Msg.APOLLO_HELPURL);
+    this.setColour(Blockly.Blocks.apollo.HUE6);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.APOLLO_RFID_read_TITLE);
+    this.setOutput(!0,"String");
+    this.setTooltip(Blockly.Msg.APOLLO_TOOLTIP)
+  }
+};
+Blockly.Blocks.apollo_custom_tone={
+  init:function(){
+    this.setHelpUrl(Blockly.Msg.APOLLO_HELPURL);
+    this.setColour(Blockly.Blocks.apollo.HUE7);
+    this.appendValueInput("FREQ")
+        .appendField(Blockly.Msg.EZ_TONE)
+        .setCheck("Number")
+        .appendField(Blockly.Msg.INOUT_TONE_APPENDTEXT_FREQ);
+    this.appendValueInput("DURATION")
+        .setCheck("Number")
+        .appendField(Blockly.Msg.INOUT_TONE_APPENDTEXT_DURATION);
+    this.setInputsInline(!0);
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setTooltip(Blockly.Msg.APOLLO_TOOLTIP)}
+};
+Blockly.Blocks.apollo_tone={
+  init:function(){
+    this.setHelpUrl(Blockly.Msg.APOLLO_HELPURL);
+    this.setColour(Blockly.Blocks.apollo.HUE7);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.EZ_TONE)
+        .appendField(Blockly.Msg.INOUT_TONE_APPENDTEXT_FREQ)
+        .appendField(new Blockly.FieldDropdown(profile["default"].tone),"FREQ");
+    this.setInputsInline(!0);
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setTooltip(Blockly.Msg.APOLLO_TOOLTIP)}
+};
+Blockly.Blocks.apollo_no_tone={
+  init:function(){
+    this.setHelpUrl(Blockly.Msg.APOLLO_HELPURL);
+    this.setColour(Blockly.Blocks.apollo.HUE7);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.EZ_noTONE);
+    this.setInputsInline(!0);
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setTooltip(Blockly.Msg.APOLLO_TOOLTIP)}
+};
+Blockly.Blocks.apollo_bt_set={
+  init:function(){
+    this.setHelpUrl(Blockly.Msg.APOLLO_HELPURL);
+    this.setColour(Blockly.Blocks.apollo.HUE8);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.APOLLO_BT_SET);
+    this.appendValueInput("tx_pins")
+        .appendField(Blockly.Msg.APOLLO_BT_SET_TX)
+        .setCheck("Number");
+    this.appendValueInput("rx_pins")
+        .appendField(Blockly.Msg.APOLLO_BT_SET_RX)
+        .setCheck("Number");
+    this.appendValueInput("board_rate")
+        .appendField(Blockly.Msg.APOLLO_BT_SET_RATE)
+        .setCheck("Number");
+    this.setInputsInline(!0);
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setTooltip(Blockly.Msg.APOLLO_TOOLTIP)
+  }
+};
+Blockly.Blocks.apollo_bt_able={
+  init:function(){
+    this.setHelpUrl(Blockly.Msg.APOLLO_HELPURL);
+    this.setColour(Blockly.Blocks.apollo.HUE8);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.APOLLO_BT_ABLE)
+    this.setInputsInline(!0);
+    this.setOutput(!0,"Boolean");
+    this.setTooltip(Blockly.Msg.APOLLO_TOOLTIP)
+  }
+};
+Blockly.Blocks.apollo_bt_readString={
+  init:function(){
+    this.setHelpUrl(Blockly.Msg.APOLLO_HELPURL);
+    this.setColour(Blockly.Blocks.apollo.HUE8);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.APOLLO_BT_READSTRING)
+    this.setInputsInline(!0);
+    this.setOutput(!0,"String");
+    this.setTooltip(Blockly.Msg.APOLLO_TOOLTIP)
+  }
+};
+Blockly.Blocks.apollo_bt_sendString={
+  init:function(){
+    this.setHelpUrl(Blockly.Msg.APOLLO_HELPURL);
+    this.setColour(Blockly.Blocks.apollo.HUE8);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.APOLLO_BT_SENDSTRING);
+    this.appendValueInput("show_text")
+        .setCheck("String");
+    this.setInputsInline(!0);
+    this.setPreviousStatement(!0,null);
+    this.setNextStatement(!0,null);
+    this.setTooltip(Blockly.Msg.APOLLO_TOOLTIP)
+  }
+};

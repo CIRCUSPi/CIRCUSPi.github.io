@@ -117,6 +117,167 @@
 				</statement>
 			</block>
 		</category>
+		<category id="category_apollo" name="category_apollo">
+			<block type="apollo_move_car">
+					<value name="SPEED">
+							<block type="math_number">
+									<field name="NUM">0</field>
+									</block>
+					</value>
+			</block>
+			<block type="apollo_move_motor">
+					<value name="SPEED_L">
+							<block type="math_number">
+									<field name="NUM">0</field>
+									</block>
+					</value>
+					<value name="SPEED_R">
+							<block type="math_number">
+									<field name="NUM">0</field>
+									</block>
+					</value>
+			</block>
+			<block type="apollo_tracker"></block>
+			<block type="apollo_sonar"></block>
+			<block type="apollo_custom_tone">
+					<value name="FREQ">
+							<block type="math_number">
+									<field name="NUM">255</field>
+							</block>
+					</value>
+					<value name="DURATION">
+							<block type="math_number">
+									<field name="NUM">300</field>
+							</block>
+					</value>
+			</block>
+			<block type="apollo_tone"></block>
+			<block type="apollo_no_tone"></block>
+			<block type="apollo_bt_set">
+				<value name="tx_pins">
+						<block type="math_number">
+								<field name="NUM">4</field>
+						</block>
+				</value>
+				<value name="rx_pins">
+						<block type="math_number">
+								<field name="NUM">7</field>
+						</block>
+				</value>
+				<value name="board_rate">
+						<block type="math_number">
+								<field name="NUM">9600</field>
+						</block>
+				</value>
+			</block>
+			<block type="apollo_bt_able"></block>
+			<block type="apollo_bt_readString"></block>
+			<block type="apollo_bt_sendString">
+					<value name="show_text">
+							<block type="text">
+									<field name="TEXT">Text</field>
+							</block>
+					</value>
+			</block>
+			<block type="apollo_init_tcs">
+				<value name="RANGE">
+						<block type="math_number">
+								<field name="NUM">5</field>
+						</block>
+				</value>
+			</block>
+			<block type="apollo_read_tcs"></block>
+			<block type="apollo_flash_light"></block>
+			<block type="apollo_record_tcs"></block>
+			<block type="apollo_chack_tcs"></block>
+			<block type="apollo_rfid_set"></block>
+			<block type="apollo_rfid_read"></block>
+			<block type="apollo_neopixel_begin">
+					<value name="NVALUE">
+							<block type="math_number">
+									<field name="NUM">30</field>
+							</block>
+					</value>
+			</block>
+			<block type="ez_start_kit_neopixel_setpixelcolor">
+					<value name="TARGET">
+							<block type="math_number">
+									<field name="NUM">0</field>
+							</block>
+					</value>
+			</block>
+			<block type="ez_start_kit_neopixel_custom_setpixelcolor">
+					<value name="TARGET">
+							<block type="math_number">
+									<field name="NUM">0</field>
+							</block>
+					</value>
+					<value name="R">
+							<block type="math_number">
+									<field name="NUM">255</field>
+							</block>
+					</value>
+					<value name="G">
+							<block type="math_number">
+									<field name="NUM">0</field>
+							</block>
+					</value>
+					<value name="B">
+							<block type="math_number">
+									<field name="NUM">0</field>
+							</block>
+					</value>
+			</block>
+			<block type="ez_start_kit_neopixel_show"></block>
+			<block type="ez_start_kit_neopixel_clear"></block>
+			<block type="apollo_oled_display_setting"></block>
+			<block type="apollo_oled_display_clear"></block>
+			<block type="apollo_oled_display_show"></block>
+			<block type="apollo_oled_display_draw_commands">
+					<value name="x_axis">
+							<block type="math_number">
+									<field name="NUM">0</field>
+							</block>
+					</value>
+					<value name="y_axis">
+							<block type="math_number">
+									<field name="NUM">0</field>
+							</block>
+					</value>
+					<value name="show_text">
+							<block type="text">
+									<field name="TEXT">Text</field>
+							</block>
+					</value>
+			</block>
+			<block type="apollo_oled_display_set_font">
+						<value name="RANGE">
+								<block type="math_number">
+										<field name="NUM">2</field>
+								</block>
+						</value>
+			</block>
+			<block type="apollo_oled_display_set_album2">
+				<value name="Name">
+						<block type="text">
+							<field name="TEXT">Name</field>
+						</block>
+				</value>
+				<value name="Data">
+						<block type="text">
+							<field name="TEXT">XBM</field>
+						</block>
+				</value>
+			</block>
+			<block type="apollo_oled_display_show_album2">
+				<value name="Name">
+						<block type="text">
+							<field name="TEXT">Name</field>
+						</block>
+				</value>
+			</block>
+			<block type="apollo_face_show"></block>
+		</category>
 		<category id="category_pixetto" name="category_pixetto">
 		    <block type="pixetto_uart_init"></block>
 		    <block type="pixetto_is_detection"></block>
