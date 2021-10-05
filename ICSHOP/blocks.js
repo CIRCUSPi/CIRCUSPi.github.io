@@ -10,7 +10,7 @@ Blockly.Blocks.mooncar_move_car={init:function(){
   this.setColour(Blockly.Blocks.mooncar.HUE1);
   this.appendDummyInput()
       .appendField(Blockly.Msg.MOVE_CAR)
-      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.FORWARD,"FORWARD"],[Blockly.Msg.BACKWARD,"BACKWARD"],[Blockly.Msg.LEFT,"LEFT"],[Blockly.Msg.RIGHT,"RIGHT"],[Blockly.Msg.STOP,"STOP"]]),"STAT");
+      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.FORWARD_,"FORWARD"],[Blockly.Msg.BACKWARD_,"BACKWARD"],[Blockly.Msg.LEFT_,"LEFT"],[Blockly.Msg.RIGHT_,"RIGHT"],[Blockly.Msg.STOP_,"STOP"]]),"STAT");
   this.appendDummyInput()
       .appendField(Blockly.Msg.MOVE_SPEED);
   this.appendValueInput("SPEED")
@@ -2371,7 +2371,7 @@ Blockly.Blocks.apollo_move_car={init:function(){
   this.setColour(Blockly.Blocks.apollo.HUE1);
   this.appendDummyInput()
       .appendField(Blockly.Msg.MOVE_APOLLO)
-      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.FORWARD,"FORWARD"],[Blockly.Msg.BACKWARD,"BACKWARD"],[Blockly.Msg.LEFT,"LEFT"],[Blockly.Msg.RIGHT,"RIGHT"],[Blockly.Msg.STOP,"STOP"]]),"STAT");
+      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.FORWARD_,"FORWARD"],[Blockly.Msg.BACKWARD_,"BACKWARD"],[Blockly.Msg.LEFT_,"LEFT"],[Blockly.Msg.RIGHT_,"RIGHT"],[Blockly.Msg.STOP_,"STOP"]]),"STAT");
   this.appendDummyInput()
       .appendField(Blockly.Msg.MOVE_SPEED);
   this.appendValueInput("SPEED")
@@ -2417,7 +2417,15 @@ Blockly.Blocks.apollo_sonar={init:function(){
   this.setOutput(!0,"Number");
   this.setTooltip(Blockly.Msg.APOLLO_TOOLTIP)}
 };
-
+Blockly.Blocks.apollo_button={init:function(){
+  this.setHelpUrl(Blockly.Msg.APOLLO_HELPURL);
+  this.setColour(Blockly.Blocks.apollo.HUE2);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.APOLLO_BUTTON)
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Boolean");
+  this.setTooltip(Blockly.Msg.APOLLO_TOOLTIP)}
+};
 Blockly.Blocks.apollo_init_tcs={
   init:function(){
     this.setHelpUrl(Blockly.Msg.APOLLO_HELPURL);
@@ -2609,7 +2617,7 @@ Blockly.Blocks.apollo_face_show={init:function(){
   this.setColour(Blockly.Blocks.apollo.HUE5);
   this.appendDummyInput()
       .appendField(Blockly.Msg.FACE_SHOW)
-      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.sign_F1,"F1"],[Blockly.Msg.sign_F2,"F2"],[Blockly.Msg.sign_F3,"F3"],[Blockly.Msg.sign_F4,"F4"],[Blockly.Msg.sign_F5,"F5"],[Blockly.Msg.sign_F6,"F6"],[Blockly.Msg.sign_F7,"F7"],[Blockly.Msg.sign_F8,"F8"]]),"SIGN_SHOW");
+      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.sign_F1,"F1"],[Blockly.Msg.sign_F2,"F2"],[Blockly.Msg.sign_F8,"F8"],[Blockly.Msg.sign_F4,"F4"],[Blockly.Msg.sign_F3,"F3"],[Blockly.Msg.sign_F5,"F5"],[Blockly.Msg.sign_F6,"F6"],[Blockly.Msg.sign_F7,"F7"]]),"SIGN_SHOW");
   this.setInputsInline(!0);
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);

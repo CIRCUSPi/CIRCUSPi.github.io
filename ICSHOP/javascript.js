@@ -351,7 +351,7 @@ Blockly.Arduino.ez_start_kit_neopixel_show=function(){
 
 Blockly.Arduino.ez_start_kit_neopixel_clear=function(){
   Blockly.Arduino.definitions_.define_button_c="void neopixel_clear()\n{\npixels.setPixelColor(0,pixels.Color(0,0,0));\npixels.setPixelColor(1,pixels.Color(0,0,0));\npixels.setPixelColor(2,pixels.Color(0,0,0));\npixels.show();\npixels.show();\n }\n";
-  return"neopixel_clear();\n"
+  return"pixels.clear();\n"
 };
 
 Blockly.Arduino.ez_start_kit_oled_display_setting=function(){
@@ -606,7 +606,7 @@ Blockly.Arduino.RockBot_neopixel_show=function(){
 
 Blockly.Arduino.RockBot_neopixel_clear=function(){
   Blockly.Arduino.definitions_.define_button_c="void neopixel_clear()\n{\npixels.setPixelColor(0,pixels.Color(0,0,0));\npixels.setPixelColor(1,pixels.Color(0,0,0));\npixels.setPixelColor(2,pixels.Color(0,0,0));\npixels.show();\npixels.show();\n }\n";
-  return"neopixel_clear();\n"
+  return"pixels.clear();\n"
 };
 
 
@@ -1580,6 +1580,11 @@ Blockly.Arduino.apollo_sonar=function(){
  Blockly.Arduino.definitions_['define_sonar_']="#include <Ultrasonic.h>\n";
  Blockly.Arduino.definitions_['define_sonar_set']="Ultrasonic ultrasonic_(4, 7);"
  return ["ultrasonic_.convert(ultrasonic_.timing(), Ultrasonic::CM)", Blockly.Arduino.ORDER_ATOMIC];
+};
+Blockly.Arduino.apollo_button=function(){
+ Blockly.Arduino.definitions_.define_apollo_button="bool pushbutton() {\n  if (digitalRead(16)) {\n    return false;\n  }\n  else {\n    return true;\n  }\n}\n";
+ Blockly.Arduino.setups_["setup_apollo_button_"]="pinMode(16, INPUT);\n";
+ return ["pushbutton()", Blockly.Arduino.ORDER_ATOMIC];
 };
 
 Blockly.Arduino.apollo_init_tcs=function(){

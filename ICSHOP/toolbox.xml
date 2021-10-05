@@ -139,6 +139,7 @@
 			</block>
 			<block type="apollo_tracker"></block>
 			<block type="apollo_sonar"></block>
+			<block type="apollo_button"></block>
 			<block type="apollo_custom_tone">
 					<value name="FREQ">
 							<block type="math_number">
