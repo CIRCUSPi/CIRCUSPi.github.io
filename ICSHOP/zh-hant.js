@@ -482,3 +482,4 @@ Blockly.Msg.APOLLO_BT_ABLE = "藍芽可用";
 Blockly.Msg.APOLLO_BT_READSTRING = "藍芽接收字串";
 Blockly.Msg.APOLLO_BT_SENDSTRING = "藍芽發送字串";
 Blockly.Msg.APOLLO_BUTTON = "按鈕被按下";
+Blockly.Msg.APOLLO_FACTORY = "APOLLO原廠展示程式";

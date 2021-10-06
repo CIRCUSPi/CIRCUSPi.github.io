@@ -2358,6 +2358,7 @@ Blockly.Blocks.ez_start_kit_q_servo_write={
 
 // apollo
 Blockly.Blocks.apollo={};
+Blockly.Blocks.apollo.HUE0 = 0;
 Blockly.Blocks.apollo.HUE1 = 40;
 Blockly.Blocks.apollo.HUE2 = 80;
 Blockly.Blocks.apollo.HUE3 = 120;
@@ -2366,6 +2367,18 @@ Blockly.Blocks.apollo.HUE5 = 200;
 Blockly.Blocks.apollo.HUE6 = 240;
 Blockly.Blocks.apollo.HUE7 = 360;
 Blockly.Blocks.apollo.HUE8 = 320;
+Blockly.Blocks.apollo_factory={
+  init:function(){
+    this.setHelpUrl(Blockly.Msg.APOLLO_HELPURL);
+    this.setColour(Blockly.Blocks.apollo.HUE0);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.APOLLO_FACTORY);
+    this.setInputsInline(!0);
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setTooltip(Blockly.Msg.APOLLO_TOOLTIP)
+  }
+};
 Blockly.Blocks.apollo_move_car={init:function(){
   this.setHelpUrl(Blockly.Msg.APOLLO_HELPURL);
   this.setColour(Blockly.Blocks.apollo.HUE1);

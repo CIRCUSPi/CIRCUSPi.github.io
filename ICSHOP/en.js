@@ -480,3 +480,4 @@ Blockly.Msg.APOLLO_BT_ABLE = "Bluetooth available";
 Blockly.Msg.APOLLO_BT_READSTRING = "Bluetooth readString";
 Blockly.Msg.APOLLO_BT_SENDSTRING = "Bluetooth sendString";
 Blockly.Msg.APOLLO_BUTTON = "Push button";
+Blockly.Msg.APOLLO_FACTORY = "APOLLO Original factory procedure";
