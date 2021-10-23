@@ -1714,7 +1714,7 @@ Blockly.Arduino.apollo_neopixel_begin=function(){
 
 Blockly.Arduino.apollo_oled_display_setting=function(){
  Blockly.Arduino.definitions_.define_wire='#include <Wire.h>\n#include <SPI.h>\n#include <Adafruit_GFX.h>\n#include <Adafruit_SSD1306.h>\n';
- Blockly.Arduino.definitions_.define_u8g2_oled_declare='#define SCREEN_WIDTH 128\n#define SCREEN_HEIGHT 64\n#define OLED_RESET     4\nAdafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);\n';
+ Blockly.Arduino.definitions_.define_u8g2_oled_declare='#define SCREEN_WIDTH 128\n#define SCREEN_HEIGHT 64\n#define OLED_RESET     12\nAdafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);\n';
  Blockly.Arduino.setups_.setup_define_u8g2_oled='display.begin(SSD1306_SWITCHCAPVCC, 0x3C);\n  display.~Adafruit_SSD1306();\n  display.setTextColor(SSD1306_WHITE);\n  display.setTextSize(2);\n';
  return""
 };
@@ -1786,7 +1786,7 @@ Blockly.Arduino.apollo_face_show=function(){
  }
 };
 Blockly.Arduino.apollo_rfid_set=function(){
- Blockly.Arduino.definitions_.define_NFC_RFID="#include <Wire.h>\n#include <Adafruit_PN532.h>\n#define PN532_IRQ   (3)\n#define PN532_RESET (0)\nAdafruit_PN532 nfc(PN532_IRQ, PN532_RESET);\n";
+ Blockly.Arduino.definitions_.define_NFC_RFID="#include <Wire.h>\n#include <Adafruit_PN532.h>\n#define PN532_IRQ   (3)\n#define PN532_RESET (12)\nAdafruit_PN532 nfc(PN532_IRQ, PN532_RESET);\n";
  Blockly.Arduino.setups_.setup_define_NFC_RFID="nfc.begin();\n  nfc.SAMConfig();\n";
  return""
 };
@@ -1825,7 +1825,7 @@ Blockly.Arduino.apollo_bt_able=function(){
 };
 
 Blockly.Arduino.apollo_bt_readString=function(){
- return["mySerial.readString()",Blockly.Arduino.ORDER_ATOMIC];
+ return["mySerial.read()",Blockly.Arduino.ORDER_ATOMIC];
 };
 
 Blockly.Arduino.apollo_bt_sendString=function(){
