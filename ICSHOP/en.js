@@ -481,3 +481,4 @@ Blockly.Msg.APOLLO_BT_READSTRING = "Bluetooth readMessage";
 Blockly.Msg.APOLLO_BT_SENDSTRING = "Bluetooth sendMessage";
 Blockly.Msg.APOLLO_BUTTON = "Push button";
 Blockly.Msg.APOLLO_FACTORY = "APOLLO Original factory procedure";
+Blockly.Msg.APOLLO_FACTORY_GAME = "APOLLO Link App answering game program";

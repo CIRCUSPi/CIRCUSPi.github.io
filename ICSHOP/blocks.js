@@ -2379,6 +2379,27 @@ Blockly.Blocks.apollo_factory={
     this.setTooltip(Blockly.Msg.APOLLO_TOOLTIP)
   }
 };
+Blockly.Blocks.apollo_factory_game={
+  init:function(){
+    this.setHelpUrl(Blockly.Msg.APOLLO_HELPURL);
+    this.setColour(Blockly.Blocks.apollo.HUE0);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.APOLLO_FACTORY_GAME);
+    this.appendValueInput("tx_pins")
+        .appendField(Blockly.Msg.APOLLO_BT_SET_TX)
+        .setCheck("Number");
+    this.appendValueInput("rx_pins")
+        .appendField(Blockly.Msg.APOLLO_BT_SET_RX)
+        .setCheck("Number");
+    this.appendValueInput("board_rate")
+        .appendField(Blockly.Msg.APOLLO_BT_SET_RATE)
+        .setCheck("Number");
+    this.setInputsInline(!0);
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setTooltip(Blockly.Msg.APOLLO_TOOLTIP)
+  }
+};
 Blockly.Blocks.apollo_move_car={init:function(){
   this.setHelpUrl(Blockly.Msg.APOLLO_HELPURL);
   this.setColour(Blockly.Blocks.apollo.HUE1);

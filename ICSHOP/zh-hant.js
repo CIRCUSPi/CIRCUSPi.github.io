@@ -483,3 +483,4 @@ Blockly.Msg.APOLLO_BT_READSTRING = "藍牙接收訊息";
 Blockly.Msg.APOLLO_BT_SENDSTRING = "藍牙發送訊息";
 Blockly.Msg.APOLLO_BUTTON = "按鈕被按下";
 Blockly.Msg.APOLLO_FACTORY = "APOLLO原廠展示程式";
+Blockly.Msg.APOLLO_FACTORY_GAME = "APOLLO連動App答題遊戲程式";
