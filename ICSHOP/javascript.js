@@ -1581,9 +1581,9 @@ Blockly.Arduino.apollo_move_car=function(){
  } else if (a == "BACKWARD"){
    return"analogWrite(5, 0);\nanalogWrite(6, "+b+");\nanalogWrite(9, 0);\nanalogWrite(10, "+b+");\n"
  } else if (a == "LEFT") {
-   return"analogWrite(5, 0);\nanalogWrite(6, "+b+");\nanalogWrite(9, "+b+");\nanalogWrite(10, 0);\n"
- } else if (a == "RIGHT") {
    return"analogWrite(5, "+b+");\nanalogWrite(6, 0);\nanalogWrite(9, 0);\nanalogWrite(10, "+b+");\n"
+ } else if (a == "RIGHT") {
+   return"analogWrite(5, 0);\nanalogWrite(6, "+b+");\nanalogWrite(9, "+b+");\nanalogWrite(10, 0);\n"
  } else {
    return"analogWrite(5, 0);\nanalogWrite(6, 0);\nanalogWrite(9, 0);\nanalogWrite(10, 0);\n"
  }
@@ -1593,7 +1593,7 @@ Blockly.Arduino.apollo_move_motor=function(){
      b=Blockly.Arduino.valueToCode(this,"SPEED_R",Blockly.Arduino.ORDER_ATOMIC)||"0";
  Blockly.Arduino.definitions_.define_move_motor="void motor_LR(int ML, int MR)\n{\n  if (ML > 0) {\n    analogWrite(5, ML);\n    analogWrite(6, 0);\n  }else {\n    analogWrite(5, 0);\n    analogWrite(6, ML*(-1));\n  }\n  if (MR > 0) {\n    analogWrite(9, MR);\n    analogWrite(10, 0);\n  }else {\n    analogWrite(9, 0);\n    analogWrite(10, MR*(-1));\n  }\n}\n";
  Blockly.Arduino.setups_["setup_mooncar_"]="pinMode(5, OUTPUT);\n  pinMode(6, OUTPUT);\n  pinMode(9, OUTPUT);\n  pinMode(10, OUTPUT);\n";
- return"motor_LR("+a+", "+b+");\n";
+ return"motor_LR("+b+", "+a+");\n";
 };
 Blockly.Arduino.apollo_tracker=function(){
  Blockly.Arduino.definitions_.define_tracker="int tracker()\n{\n  if (digitalRead(14) == 1 && digitalRead(15) == 1) {\n    return 0;\n  } else if (digitalRead(14) == 0 && digitalRead(15) == 1) {\n    return 1;\n  } else if (digitalRead(14) == 1 && digitalRead(15) == 0){\n    return 2;\n  } else {\n    return 3;\n  }\n}\n";
