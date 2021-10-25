@@ -120,6 +120,7 @@
 		<category id="category_apollo" name="category_apollo">
 			<block type="apollo_factory"></block>
 			<block type="apollo_factory_game"></block>
+			<block type="apollo_factory_remote"></block>
 			<block type="apollo_move_car">
 					<value name="SPEED">
 							<block type="math_number">
