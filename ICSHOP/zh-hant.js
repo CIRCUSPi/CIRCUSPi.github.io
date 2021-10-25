@@ -485,3 +485,7 @@ Blockly.Msg.APOLLO_BUTTON = "按鈕被按下";
 Blockly.Msg.APOLLO_FACTORY = "APOLLO原廠展示程式";
 Blockly.Msg.APOLLO_FACTORY_GAME = "APOLLO藍牙App答題遊戲程式";
 Blockly.Msg.APOLLO_FACTORY_REMOTE = "APOLLO藍牙App遙控程式";
+Blockly.Msg.APOLLO_white_SET_R = "設定背景顏色 R";
+Blockly.Msg.APOLLO_white_SET_G = "G";
+Blockly.Msg.APOLLO_white_SET_B = "B";
+Blockly.Msg.APOLLO_white_SET_RANGE = "容許誤差";

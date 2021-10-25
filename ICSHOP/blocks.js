@@ -2394,6 +2394,18 @@ Blockly.Blocks.apollo_factory_game={
     this.appendValueInput("board_rate")
         .appendField(Blockly.Msg.APOLLO_BT_SET_RATE)
         .setCheck("Number");
+    this.appendValueInput("white_r")
+        .appendField(Blockly.Msg.APOLLO_white_SET_R)
+        .setCheck("Number");
+    this.appendValueInput("white_g")
+        .appendField(Blockly.Msg.APOLLO_white_SET_G)
+        .setCheck("Number");
+    this.appendValueInput("white_b")
+        .appendField(Blockly.Msg.APOLLO_white_SET_B)
+        .setCheck("Number");
+    this.appendValueInput("white_range")
+        .appendField(Blockly.Msg.APOLLO_white_SET_RANGE)
+        .setCheck("Number");
     this.setInputsInline(!0);
     this.setPreviousStatement(!0);
     this.setNextStatement(!0);

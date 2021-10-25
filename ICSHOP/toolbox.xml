@@ -135,6 +135,26 @@
 								<field name="NUM">9600</field>
 						</block>
 				</value>
+				<value name="white_r">
+						<block type="math_number">
+								<field name="NUM">0</field>
+						</block>
+				</value>
+				<value name="white_g">
+						<block type="math_number">
+								<field name="NUM">0</field>
+						</block>
+				</value>
+				<value name="white_b">
+						<block type="math_number">
+								<field name="NUM">0</field>
+						</block>
+				</value>
+				<value name="white_range">
+						<block type="math_number">
+								<field name="NUM">30</field>
+						</block>
+				</value>
 			</block>
 			<block type="apollo_factory_remote">
 				<value name="tx_pins">

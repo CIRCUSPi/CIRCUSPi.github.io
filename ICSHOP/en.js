@@ -483,3 +483,7 @@ Blockly.Msg.APOLLO_BUTTON = "Push button";
 Blockly.Msg.APOLLO_FACTORY = "APOLLO Original factory procedure";
 Blockly.Msg.APOLLO_FACTORY_GAME = "APOLLO Bluetooth App Answering Game Program";
 Blockly.Msg.APOLLO_FACTORY_REMOTE = "APOLLO Bluetooth App remote program";
+Blockly.Msg.APOLLO_white_SET_R = "Set background color R";
+Blockly.Msg.APOLLO_white_SET_G = "G";
+Blockly.Msg.APOLLO_white_SET_B = "B";
+Blockly.Msg.APOLLO_white_SET_RANGE = "Range";
