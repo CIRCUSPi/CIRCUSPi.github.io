@@ -152,7 +152,7 @@
 				</value>
 				<value name="white_range">
 						<block type="math_number">
-								<field name="NUM">30</field>
+								<field name="NUM">200</field>
 						</block>
 				</value>
 			</block>
