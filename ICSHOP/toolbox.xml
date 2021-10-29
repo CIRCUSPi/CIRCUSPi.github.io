@@ -120,16 +120,6 @@
 		<category id="category_apollo" name="category_apollo">
 			<block type="apollo_factory"></block>
 			<block type="apollo_factory_game">
-				<value name="tx_pins">
-						<block type="math_number">
-								<field name="NUM">4</field>
-						</block>
-				</value>
-				<value name="rx_pins">
-						<block type="math_number">
-								<field name="NUM">7</field>
-						</block>
-				</value>
 				<value name="board_rate">
 						<block type="math_number">
 								<field name="NUM">9600</field>
@@ -157,16 +147,6 @@
 				</value>
 			</block>
 			<block type="apollo_factory_remote">
-				<value name="tx_pins">
-						<block type="math_number">
-								<field name="NUM">4</field>
-						</block>
-				</value>
-				<value name="rx_pins">
-						<block type="math_number">
-								<field name="NUM">7</field>
-						</block>
-				</value>
 				<value name="board_rate">
 						<block type="math_number">
 								<field name="NUM">9600</field>

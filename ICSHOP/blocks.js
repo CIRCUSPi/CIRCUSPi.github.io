@@ -2384,13 +2384,10 @@ Blockly.Blocks.apollo_factory_game={
     this.setHelpUrl(Blockly.Msg.APOLLO_HELPURL);
     this.setColour(Blockly.Blocks.apollo.HUE0);
     this.appendDummyInput()
-        .appendField(Blockly.Msg.APOLLO_FACTORY_GAME);
-    this.appendValueInput("tx_pins")
-        .appendField(Blockly.Msg.APOLLO_BT_SET_TX)
-        .setCheck("Number");
-    this.appendValueInput("rx_pins")
-        .appendField(Blockly.Msg.APOLLO_BT_SET_RX)
-        .setCheck("Number");
+        .appendField(Blockly.Msg.APOLLO_FACTORY_GAME)
+        .appendField(new Blockly.FieldDropdown([["P3","P3"],["P9","P9"]]),"blueChoose1");
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown([["P9","P9"],["P3","P3"]]),"blueChoose2");
     this.appendValueInput("board_rate")
         .appendField(Blockly.Msg.APOLLO_BT_SET_RATE)
         .setCheck("Number");
@@ -2417,13 +2414,10 @@ Blockly.Blocks.apollo_factory_remote={
     this.setHelpUrl(Blockly.Msg.APOLLO_HELPURL);
     this.setColour(Blockly.Blocks.apollo.HUE0);
     this.appendDummyInput()
-        .appendField(Blockly.Msg.APOLLO_FACTORY_REMOTE);
-    this.appendValueInput("tx_pins")
-        .appendField(Blockly.Msg.APOLLO_BT_SET_TX)
-        .setCheck("Number");
-    this.appendValueInput("rx_pins")
-        .appendField(Blockly.Msg.APOLLO_BT_SET_RX)
-        .setCheck("Number");
+        .appendField(Blockly.Msg.APOLLO_FACTORY_REMOTE)
+        .appendField(new Blockly.FieldDropdown([["P3","3"],["P9","9"]]),"blueChoose1");
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown([["P9","9"],["P3","3"]]),"blueChoose2");
     this.appendValueInput("board_rate")
         .appendField(Blockly.Msg.APOLLO_BT_SET_RATE)
         .setCheck("Number");
