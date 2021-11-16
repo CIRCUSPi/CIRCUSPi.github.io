@@ -1901,7 +1901,7 @@ Blockly.Arduino.am7020_connect_mqtt = function () {
     var password = (Blockly.Arduino.valueToCode(this, "PASSWORD", Blockly.Arduino.ORDER_ATOMIC) || "").replace(/"/g, "");
     var keepAlive = (Blockly.Arduino.valueToCode(this, "KEEPALIVE", Blockly.Arduino.ORDER_ATOMIC) || "270").replace(/"/g, "");
 
-    Blockly.Arduino.definitions_.include_PubSubClient = "#include <PubSubClient.h>";
+    Blockly.Arduino.definitions_.include_PubSubClient = "#include <Am7020PubSubClient.h>";
 
     Blockly.Arduino.definitions_.const_broker = "const char* broker = \"" + broker + "\";";
     Blockly.Arduino.definitions_.const_port = "const int port = " + port + ";";
@@ -1915,7 +1915,7 @@ Blockly.Arduino.am7020_connect_mqtt = function () {
     Blockly.Arduino.setups_.set_msg_buff_size = "msg_buff.reserve(100);\n";
     
     Blockly.Arduino.definitions_.object_tcpClient = "TinyGsmClient tcpClient(modem);";
-    Blockly.Arduino.definitions_.object_mqttClient = "PubSubClient  mqttClient(broker, port, tcpClient);";
+    Blockly.Arduino.definitions_.object_mqttClient = "Am7020PubSubClient  mqttClient(broker, port, tcpClient);";
 
     Blockly.Arduino.definitions_.func_mqttConnect = "\nvoid mqttConnect(void)\n{\n    Serial.print(F(\"Connecting to \"));\n    Serial.print(broker);\n    Serial.print(F(\"...\"));\n\n    while (!mqttClient.connect(mqtt_id, mqtt_username, mqtt_password)) {\n        Serial.print(F(\" fail\"));\n    }\n    Serial.println(F(\" success\"));\n}\n";
     Blockly.Arduino.setups_.setup_setMqttCallback = "mqttClient.setCallback(mqttCallback);\n";
