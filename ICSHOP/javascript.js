@@ -1854,3 +1854,109 @@ Blockly.Arduino.apollo_bt_sendString=function(){
  var a=Blockly.Arduino.valueToCode(this,"show_text",Blockly.Arduino.ORDER_ATOMIC)||"";
  return"mySerial.println("+a+");"
 };
+
+
+// AM7020
+Blockly.Arduino.am7020 = {};
+// AM7020 Init
+Blockly.Arduino.am7020_init = function () {
+    var baudrate = this.getFieldValue("BAUDRATE");
+    var resetPin = this.getFieldValue("RESET_PIN");
+
+    Blockly.Arduino.definitions_.include_TinyGsmClientSIM7020 = "#include \"TinyGsmClientSIM7020.h\"";
+    Blockly.Arduino.definitions_.typedef_TinyGsmSim7020 = "typedef TinyGsmSim7020 TinyGsm;";
+    Blockly.Arduino.definitions_.typedef_GsmClientSim7020 = "typedef TinyGsmSim7020::GsmClientSim7020 TinyGsmClient;\n";
+    Blockly.Arduino.definitions_.object_modem = "TinyGsm       modem(Serial1, " + resetPin + ");";
+    Blockly.Arduino.setups_.setup_serialAT = "Serial1.begin(" + baudrate + ");\n";
+    Blockly.Arduino.setups_.setup_randomSeed = "randomSeed(analogRead(16));\n";
+    return ""
+};
+// AM7020 Connect BS
+Blockly.Arduino.am7020_connect = function () {
+    var apn = this.getFieldValue("APN");
+    var band = 28;
+    if (apn == "twm.nbiot" || apn == "nbiot") {
+        band = 28;
+    } else if (apn == "internet.iot") {
+        band = 8;
+    }
+    Blockly.Arduino.definitions_.func_nbConnect = "\nvoid nbConnect(void)\n{\n    Serial.println(F(\"Initializing modem...\"));\n    while (!modem.init() || !modem.nbiotConnect(\"" + apn + "\", " + band + ")) {\n        Serial.print(F(\".\"));\n    }\n\n    Serial.print(F(\"Waiting for network...\"));\n    while (!modem.waitForNetwork()) {\n        Serial.print(F(\".\"));\n    }\n    Serial.println(F(\" success\"));\n}\n";
+    return "nbConnect();\n";
+};
+// AM7020 Check NBIOT Connected
+Blockly.Arduino.am7020_connected = function () {
+    return ["modem.isNetworkConnected()", Blockly.Arduino.ORDER_ATOMIC];
+};
+// AM7020 NBIOT Reconnect
+Blockly.Arduino.am7020_reconnect = function () {
+    return "nbConnect();\n";
+};
+/* AM7020 MQTT */
+// AM7020 MQTT Connect
+Blockly.Arduino.am7020_connect_mqtt = function () {
+    var broker = (Blockly.Arduino.valueToCode(this, "BROKER", Blockly.Arduino.ORDER_ATOMIC) || "").replace(/"/g, "");
+    var port = (Blockly.Arduino.valueToCode(this, "PORT", Blockly.Arduino.ORDER_ATOMIC) || "0").replace(/"/g, "");
+    var id = (Blockly.Arduino.valueToCode(this, "ID", Blockly.Arduino.ORDER_ATOMIC) || "").replace(/"/g, "");
+    var username = (Blockly.Arduino.valueToCode(this, "USERNAME", Blockly.Arduino.ORDER_ATOMIC) || "").replace(/"/g, "");
+    var password = (Blockly.Arduino.valueToCode(this, "PASSWORD", Blockly.Arduino.ORDER_ATOMIC) || "").replace(/"/g, "");
+    var keepAlive = (Blockly.Arduino.valueToCode(this, "KEEPALIVE", Blockly.Arduino.ORDER_ATOMIC) || "270").replace(/"/g, "");
+
+    Blockly.Arduino.definitions_.include_PubSubClient = "#include <PubSubClient.h>";
+
+    Blockly.Arduino.definitions_.const_broker = "const char* broker = \"" + broker + "\";";
+    Blockly.Arduino.definitions_.const_port = "const int port = " + port + ";";
+    Blockly.Arduino.definitions_.const_mqtt_id = "const char* mqtt_id = \"" + id + "\";";
+    Blockly.Arduino.definitions_.const_username = "const char* mqtt_username = \"" + username + "\";";
+    Blockly.Arduino.definitions_.const_password = "const char* mqtt_password = \"" + password + "\";\n";
+
+    Blockly.Arduino.definitions_.topic_buff = "String topic_buff;\n";
+    Blockly.Arduino.definitions_.msg_buff = "String msg_buff;\n";
+    Blockly.Arduino.setups_.set_topic_buff_size = "topic_buff.reserve(100);\n";
+    Blockly.Arduino.setups_.set_msg_buff_size = "msg_buff.reserve(100);\n";
+    
+    Blockly.Arduino.definitions_.object_tcpClient = "TinyGsmClient tcpClient(modem);";
+    Blockly.Arduino.definitions_.object_mqttClient = "PubSubClient  mqttClient(broker, port, tcpClient);";
+
+    Blockly.Arduino.definitions_.func_mqttConnect = "\nvoid mqttConnect(void)\n{\n    Serial.print(F(\"Connecting to \"));\n    Serial.print(broker);\n    Serial.print(F(\"...\"));\n\n    while (!mqttClient.connect(mqtt_id, mqtt_username, mqtt_password)) {\n        Serial.print(F(\" fail\"));\n    }\n    Serial.println(F(\" success\"));\n}\n";
+    Blockly.Arduino.setups_.setup_setMqttCallback = "mqttClient.setCallback(mqttCallback);\n";
+    Blockly.Arduino.setups_.setup_setKeepAlive = "mqttClient.setKeepAlive(" + keepAlive + ");\n";
+    return "mqttConnect();\n";
+};
+// AM7020 MQTT Subscribe
+Blockly.Arduino.am7020_subscribe_mqtt = function () {
+    var topic = (Blockly.Arduino.valueToCode(this, "TOPIC", Blockly.Arduino.ORDER_ATOMIC) || "");
+    return "mqttClient.subscribe(String(" + topic + ").c_str());\n";
+};
+// AM7020 MQTT Publish
+Blockly.Arduino.am7020_publish_mqtt = function () {
+    var topic = (Blockly.Arduino.valueToCode(this, "TOPIC", Blockly.Arduino.ORDER_ATOMIC) || "");
+    var msg = (Blockly.Arduino.valueToCode(this, "MESSAGE", Blockly.Arduino.ORDER_ATOMIC) || "");
+    return "mqttClient.publish(String(" + topic + ").c_str(), String(" + msg + ").c_str());\n";
+};
+// AM7020 MQTT Received Topic
+Blockly.Arduino.am7020_mqtt_received_topic = function () {
+    return ["topic_buff", Blockly.Arduino.ORDER_ATOMIC];
+};
+// AM7020 MQTT Received Msg
+Blockly.Arduino.am7020_mqtt_received_msg = function () {
+    return ["msg_buff", Blockly.Arduino.ORDER_ATOMIC];
+};
+// AM7020 MQTT Event
+Blockly.Arduino.am7020_mqtt_event = function () {
+    Blockly.Arduino.definitions_.func_mqttCallback = "\nvoid mqttCallback(char *topic, byte *payload, unsigned int len)\n{\n    topic_buff = String(topic);\n    msg_buff = \"\";\n\n    for (int ii = 0;ii < (int)len;ii++) {\n        msg_buff += (char)(*(payload + ii));\n    }\n    Serial.print(F(\"Message arrived [\"));\n    Serial.print(topic_buff);\n    Serial.print(F(\"]: \"));\n    Serial.println(msg_buff);\n\n";
+    Blockly.Arduino.definitions_.func_mqttCallback += Blockly.Arduino.statementToCode(this, "MSG_TOPIC_EQAL");
+    Blockly.Arduino.definitions_.func_mqttCallback += "\n}\n";
+    return ""
+};
+// AM7020 MQTT Connected
+Blockly.Arduino.am7020_mqtt_connected = function () {
+    return ['mqttClient.connected()', Blockly.Arduino.ORDER_ATOMIC];
+};
+// AM7020 MQTT Reconnect
+Blockly.Arduino.am7020_mqtt_reconnect = function () {
+    return "mqttConnect();\n";
+};
+// AM7020 MQTT handle
+Blockly.Arduino.am7020_mqtt_handle = function () {
+    return "mqttClient.loop();\n";
+};

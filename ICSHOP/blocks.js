@@ -2805,3 +2805,265 @@ Blockly.Blocks.apollo_bt_sendString={
     this.setTooltip(Blockly.Msg.APOLLO_TOOLTIP)
   }
 };
+
+// AM7020
+Blockly.Blocks.am7020 = {};
+Blockly.Blocks.am7020.HUE = 180;
+// check am7020_init Block exist
+Blockly.Blocks.am7020.checkAm7020InitBlocks = function (block) {
+    var blocks = block.workspace.getAllBlocks();
+    for (var b = 0; b < blocks.length; b++)
+        if (blocks[b].type == "am7020_init") {
+            return true;
+        }
+    return false;
+};
+// check am7020_connect Block exist
+Blockly.Blocks.am7020.checkAm7020ConnectBlocks = function (block) {
+    var blocks = block.workspace.getAllBlocks();
+    for (var b = 0; b < blocks.length; b++)
+        if (blocks[b].type == "am7020_connect") {
+            return true;
+        }
+    return false;
+};
+// AM7020 Init
+Blockly.Blocks.am7020_init = {
+    init: function () {
+        this.setHelpUrl(Blockly.Msg.AM7020_HELPURL);
+        this.setColour(Blockly.Blocks.am7020.HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.AM7020_INIT_TITLE)
+            .appendField(Blockly.Msg.AM7020_INIT_BAUDRATE)
+            .appendField(new Blockly.FieldDropdown([
+                ["9600", "9600"],
+                ["38400", "38400"],
+                ["115200", "115200"],
+            ]), "BAUDRATE")
+            .appendField(Blockly.Msg.AM7020_INIT_RESET_PIN)
+            .appendField(new Blockly.FieldDropdown([
+                ["2", "2"],
+                ["3", "3"],
+                ["4", "4"],
+                ["5", "5"],
+                ["8", "8"],
+                ["9", "9"],
+                ["10", "10"],
+                ["11", "11"],
+                ["12", "12"],
+                ["13", "13"],
+                ["14", "14"],
+                ["15", "15"],
+                ["16", "16"],
+                ["17", "17"],
+            ]), "RESET_PIN");;
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setTooltip(Blockly.Msg.AM7020_INIT_TOOLTIP)
+    }
+};
+// AM7020 Connect BS
+Blockly.Blocks.am7020_connect = {
+    init: function () {
+        this.setHelpUrl(Blockly.Msg.AM7020_HELPURL);
+        this.setColour(Blockly.Blocks.am7020.HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.AM7020_CONN_BS_TITLE)
+            .appendField(Blockly.Msg.AM7020_CONN_BS_TELECOM)
+            .appendField(new Blockly.FieldDropdown([
+                ["台灣大哥大", "twm.nbiot"],
+                ["中華電信", "internet.iot"],
+                ["遠傳電信", "nbiot"],
+            ]), "APN");
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setTooltip(Blockly.Msg.AM7020_CONN_BS_TOOLTIP)
+    }, onchange: function () {
+        this.workspace && (Blockly.Blocks.am7020.checkAm7020InitBlocks(this) ? this.setWarningText(null) : this.setWarningText(Blockly.Msg.AM7020_CONN_BS_WARNING));
+    }
+};
+// AM7020 Check NBIOT Connected
+Blockly.Blocks.am7020_connected = {
+    init: function () {
+        this.setHelpUrl(Blockly.Msg.AM7020_HELPURL);
+        this.setColour(Blockly.Blocks.am7020.HUE);
+        this.appendDummyInput().appendField(Blockly.Msg.AM7020_CHK_CONN_BS_TITLE);
+        this.setInputsInline(true);
+        this.setOutput(true, "Boolean");
+        this.setTooltip(Blockly.Msg.AM7020_CHK_CONN_BS_TOOLTIP)
+    }, onchange: function () {
+        this.workspace && (Blockly.Blocks.am7020.checkAm7020ConnectBlocks(this) ? this.setWarningText(null) : this.setWarningText(Blockly.Msg.AM7020_RE_CONN_BS_WARNING));
+    }
+};
+// AM7020 NBIOT Reconnect
+Blockly.Blocks.am7020_reconnect = {
+    init: function () {
+        this.setHelpUrl(Blockly.Msg.AM7020_HELPURL);
+        this.setColour(Blockly.Blocks.am7020.HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.AM7020_RE_CONN_BS_TITLE);
+        this.setInputsInline(true);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setTooltip(Blockly.Msg.AM7020_RE_CONN_BS_TOOLTIP)
+    }, onchange: function () {
+        this.workspace && (Blockly.Blocks.am7020.checkAm7020ConnectBlocks(this) ? this.setWarningText(null) : this.setWarningText(Blockly.Msg.AM7020_RE_CONN_BS_WARNING));
+    }
+};
+/* AM7020 MQTT */
+Blockly.Blocks.am7020.checkBlocks = function (a) {
+    var b = null,
+        d = a.type;
+    a = a.workspace.getAllBlocks();
+    for (var c = 0; c < a.length; c++)
+        if ("am7020_mqtt_event" != a[c].type && "am7020_subscribe_mqtt" != a[c].type && "am7020_publish_mqtt" != a[c].type && "am7020_mqtt_received_topic" != a[c].type && "am7020_mqtt_received_msg" != a[c].type || null != b || (b = a[c].type != d ? !0 : !1), "am7020_connect_mqtt" == a[c].type)
+            return !0;
+    return b
+};
+// AM7020 MQTT Connect
+Blockly.Blocks.am7020_connect_mqtt = {
+    init: function () {
+        this.setHelpUrl(Blockly.Msg.AM7020_HELPURL);
+        this.setColour(Blockly.Blocks.linkit.HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.AM7020_SET_MQTT_UNTIL_READY_TITLE);
+        this.appendValueInput("BROKER")
+            .setCheck("String").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.AM7020_MQTT_BROKER);
+        this.appendValueInput("PORT")
+            .setCheck("Number").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.AM7020_MQTT_PORT);
+        this.appendValueInput("ID")
+            .setCheck("String").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.AM7020_MQTT_ID);
+        this.appendValueInput("USERNAME")
+            .setCheck("String").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.AM7020_MQTT_USERNAME);
+        this.appendValueInput("PASSWORD")
+            .setCheck("String").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.AM7020_MQTT_PASSWORD);
+        this.appendValueInput("KEEPALIVE")
+            .setCheck("Number").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.AM7020_MQTT_KEEPALIVE);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setTooltip(Blockly.Msg.AM7020_MQTT_TOOLTIP)
+    }, onchange: function () {
+        this.workspace && (Blockly.Blocks.am7020.checkAm7020ConnectBlocks(this) ? this.setWarningText(null) : this.setWarningText(Blockly.Msg.AM7020_MQTT_WARNING_ROOT));
+    }
+};
+// AM7020 MQTT Subscribe
+Blockly.Blocks.am7020_subscribe_mqtt = {
+    init: function () {
+        this.setHelpUrl(Blockly.Msg.AM7020_HELPURL);
+        this.setColour(Blockly.Blocks.linkit.HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.AM7020_MQTT_SUB);
+        this.appendValueInput("TOPIC").setCheck("String");
+        this.setInputsInline(true);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setTooltip(Blockly.Msg.AM7020_MQTT_TOOLTIP)
+    }, onchange: function () {
+        this.workspace && (Blockly.Blocks.am7020.checkBlocks(this) ? this.setWarningText(null) : this.setWarningText(Blockly.Msg.AM7020_MQTT_WARNING))
+    }
+};
+// AM7020 MQTT Publish
+Blockly.Blocks.am7020_publish_mqtt = {
+    init: function () {
+        this.setHelpUrl(Blockly.Msg.AM7020_HELPURL);
+        this.setColour(Blockly.Blocks.linkit.HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.AM7020_MQTT_PUB_TITLE);
+        this.appendValueInput("TOPIC")
+            .setCheck("String").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.AM7020_MQTT_TOPIC);
+        this.appendValueInput("MESSAGE")
+            .setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.AM7020_MQTT_MESSAGE);
+        this.setInputsInline(true);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setTooltip(Blockly.Msg.AM7020_MQTT_TOOLTIP)
+    }, onchange: function () {
+        this.workspace && (Blockly.Blocks.am7020.checkBlocks(this) ? this.setWarningText(null) : this.setWarningText(Blockly.Msg.AM7020_MQTT_WARNING))
+    }
+};
+// AM7020 MQTT Received Topic
+Blockly.Blocks.am7020_mqtt_received_topic = {
+    init: function () {
+        this.setHelpUrl(Blockly.Msg.AM7020_HELPURL);
+        this.setColour(Blockly.Blocks.texts.HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.AM7020_MQTT_RECEIVED_TOPIC);
+        this.setInputsInline(true);
+        this.setOutput(true, "String")
+        this.setTooltip(Blockly.Msg.AM7020_MQTT_TOOLTIP)
+    }, onchange: function () {
+        this.workspace && (Blockly.Blocks.am7020.checkBlocks(this) ? this.setWarningText(null) : this.setWarningText(Blockly.Msg.AM7020_MQTT_WARNING))
+    }
+};
+// AM7020 MQTT Received Msg
+Blockly.Blocks.am7020_mqtt_received_msg = {
+    init: function () {
+        this.setHelpUrl(Blockly.Msg.AM7020_HELPURL);
+        this.setColour(Blockly.Blocks.texts.HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.AM7020_MQTT_RECEIVED_MSG);
+        this.setInputsInline(true);
+        this.setOutput(true, "String")
+        this.setTooltip(Blockly.Msg.AM7020_MQTT_TOOLTIP)
+    }, onchange: function () {
+        this.workspace && (Blockly.Blocks.am7020.checkBlocks(this) ? this.setWarningText(null) : this.setWarningText(Blockly.Msg.AM7020_MQTT_WARNING))
+    }
+};
+// AM7020 MQTT Event
+Blockly.Blocks.am7020_mqtt_event = {
+    init: function () {
+        this.setHelpUrl(Blockly.Msg.AM7020_HELPURL);
+        this.setColour(Blockly.Blocks.linkit.HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.AM7020_MQTT_EVENT);
+        this.setInputsInline(true);
+        this.appendStatementInput("MSG_TOPIC_EQAL");
+        this.setTooltip(Blockly.Msg.AM7020_MQTT_TOOLTIP)
+    }, onchange: function () {
+        this.workspace && (Blockly.Blocks.am7020.checkBlocks(this) ? this.setWarningText(null) : this.setWarningText(Blockly.Msg.AM7020_MQTT_WARNING))
+    }
+};
+// AM7020 MQTT handle
+Blockly.Blocks.am7020_mqtt_handle = {
+    init: function () {
+        this.setHelpUrl(Blockly.Msg.AM7020_HELPURL);
+        this.setColour(Blockly.Blocks.linkit.HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.AM7020_MQTT_HANDLE);
+        this.setInputsInline(true);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setTooltip(Blockly.Msg.AM7020_MQTT_TOOLTIP)
+    }, onchange: function () {
+        this.workspace && (Blockly.Blocks.am7020.checkBlocks(this) ? this.setWarningText(null) : this.setWarningText(Blockly.Msg.AM7020_MQTT_WARNING))
+    }
+};
+// AM7020 MQTT Connected
+Blockly.Blocks.am7020_mqtt_connected = {
+    init: function () {
+        this.setHelpUrl(Blockly.Msg.AM7020_HELPURL);
+        this.setColour(Blockly.Blocks.linkit.HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.AM7020_MQTT_CONNECTED);
+        this.setInputsInline(true);
+        this.setOutput(true, "Boolean");
+        this.setTooltip(Blockly.Msg.AM7020_MQTT_TOOLTIP)
+    }, onchange: function () {
+        this.workspace && (Blockly.Blocks.am7020.checkBlocks(this) ? this.setWarningText(null) : this.setWarningText(Blockly.Msg.AM7020_MQTT_WARNING))
+    }
+};
+// AM7020 MQTT Reconnect
+Blockly.Blocks.am7020_mqtt_reconnect = {
+    init: function () {
+        this.setHelpUrl(Blockly.Msg.AM7020_HELPURL);
+        this.setColour(Blockly.Blocks.linkit.HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.AM7020_MQTT_RECONNECT);
+        this.setInputsInline(true);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setTooltip(Blockly.Msg.AM7020_MQTT_TOOLTIP)
+    }, onchange: function () {
+        this.workspace && (Blockly.Blocks.am7020.checkBlocks(this) ? this.setWarningText(null) : this.setWarningText(Blockly.Msg.AM7020_MQTT_WARNING))
+    }
+};

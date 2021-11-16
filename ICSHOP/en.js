@@ -489,3 +489,25 @@ Blockly.Msg.APOLLO_white_SET_R = "Set background color R";
 Blockly.Msg.APOLLO_white_SET_G = "G";
 Blockly.Msg.APOLLO_white_SET_B = "B";
 Blockly.Msg.APOLLO_white_SET_RANGE = "Range";
+
+// am7020
+Blockly.Msg.AM7020_MQTT_WARNING_ROOT = "You have to setup「" + Blockly.Msg.AM7020_CONN_BS_TITLE + "」block at first !";
+Blockly.Msg.AM7020_SET_MQTT_UNTIL_READY_TITLE = "Connect to MQTT";
+Blockly.Msg.AM7020_MQTT_TOOLTIP = "MQTT";
+Blockly.Msg.AM7020_MQTT_BROKER = "MQTT Broker";
+Blockly.Msg.AM7020_MQTT_PORT = "Port";
+Blockly.Msg.AM7020_MQTT_ID = "MQTT ID";
+Blockly.Msg.AM7020_MQTT_USERNAME = "Username";
+Blockly.Msg.AM7020_MQTT_PASSWORD = "Password";
+Blockly.Msg.AM7020_MQTT_KEEPALIVE = "KeepAlive";
+Blockly.Msg.AM7020_MQTT_SUB = "Subscribe Topic";
+Blockly.Msg.AM7020_MQTT_PUB_TITLE = "Publish Message";
+Blockly.Msg.AM7020_MQTT_TOPIC = "Topic name";
+Blockly.Msg.AM7020_MQTT_MESSAGE = "Message";
+Blockly.Msg.AM7020_MQTT_EVENT = "When message received from MQTT";
+Blockly.Msg.AM7020_MQTT_RECEIVED_TOPIC = "received topic name";
+Blockly.Msg.AM7020_MQTT_RECEIVED_MSG = "received messag";
+Blockly.Msg.AM7020_MQTT_WARNING = "You have to setup「" + Blockly.Msg.AM7020_SET_MQTT_UNTIL_READY_TITLE + "」block at first !";
+Blockly.Msg.AM7020_MQTT_RECONNECT = "MQTT reconnect";
+Blockly.Msg.AM7020_MQTT_CONNECTED = "MQTT connected?";
+Blockly.Msg.AM7020_MQTT_HANDLE = "MQTT handle";

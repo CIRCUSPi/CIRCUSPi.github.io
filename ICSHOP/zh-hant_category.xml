@@ -22,4 +22,5 @@
 <category><name>category_line_tracker</name><lang>線路循跡</lang></category>
 <category><name>category_pca9685</name><lang>PCA9685</lang></category>
 <category><name>category_sensor_big</name><lang>感測模組擴充</lang></category>
+<category><name>category_am7020</name><lang>AM7020</lang></category>
 </xml>

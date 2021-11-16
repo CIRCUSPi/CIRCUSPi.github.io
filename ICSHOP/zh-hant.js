@@ -491,3 +491,25 @@ Blockly.Msg.APOLLO_white_SET_R = "設定背景顏色 R";
 Blockly.Msg.APOLLO_white_SET_G = "G";
 Blockly.Msg.APOLLO_white_SET_B = "B";
 Blockly.Msg.APOLLO_white_SET_RANGE = "容許誤差";
+
+// am7020
+Blockly.Msg.AM7020_MQTT_WARNING_ROOT = "必須先設定「" + Blockly.Msg.AM7020_CONN_BS_TITLE + "」積木！";
+Blockly.Msg.AM7020_SET_MQTT_UNTIL_READY_TITLE = "連線到MQTT";
+Blockly.Msg.AM7020_MQTT_TOOLTIP = "MQTT";
+Blockly.Msg.AM7020_MQTT_BROKER = "MQTT伺服器";
+Blockly.Msg.AM7020_MQTT_PORT = "連接埠";
+Blockly.Msg.AM7020_MQTT_ID = "MQTT ID";
+Blockly.Msg.AM7020_MQTT_USERNAME = "帳號";
+Blockly.Msg.AM7020_MQTT_PASSWORD = "密碼";
+Blockly.Msg.AM7020_MQTT_KEEPALIVE = "KeepAlive";
+Blockly.Msg.AM7020_MQTT_SUB = "訂閱主題";
+Blockly.Msg.AM7020_MQTT_PUB_TITLE = "發佈訊息";
+Blockly.Msg.AM7020_MQTT_TOPIC = "主題名稱";
+Blockly.Msg.AM7020_MQTT_MESSAGE = "訊息";
+Blockly.Msg.AM7020_MQTT_EVENT = "當收到MQTT訊息時";
+Blockly.Msg.AM7020_MQTT_RECEIVED_TOPIC = "接收到訊息的主題名稱";
+Blockly.Msg.AM7020_MQTT_RECEIVED_MSG = "接收到的訊息";
+Blockly.Msg.AM7020_MQTT_WARNING = "必須先設定「" + Blockly.Msg.AM7020_SET_MQTT_UNTIL_READY_TITLE + "」積木！";
+Blockly.Msg.AM7020_MQTT_RECONNECT = "MQTT重新連線";
+Blockly.Msg.AM7020_MQTT_CONNECTED = "MQTT是否已連線？";
+Blockly.Msg.AM7020_MQTT_HANDLE = "MQTT處理";
