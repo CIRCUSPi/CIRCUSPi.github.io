@@ -492,7 +492,24 @@ Blockly.Msg.APOLLO_white_SET_G = "G";
 Blockly.Msg.APOLLO_white_SET_B = "B";
 Blockly.Msg.APOLLO_white_SET_RANGE = "容許誤差";
 
+
 // am7020
+Blockly.Msg.CATEGORY_AM7020 = "AM7020";
+Blockly.Msg.AM7020_HELPURL = "https://github.com/FelixLinSY/am7020_arduino";
+Blockly.Msg.AM7020_INIT_TITLE = "AM7020 初始化";
+Blockly.Msg.AM7020_INIT_BAUDRATE = "Baud";
+Blockly.Msg.AM7020_INIT_RESET_PIN = "重起腳位";
+Blockly.Msg.AM7020_INIT_TOOLTIP = "初始化 AM7020，設定 HW Serial、Reset PIN";
+Blockly.Msg.AM7020_CONN_BS_TITLE = "連線到 NB-IOT 基地台";
+Blockly.Msg.AM7020_CONN_BS_TELECOM = "電信商";
+Blockly.Msg.AM7020_CONN_BS_TOOLTIP = "AM7020 連線到 NB-IOT 基地台，設定電信商，需等待30~120秒";
+Blockly.Msg.AM7020_CONN_BS_WARNING = "必須先設定「AM7020 初始化」積木！";
+Blockly.Msg.AM7020_CHK_CONN_BS_TITLE = "NB-IOT是否已連線？";
+Blockly.Msg.AM7020_CHK_CONN_BS_TOOLTIP = "回傳NB-IOT是否已連線？";
+Blockly.Msg.AM7020_CHK_CONN_BS_WARNING = "必須先設定「連線到 NB-IOT 基地台」積木！";
+Blockly.Msg.AM7020_RE_CONN_BS_TITLE = "NB-IOT重新連線";
+Blockly.Msg.AM7020_RE_CONN_BS_TOOLTIP = "NB-IOT重新連線";
+Blockly.Msg.AM7020_RE_CONN_BS_WARNING = "必須先設定「連線到 NB-IOT 基地台」積木！";
 Blockly.Msg.AM7020_MQTT_WARNING_ROOT = "必須先設定「" + Blockly.Msg.AM7020_CONN_BS_TITLE + "」積木！";
 Blockly.Msg.AM7020_SET_MQTT_UNTIL_READY_TITLE = "連線到MQTT";
 Blockly.Msg.AM7020_MQTT_TOOLTIP = "MQTT";
