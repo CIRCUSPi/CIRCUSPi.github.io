@@ -1984,13 +1984,6 @@ Blockly.Arduino.adafruitio_connect = function () {
     Blockly.Arduino.definitions_.adafruitio_object_tcpClient = "WiFiClient tcpClient;";
     Blockly.Arduino.definitions_.adafruitio_object_mqttClient = "PubSubClient  mqttClient(\"io.adafruit.com\", 1883, tcpClient);";
     
-    Blockly.Arduino.definitions_.adafruitio_connect_header =  '\nvoid adafruitio_connect(){\n  while (!mqttClient.connected()){\n    if (!mqttClient.connect(mqtt_id,mqtt_username,mqtt_password))\n    {\n      delay(5000);\n    }\n  }\n';
-    Blockly.Arduino.definitions_.adafruitio_callback_header =  '\nvoid mqttCallback(char* topic, byte* payload, unsigned int length){\n  topic_buff=String(topic);\n  msg_buff="";\n  for (unsigned int myIndex = 0; myIndex < length; myIndex++)\n  {\n      msg_buff += (char)payload[myIndex];\n  }\n  msg_buff.trim();\n';
-    Blockly.Arduino.definitions_.adafruitio_connect_body = '';
-    Blockly.Arduino.definitions_.adafruitio_callback_body = '';
-    Blockly.Arduino.definitions_.adafruitio_connect_footer += '\n}\n';
-    Blockly.Arduino.definitions_.adafruitio_callback_footer += '\n}\n';
-    
     Blockly.Arduino.setups_.setup_setAdafruitioCallback = "mqttClient.setCallback(mqttCallback);\n";
     return "adafruitio_connect();\n";
   };
