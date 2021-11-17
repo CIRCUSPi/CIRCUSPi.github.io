@@ -1334,7 +1334,7 @@
 			<block type="am7020_mqtt_received_topic"></block>
 			<block type="am7020_mqtt_received_msg"></block>
 		</category>
-		<category id="category_adafruitio">
+		<category id="category_adafruitio" name="category_adafruitio">
 			<block type="adafruitio_connect">
 				<value name="USERNAME">
 					<block type="text">
