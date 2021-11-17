@@ -1978,41 +1978,39 @@ Blockly.Arduino.adafruitio_connect = function () {
     Blockly.Arduino.setups_.set_topic_buff_size = "topic_buff.reserve(100);\n";
     Blockly.Arduino.setups_.set_msg_buff_size = "msg_buff.reserve(100);\n";
 
-    Blockly.Arduino.definitions_.adafruitio_callback_header='void mqttCallback(char* topic, byte* payload, unsigned int length){\n  topic_buff=String(topic);\n  msg_buff="";\n  for (unsigned int myIndex = 0; myIndex < length; myIndex++)\n  {\n      msg_buff += (char)payload[myIndex];\n  }\n  msg_buff.trim();\n';
-    Blockly.Arduino.definitions_.adafruitio_callback_body='';
-    Blockly.Arduino.definitions_.adafruitio_callback_footer='\n}\n';
-
-
+    
     Blockly.Arduino.definitions_.adafruitio_object_tcpClient = "WiFiClient tcpClient;";
     Blockly.Arduino.definitions_.adafruitio_object_mqttClient = "PubSubClient  mqttClient(\"io.adafruit.com\", 1883, tcpClient);";
-    var code = Blockly.Arduino.statementToCode(this, "CONTENT");
-
-    Blockly.Arduino.definitions_.adafruitio_connect_header = 'void adafruitio_connect(){\n  while (!mqttClient.connected()){\n    if (!mqttClient.connect(mqtt_id,mqtt_username,mqtt_password))\n    {\n      delay(5000);\n    }\n  }\n' + code;
-    Blockly.Arduino.definitions_.adafruitio_connect_body='';
-    Blockly.Arduino.definitions_.adafruitio_connect_footer='\n}\n';
-
+    
+    
     Blockly.Arduino.setups_.setup_setAdafruitioCallback = "mqttClient.setCallback(mqttCallback);\n";
     return "adafruitio_connect();\n";
-};
-
-Blockly.Arduino.adafruitio_handle = function () {
+  };
+  
+  Blockly.Arduino.adafruitio_handle = function () {
     return "mqttClient.loop();\n";
-};
-
-Blockly.Arduino.adafruitio_update_sensor = function () {
+  };
+  
+  Blockly.Arduino.adafruitio_update_sensor = function () {
     var sensor_id = Blockly.Arduino.valueToCode(this, "SENSOR_ID", Blockly.Arduino.ORDER_ATOMIC) || "";
     var data = Blockly.Arduino.valueToCode(this, "SET_VALUE", Blockly.Arduino.ORDER_ATOMIC) || "";
     return "mqttClient.publish((String(mqtt_username)+\"/feeds/\"+String(mqtt_id)+\".\"+String("+sensor_id+")).c_str(), String("+data+").c_str());\n";
-};
-
-Blockly.Arduino.adafruitio_event = function () {
-    var sensor_id = Blockly.Arduino.valueToCode(this, "SENSOR_ID", Blockly.Arduino.ORDER_ATOMIC) || "";
+  };
+  
+  Blockly.Arduino.adafruitio_event = function () {
     var code = Blockly.Arduino.statementToCode(this, "CONTENT");
-    Blockly.Arduino.definitions_.adafruitio_connect_body += "  mqttClient.subscribe((String(mqtt_username)+\"/feeds/\"+String(mqtt_id)+\".\"+String("+sensor_id+")).c_str());\n"
-    Blockly.Arduino.definitions_.adafruitio_callback_body += "  if(topic_buff.equals((String(mqtt_username)+\"/feeds/\"+String(mqtt_id)+\".\"+String("+sensor_id+")))) {\n  " + code + "  }\n";
+    var sensor_id = Blockly.Arduino.valueToCode(this, "SENSOR_ID", Blockly.Arduino.ORDER_ATOMIC) || "";
+
+    Blockly.Arduino.definitions_.adafruitio_connect_body =  '\nvoid adafruitio_connect(){\n  while (!mqttClient.connected()){\n    if (!mqttClient.connect(mqtt_id,mqtt_username,mqtt_password))\n    {\n      delay(5000);\n    }\n  }\n' + code;
+    Blockly.Arduino.definitions_.adafruitio_connect_body += "  mqttClient.subscribe((String(mqtt_username)+\"/feeds/\"+String(mqtt_id)+\".\"+String("+sensor_id+")).c_str());\n";
+    Blockly.Arduino.definitions_.adafruitio_connect_body += '\n}\n';
+
+    Blockly.Arduino.definitions_.adafruitio_callback_body =  '\nvoid mqttCallback(char* topic, byte* payload, unsigned int length){\n  topic_buff=String(topic);\n  msg_buff="";\n  for (unsigned int myIndex = 0; myIndex < length; myIndex++)\n  {\n      msg_buff += (char)payload[myIndex];\n  }\n  msg_buff.trim();\n';
+    Blockly.Arduino.definitions_.adafruitio_callback_body += "  if(topic_buff.equals((String(mqtt_username)+\"/feeds/\"+String(mqtt_id)+\".\"+String(" + sensor_id + ")))) {\n  " + code + "  }\n";
+    Blockly.Arduino.definitions_.adafruitio_callback_body += '\n}\n';
     return "";
 };
 
 Blockly.Arduino.adafruitio_received_msg = function () {
-    rn ["msg_buff", Blockly.Arduino.ORDER_ATOMIC];
+    return ["msg_buff", Blockly.Arduino.ORDER_ATOMIC];
 };
