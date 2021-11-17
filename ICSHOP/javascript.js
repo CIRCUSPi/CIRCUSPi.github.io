@@ -1960,3 +1960,59 @@ Blockly.Arduino.am7020_mqtt_reconnect = function () {
 Blockly.Arduino.am7020_mqtt_handle = function () {
     return "mqttClient.loop();\n";
 };
+
+// adafruitio uses linkit7697 wifi
+Blockly.Arduino.adafruitio_connect = function () {
+    var username = (Blockly.Arduino.valueToCode(this, "USERNAME", Blockly.Arduino.ORDER_ATOMIC) || "").replace(/"/g, "");
+    var aiokey = (Blockly.Arduino.valueToCode(this, "AIOKEY", Blockly.Arduino.ORDER_ATOMIC) || "").replace(/"/g, "");
+    var deviceId = (Blockly.Arduino.valueToCode(this, "DEVICEID", Blockly.Arduino.ORDER_ATOMIC) || "").replace(/"/g, "");
+
+    Blockly.Arduino.definitions_.include_PubSubClient = "#include <PubSubClient.h>";
+
+    Blockly.Arduino.definitions_.const_mqtt_id = "const char* mqtt_id = \"" + deviceId + "\";";
+    Blockly.Arduino.definitions_.const_username = "const char* mqtt_username = \"" + username + "\";";
+    Blockly.Arduino.definitions_.const_password = "const char* mqtt_password = \"" + aiokey + "\";\n";
+
+    Blockly.Arduino.definitions_.topic_buff = "String topic_buff;\n";
+    Blockly.Arduino.definitions_.msg_buff = "String msg_buff;\n";
+    Blockly.Arduino.setups_.set_topic_buff_size = "topic_buff.reserve(100);\n";
+    Blockly.Arduino.setups_.set_msg_buff_size = "msg_buff.reserve(100);\n";
+
+    Blockly.Arduino.definitions_.adafruitio_callback_header='void mqttCallback(char* topic, byte* payload, unsigned int length){\n  topic_buff=String(topic);\n  msg_buff="";\n  for (unsigned int myIndex = 0; myIndex < length; myIndex++)\n  {\n      msg_buff += (char)payload[myIndex];\n  }\n  msg_buff.trim();\n';
+    Blockly.Arduino.definitions_.adafruitio_callback_body='';
+    Blockly.Arduino.definitions_.adafruitio_callback_footer='\n}\n';
+
+
+    Blockly.Arduino.definitions_.adafruitio_object_tcpClient = "WiFiClient tcpClient;";
+    Blockly.Arduino.definitions_.adafruitio_object_mqttClient = "PubSubClient  mqttClient(\"io.adafruit.com\", 1883, tcpClient);";
+    var code = Blockly.Arduino.statementToCode(this, "CONTENT");
+
+    Blockly.Arduino.definitions_.adafruitio_connect_header = 'void adafruitio_connect(){\n  while (!mqttClient.connected()){\n    if (!mqttClient.connect(mqtt_id,mqtt_username,mqtt_password))\n    {\n      delay(5000);\n    }\n  }\n' + code;
+    Blockly.Arduino.definitions_.adafruitio_connect_body='';
+    Blockly.Arduino.definitions_.adafruitio_connect_footer='\n}\n';
+
+    Blockly.Arduino.setups_.setup_setAdafruitioCallback = "mqttClient.setCallback(mqttCallback);\n";
+    return "adafruitio_connect();\n";
+};
+
+Blockly.Arduino.adafruitio_handle = function () {
+    return "mqttClient.loop();\n";
+};
+
+Blockly.Arduino.adafruitio_update_sensor = function () {
+    var sensor_id = Blockly.Arduino.valueToCode(this, "SENSOR_ID", Blockly.Arduino.ORDER_ATOMIC) || "";
+    var data = Blockly.Arduino.valueToCode(this, "SET_VALUE", Blockly.Arduino.ORDER_ATOMIC) || "";
+    return "mqttClient.publish((String(mqtt_username)+\"/feeds/\"+String(mqtt_id)+\".\"+String("+sensor_id+")).c_str(), String("+data+").c_str());\n";
+};
+
+Blockly.Arduino.adafruitio_event = function () {
+    var sensor_id = Blockly.Arduino.valueToCode(this, "SENSOR_ID", Blockly.Arduino.ORDER_ATOMIC) || "";
+    var code = Blockly.Arduino.statementToCode(this, "CONTENT");
+    Blockly.Arduino.definitions_.adafruitio_connect_body += "  mqttClient.subscribe((String(mqtt_username)+\"/feeds/\"+String(mqtt_id)+\".\"+String("+sensor_id+")).c_str());\n"
+    Blockly.Arduino.definitions_.adafruitio_callback_body += "  if(topic_buff.equals((String(mqtt_username)+\"/feeds/\"+String(mqtt_id)+\".\"+String("+sensor_id+")))) {\n  " + code + "  }\n";
+    return "";
+};
+
+Blockly.Arduino.adafruitio_received_msg = function () {
+    rn ["msg_buff", Blockly.Arduino.ORDER_ATOMIC];
+};

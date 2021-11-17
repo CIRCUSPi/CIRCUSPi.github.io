@@ -528,3 +528,18 @@ Blockly.Msg.AM7020_MQTT_WARNING = "You have to setup「" + Blockly.Msg.AM7020_SE
 Blockly.Msg.AM7020_MQTT_RECONNECT = "MQTT reconnect";
 Blockly.Msg.AM7020_MQTT_CONNECTED = "MQTT connected?";
 Blockly.Msg.AM7020_MQTT_HANDLE = "MQTT handle";
+
+// adafruitio uses linkit7697 wifi
+Blockly.Msg.CATEGORY_ADAFRUIT_IO = "Adafruit IO";
+Blockly.Msg.ADAFRUIT_IO_TOOLTIP = "adafruitio uses linkit7697 wifi";
+Blockly.Msg.ADAFRUIT_IO_HELPURL = "https://io.adafruit.com";
+Blockly.Msg.ADAFRUIT_IO_CONN = "Connect to Adafruit IO";
+Blockly.Msg.ADAFRUIT_IO_USERNAME = "Username";
+Blockly.Msg.ADAFRUIT_IO_AIOKEY = "AIO Key";
+Blockly.Msg.ADAFRUIT_IO_DEVICEID = "DeviceID";
+Blockly.Msg.ADAFRUIT_IO_HANDLE = "Adafruit IO Sync";
+Blockly.Msg.ADAFRUIT_IO_UPDATE = "Update";
+Blockly.Msg.ADAFRUIT_IO_UPDATE_TAIL = "Sensor value";
+Blockly.Msg.ADAFRUIT_IO_IF_SENSOR = "When Sensor";
+Blockly.Msg.ADAFRUIT_IO_UPDATEING = "Updateing";
+Blockly.Msg.ADAFRUIT_IO_RECEIVED_MSG = "Receive message";

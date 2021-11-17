@@ -3067,3 +3067,85 @@ Blockly.Blocks.am7020_mqtt_reconnect = {
         this.workspace && (Blockly.Blocks.am7020.checkBlocks(this) ? this.setWarningText(null) : this.setWarningText(Blockly.Msg.AM7020_MQTT_WARNING))
     }
 };
+
+// adafruitio uses linkit7697 wifi
+Blockly.Blocks.adafruitio_connect = {
+    init: function () {
+        this.setHelpUrl(Blockly.Msg.ADAFRUIT_IO_HELPURL);
+        this.setColour(Blockly.Blocks.linkit.HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.ADAFRUIT_IO_CONN);
+        this.appendValueInput("USERNAME")
+            .setCheck("String")
+            .setAlign(Blockly.ALIGN_RIGHT)
+            .appendField(Blockly.Msg.ADAFRUIT_IO_USERNAME);
+        this.appendValueInput("AIOKEY")
+            .setCheck("String")
+            .setAlign(Blockly.ALIGN_RIGHT)
+            .appendField(Blockly.Msg.ADAFRUIT_IO_AIOKEY);
+        this.appendValueInput("DEVICEID")
+            .setCheck("String")
+            .setAlign(Blockly.ALIGN_RIGHT)
+            .appendField(Blockly.Msg.ADAFRUIT_IO_DEVICEID);
+        this.setPreviousStatement(!0);
+        this.setNextStatement(!0);
+        this.setTooltip(Blockly.Msg.ADAFRUIT_IO_TOOLTIP)
+    }
+};
+
+Blockly.Blocks.adafruitio_handle = {
+    init: function () {
+        this.setHelpUrl(Blockly.Msg.ADAFRUIT_IO_HELPURL);
+        this.setColour(Blockly.Blocks.linkit.HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.ADAFRUIT_IO_HANDLE);
+        this.setInputsInline(true);
+        this.setPreviousStatement(!0);
+        this.setNextStatement(!0);
+        this.setTooltip(Blockly.Msg.ADAFRUIT_IO_TOOLTIP)
+    }
+};
+
+Blockly.Blocks.adafruitio_update_sensor = {
+    init: function () {
+        this.setHelpUrl(Blockly.Msg.ADAFRUIT_IO_HELPURL);
+        this.setColour(Blockly.Blocks.linkit.HUE);
+        this.appendValueInput("SENSOR_ID")
+            .appendField(Blockly.Msg.ADAFRUIT_IO_UPDATE)
+            .setAlign(Blockly.ALIGN_RIGHT).setCheck("String");
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.ADAFRUIT_IO_UPDATE_TAIL);
+        this.appendValueInput("SET_VALUE");
+        this.setInputsInline(!0);
+        this.setPreviousStatement(!0);
+        this.setNextStatement(!0);
+        this.setTooltip(Blockly.Msg.ADAFRUIT_IO_TOOLTIP)
+    }
+};
+
+Blockly.Blocks.adafruitio_event = {
+    init: function () {
+        this.setHelpUrl(Blockly.Msg.ADAFRUIT_IO_HELPURL);
+        this.setColour(Blockly.Blocks.linkit.HUE);
+        this.appendValueInput("SENSOR_ID")
+            .appendField(Blockly.Msg.ADAFRUIT_IO_IF_SENSOR)
+            .setCheck("String");
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.ADAFRUIT_IO_UPDATEING);
+        this.setInputsInline(!0);
+        this.appendStatementInput("CONTENT");
+        this.setTooltip(Blockly.Msg.ADAFRUIT_IO_TOOLTIP)
+    }
+};
+
+Blockly.Blocks.adafruitio_received_msg = {
+    init: function () {
+        this.setHelpUrl(Blockly.Msg.ADAFRUIT_IO_HELPURL);
+        this.setColour(Blockly.Blocks.texts.HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.ADAFRUIT_IO_RECEIVED_MSG);
+        this.setInputsInline(true);
+        this.setOutput(true, "String")
+        this.setTooltip(Blockly.Msg.ADAFRUIT_IO_TOOLTIP)
+    }
+};

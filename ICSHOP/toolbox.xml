@@ -1334,4 +1334,39 @@
 			<block type="am7020_mqtt_received_topic"></block>
 			<block type="am7020_mqtt_received_msg"></block>
 		</category>
+		<category id="category_adafruitio">
+			<block type="adafruitio_connect">
+				<value name="USERNAME">
+					<block type="text">
+						<field name="TEXT"></field>
+					</block>
+				</value>
+				<value name="AIOKEY">
+					<block type="text">
+						<field name="TEXT"></field>
+					</block>
+				</value>
+				<value name="DEVICEID">
+					<block type="text">
+						<field name="TEXT"></field>
+					</block>
+				</value>
+			</block>
+			<block type="adafruitio_handle"></block>
+			<block type="adafruitio_update_sensor">
+				<value name="SENSOR_ID">
+					<block type="text">
+						<field name="TEXT"></field>
+					</block>
+				</value>
+			</block>
+			<block type="adafruitio_event">
+				<value name="SENSOR_ID">
+					<block type="text">
+						<field name="TEXT"></field>
+					</block>
+				</value>
+			</block>
+			<block type="adafruitio_received_msg"></block>
+		</category>
 </category>

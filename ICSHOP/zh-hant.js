@@ -530,3 +530,18 @@ Blockly.Msg.AM7020_MQTT_WARNING = "必須先設定「" + Blockly.Msg.AM7020_SET_
 Blockly.Msg.AM7020_MQTT_RECONNECT = "MQTT重新連線";
 Blockly.Msg.AM7020_MQTT_CONNECTED = "MQTT是否已連線？";
 Blockly.Msg.AM7020_MQTT_HANDLE = "MQTT處理";
+
+// adafruitio uses linkit7697 wifi
+Blockly.Msg.CATEGORY_ADAFRUIT_IO = "Adafruit IO";
+Blockly.Msg.ADAFRUIT_IO_TOOLTIP = "AdafruitIO Linkit7697 WiFi 專用";
+Blockly.Msg.ADAFRUIT_IO_HELPURL = "https://io.adafruit.com";
+Blockly.Msg.ADAFRUIT_IO_CONN = "連線到 Adafruit IO";
+Blockly.Msg.ADAFRUIT_IO_USERNAME = "帳號";
+Blockly.Msg.ADAFRUIT_IO_AIOKEY = "密碼";
+Blockly.Msg.ADAFRUIT_IO_DEVICEID = "裝置 ID";
+Blockly.Msg.ADAFRUIT_IO_HANDLE = "Adafruit IO 同步";
+Blockly.Msg.ADAFRUIT_IO_UPDATE = "更新";
+Blockly.Msg.ADAFRUIT_IO_UPDATE_TAIL = "感測器數值為";
+Blockly.Msg.ADAFRUIT_IO_IF_SENSOR = "當感測器";
+Blockly.Msg.ADAFRUIT_IO_UPDATEING = "更新時";
+Blockly.Msg.ADAFRUIT_IO_RECEIVED_MSG = "接收到的訊息";
