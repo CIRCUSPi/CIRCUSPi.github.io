@@ -2001,7 +2001,7 @@ Blockly.Arduino.adafruitio_connect = function () {
     var code = Blockly.Arduino.statementToCode(this, "CONTENT");
     var sensor_id = Blockly.Arduino.valueToCode(this, "SENSOR_ID", Blockly.Arduino.ORDER_ATOMIC) || "";
 
-    Blockly.Arduino.definitions_.adafruitio_connect_body =  '\nvoid adafruitio_connect(){\n  while (!mqttClient.connected()){\n    if (!mqttClient.connect(mqtt_id,mqtt_username,mqtt_password))\n    {\n      delay(5000);\n    }\n  }\n' + code;
+    Blockly.Arduino.definitions_.adafruitio_connect_body =  '\nvoid adafruitio_connect(){\n  while (!mqttClient.connected()){\n    if (!mqttClient.connect(mqtt_id,mqtt_username,mqtt_password))\n    {\n      delay(5000);\n    }\n  }\n';
     Blockly.Arduino.definitions_.adafruitio_connect_body += "  mqttClient.subscribe((String(mqtt_username)+\"/feeds/\"+String(mqtt_id)+\".\"+String("+sensor_id+")).c_str());\n";
     Blockly.Arduino.definitions_.adafruitio_connect_body += '\n}\n';
 
