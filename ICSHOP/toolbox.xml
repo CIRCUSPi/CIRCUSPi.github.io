@@ -458,6 +458,13 @@
 					</block>
 				</value>
 			</block>
+			<block type="ez_start_kit_neopixel_setpixelcolor_hex">
+				<value name="TARGET">
+					<block type="text">
+						<field name="TEXT">#ffffff</field>
+					</block>
+				</value>
+			</block>
 			<block type="ez_start_kit_neopixel_custom_setpixelcolor">
 				<value name="TARGET">
 					<block type="math_number">

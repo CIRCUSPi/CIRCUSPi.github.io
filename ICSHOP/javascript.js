@@ -338,6 +338,10 @@ Blockly.Arduino.ez_start_kit_neopixel_setpixelcolor=function(){
       b=this.getFieldValue("RGB");
   return"pixels.setPixelColor("+a+",pixels.Color("+hexToR(b)+","+hexToG(b)+","+hexToB(b)+"));\n"
 };
+Blockly.Arduino.ez_start_kit_neopixel_setpixelcolor_hex=function(){
+  var a=Blockly.Arduino.valueToCode(this,"TARGET",Blockly.Arduino.ORDER_ATOMIC)||"#000000",
+  return"pixels.setPixelColor("+a+",pixels.Color("+hexToR(a)+","+hexToG(a)+","+hexToB(a)+"));\n"
+};
 Blockly.Arduino.ez_start_kit_neopixel_custom_setpixelcolor=function(){
   var a=Blockly.Arduino.valueToCode(this,"TARGET",Blockly.Arduino.ORDER_ATOMIC)||"0",
       b=Blockly.Arduino.valueToCode(this,"R",Blockly.Arduino.ORDER_ATOMIC)||"255",

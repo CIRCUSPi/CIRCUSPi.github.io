@@ -372,6 +372,20 @@ Blockly.Blocks.ez_start_kit_neopixel_setpixelcolor={
     this.setNextStatement(!0);
     this.setTooltip(Blockly.Msg.NEOPIXEL_CUSTOM_SETPIXELCOLOR_TOOLTIP)},
 };
+Blockly.Blocks.ez_start_kit_neopixel_setpixelcolor_hex={
+  init:function(){
+    this.setHelpUrl(Blockly.Msg.NEOPIXEL_CUSTOM_SETPIXELCOLOR_HELPURL);
+    this.setColour(Blockly.Blocks.ez_start_kit.HUE9);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.EZ_NEOPIXEL_ALL_TITLE);
+    this.appendValueInput("TARGET")
+        .setCheck("String")
+        .appendField(Blockly.Msg.NEOPIXEL_CUSTOM_SETPIXELCOLOR_HEX);
+    this.setInputsInline(!0);
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setTooltip(Blockly.Msg.NEOPIXEL_CUSTOM_SETPIXELCOLOR_TOOLTIP)},
+};
 Blockly.Blocks.ez_start_kit_neopixel_custom_setpixelcolor={
   init:function(){
     this.setHelpUrl(Blockly.Msg.NEOPIXEL_CUSTOM_SETPIXELCOLOR_HELPURL);
