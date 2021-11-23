@@ -2889,7 +2889,7 @@ Blockly.Blocks.am7020_connect = {
             .appendField(new Blockly.FieldDropdown([
                 ["台灣大哥大", "twm.nbiot"],
                 ["中華電信", "internet.iot"],
-                ["遠傳電信", "nbiot"],
+                ["遠傳電信", "iot4ga2"],
             ]), "APN");
         this.setPreviousStatement(true);
         this.setNextStatement(true);

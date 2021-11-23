@@ -460,8 +460,13 @@
 			</block>
 			<block type="ez_start_kit_neopixel_setpixelcolor_hex">
 				<value name="TARGET">
+					<block type="math_number">
+						<field name="NUM">0</field>
+					</block>
+				</value>
+				<value name="RGB_HEX">
 					<block type="text">
-						<field name="TEXT">#ffffff</field>
+						<field name="TEXT">#FFFFFF</field>
 					</block>
 				</value>
 			</block>
