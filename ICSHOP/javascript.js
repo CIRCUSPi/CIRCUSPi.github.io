@@ -339,9 +339,10 @@ Blockly.Arduino.ez_start_kit_neopixel_setpixelcolor=function(){
   return"pixels.setPixelColor("+a+",pixels.Color("+hexToR(b)+","+hexToG(b)+","+hexToB(b)+"));\n"
 };
 Blockly.Arduino.ez_start_kit_neopixel_setpixelcolor_hex=function(){
-  Blockly.Arduino.definitions_.setWS2812LEDSHEX="void setWS2812LEDHEX(String hex_color) {\nlong number = strtol( &hex_color[1], NULL, 16);\nfor (int i = 0; i < 3; i++) {\npixels.setPixelColor(i, pixels.Color(number >> 16, number >> 8 & 0xFF, number & 0xFF));\n}\n}\n";
-  var a=Blockly.Arduino.valueToCode(this,"TARGET",Blockly.Arduino.ORDER_ATOMIC)||"#000000";
-  return "setWS2812LEDHEX(" + a + ");\n"
+  Blockly.Arduino.definitions_.setWS2812LEDSHEX="void setWS2812LEDHEX(byte idx, String hex_color) {\nlong number = strtol( &hex_color[1], NULL, 16);\npixels.setPixelColor(idx, pixels.Color(number >> 16, number >> 8 & 0xFF, number & 0xFF));\n}\n";
+  var a=Blockly.Arduino.valueToCode(this,"TARGET",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  var b=Blockly.Arduino.valueToCode(this,"RGB_HEX",Blockly.Arduino.ORDER_ATOMIC)||"#000000";
+  return "setWS2812LEDHEX(" + a + ", " + b + ");\n"
 };
 Blockly.Arduino.ez_start_kit_neopixel_custom_setpixelcolor=function(){
   var a=Blockly.Arduino.valueToCode(this,"TARGET",Blockly.Arduino.ORDER_ATOMIC)||"0",

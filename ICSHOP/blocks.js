@@ -377,8 +377,10 @@ Blockly.Blocks.ez_start_kit_neopixel_setpixelcolor_hex={
     this.setHelpUrl(Blockly.Msg.NEOPIXEL_CUSTOM_SETPIXELCOLOR_HELPURL);
     this.setColour(Blockly.Blocks.ez_start_kit.HUE9);
     this.appendDummyInput()
-        .appendField(Blockly.Msg.EZ_NEOPIXEL_ALL_TITLE);
+        .appendField(Blockly.Msg.EZ_NEOPIXEL_TITLE);
     this.appendValueInput("TARGET")
+        .setCheck("Number")
+    this.appendValueInput("RGB_HEX")
         .setCheck("String")
         .appendField(Blockly.Msg.NEOPIXEL_CUSTOM_SETPIXELCOLOR_HEX);
     this.setInputsInline(!0);

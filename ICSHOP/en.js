@@ -76,7 +76,6 @@ Blockly.Msg.EZ_LED_GREEN = "Green";
 Blockly.Msg.EZ_LED_VALUE = "Brightness(0~255)";
 Blockly.Msg.EZ_NEOPIXEL_BEGIN_BRIGHTNESS = "Setup RGB LED Brightness(0~255)";
 Blockly.Msg.EZ_NEOPIXEL_TITLE = "RGB LED"
-Blockly.Msg.EZ_NEOPIXEL_ALL_TITLE = "RGB LED ALL";
 Blockly.Msg.EZ_NEOPIXEL_CLEAR = "Clear RGB LED";
 Blockly.Msg.EZ_OLED_DISPLAY_ALBUM = "Custom OLED dot matrix(128*64)";
 Blockly.Msg.custom_C1 = "Custom1";
