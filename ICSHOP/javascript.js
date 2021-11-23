@@ -619,7 +619,7 @@ Blockly.Arduino.RockBot_neopixel_clear=function(){
 Blockly.Arduino.NFC_RFID={};
 Blockly.Arduino.NFC_RFID_setup=function(){
   var a=Blockly.Arduino.valueToCode(this,"IRQ",Blockly.Arduino.ORDER_ATOMIC)||"0";
-  Blockly.Arduino.definitions_.define_NFC_RFID="#include <Wire.h>\n#include <Adafruit_PN532.h>\n#define PN532_IRQ   ("+a+")\n#define PN532_RESET (0)\nAdafruit_PN532 nfc(PN532_IRQ, PN532_RESET);\n";
+  Blockly.Arduino.definitions_.define_NFC_RFID="#include <Wire.h>\n#include <Adafruit_PN532_linkit.h>\n#define PN532_IRQ   ("+a+")\n#define PN532_RESET (0)\nAdafruit_PN532_linkit nfc(PN532_IRQ, PN532_RESET);\n";
   Blockly.Arduino.setups_.setup_define_NFC_RFID="nfc.begin();\n  nfc.SAMConfig();\n";
   return""
 };
