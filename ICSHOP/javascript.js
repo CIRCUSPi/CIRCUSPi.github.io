@@ -1881,7 +1881,7 @@ Blockly.Arduino.am7020_init = function () {
 Blockly.Arduino.am7020_connect = function () {
     var apn = this.getFieldValue("APN");
     var band = 28;
-    if (apn == "twm.nbiot" || apn == "nbiot") {
+    if (apn == "twm.nbiot" || apn == "iot4ga2") {
         band = 28;
     } else if (apn == "internet.iot") {
         band = 8;
