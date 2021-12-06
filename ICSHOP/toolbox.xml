@@ -12,6 +12,8 @@
 					</block>
 				</value>
 			</block>
+			<block type="linkit_wifi_disconnect"></block>
+			<block type="linkit_wifi_ip_address"></block>
 		</category>
 		<category id="category_mooncar" name="category_mooncar">
 			<block type="mooncar_move_car">
