@@ -1,3 +1,5 @@
+// 7697 5G Wi-Fi
+Blockly.Msg.LINKIT_SET_WIFI_5G_UNTIL_READY_TITLE = "Connect to Wi-Fi 5G AP";
 // mooncar
 Blockly.Msg.CATEGORY_MOONCAR = "MoonCar";
 Blockly.Msg.MOONCAR_HELPURL = "MoonCar";

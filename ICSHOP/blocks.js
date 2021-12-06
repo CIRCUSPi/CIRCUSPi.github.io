@@ -1,3 +1,24 @@
+// 7697 5G Wi-Fi
+Blockly.Blocks.LinkIt7697_5g_wifi={};
+Blockly.Blocks.linkit_wifi_5G_wait_until_ready={
+	init:function(){
+		this.setHelpUrl(Blockly.Msg.LINKIT_SET_WIFI_HELPURL);
+		this.setColour(Blockly.Blocks.linkit.HUE);
+		this.appendDummyInput()
+				.appendField(Blockly.Msg.LINKIT_SET_WIFI_5G_UNTIL_READY_TITLE);
+		this.appendValueInput("SSID")
+				.setCheck("String")
+				.setAlign(Blockly.ALIGN_RIGHT)
+				.appendField(Blockly.Msg.LINKIT_SET_WIFI_SSID);
+		this.appendValueInput("PASSWORD")
+        .setCheck("String")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField(Blockly.Msg.LINKIT_SET_WIFI_PASSWORD);
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setTooltip(Blockly.Msg.LINKIT_SET_WIFI_TOOLTIP)
+  }
+};
 // mooncar
 Blockly.Blocks.mooncar={};
 Blockly.Blocks.mooncar.HUE1=60;

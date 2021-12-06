@@ -1,3 +1,11 @@
+// 7697 5G Wi-Fi
+Blockly.Arduino.LinkIt7697_5g_wifi={};
+Blockly.Arduino.linkit_wifi_5G_wait_until_ready=function(){
+	var a=Blockly.Arduino.valueToCode(this,"SSID",Blockly.Arduino.ORDER_ATOMIC)||"",b=Blockly.Arduino.valueToCode(this,"PASSWORD",Blockly.Arduino.ORDER_ATOMIC)||"";
+	//a=a.replace(/"/g,"");b=b.replace(/"/g,"");
+	Blockly.Arduino.definitions_.define_linkit_wifi_include="#include <LWiFi.h>";Blockly.Arduino.definitions_.define_linkit_wifi_ssid='char _lwifi_ssid[] = '+a+';';Blockly.Arduino.definitions_.define_linkit_wifi_pass='char _lwifi_pass[] = '+b+';';
+	return"while (WiFi.begin_5G(_lwifi_ssid, _lwifi_pass) != WL_CONNECTED) { delay(1000); }\n"
+};
 // mooncar
 Blockly.Arduino.mooncar={};
 Blockly.Arduino.mooncar_move_car=function(){
@@ -1919,7 +1927,7 @@ Blockly.Arduino.am7020_connect_mqtt = function () {
     Blockly.Arduino.definitions_.msg_buff = "String msg_buff;\n";
     Blockly.Arduino.setups_.set_topic_buff_size = "topic_buff.reserve(100);\n";
     Blockly.Arduino.setups_.set_msg_buff_size = "msg_buff.reserve(100);\n";
-    
+
     Blockly.Arduino.definitions_.object_tcpClient = "TinyGsmClient tcpClient(modem);";
     Blockly.Arduino.definitions_.object_mqttClient = "Am7020PubSubClient  mqttClient(broker, port, tcpClient);";
 
@@ -1986,24 +1994,24 @@ Blockly.Arduino.adafruitio_connect = function () {
 
     Blockly.Arduino.adafruitio_connect_body_temp = "";
     Blockly.Arduino.adafruitio_callback_body_temp = "";
-    
+
     Blockly.Arduino.definitions_.adafruitio_object_tcpClient = "WiFiClient tcpClient;";
     Blockly.Arduino.definitions_.adafruitio_object_mqttClient = "PubSubClient  mqttClient(\"io.adafruit.com\", 1883, tcpClient);";
-    
+
     Blockly.Arduino.setups_.setup_setAdafruitioCallback = "mqttClient.setCallback(mqttCallback);\n";
     return "adafruitio_connect();\n";
   };
-  
+
   Blockly.Arduino.adafruitio_handle = function () {
     return "mqttClient.loop();\n";
   };
-  
+
   Blockly.Arduino.adafruitio_update_sensor = function () {
     var sensor_id = Blockly.Arduino.valueToCode(this, "SENSOR_ID", Blockly.Arduino.ORDER_ATOMIC) || "";
     var data = Blockly.Arduino.valueToCode(this, "SET_VALUE", Blockly.Arduino.ORDER_ATOMIC) || "";
     return "mqttClient.publish((String(mqtt_username)+\"/feeds/\"+String(mqtt_id)+\".\"+String("+sensor_id+")).c_str(), String("+data+").c_str());\n";
   };
-  
+
   Blockly.Arduino.adafruitio_event = function () {
     var code = Blockly.Arduino.statementToCode(this, "CONTENT");
     var sensor_id = Blockly.Arduino.valueToCode(this, "SENSOR_ID", Blockly.Arduino.ORDER_ATOMIC) || "";

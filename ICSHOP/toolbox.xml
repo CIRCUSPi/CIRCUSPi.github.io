@@ -1,4 +1,18 @@
 <category id="catICSHOP" name="catICSHOP" colour="290">
+		<category id="category_LinkIt7697_5g_wifi" name="category_LinkIt7697_5g_wifi">
+			<block type="linkit_wifi_5G_wait_until_ready">
+				<value name="SSID">
+					<block type="text">
+						<field name="TEXT"></field>
+					</block>
+				</value>
+				<value name="PASSWORD">
+					<block type="text">
+						<field name="TEXT"></field>
+					</block>
+				</value>
+			</block>
+		</category>
 		<category id="category_mooncar" name="category_mooncar">
 			<block type="mooncar_move_car">
 				<value name="SPEED">
