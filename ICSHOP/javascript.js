@@ -1,5 +1,5 @@
 // 7697 5G Wi-Fi
-Blockly.Arduino.LinkIt7697_5g_wifi={};
+Blockly.Arduino.linkit_wifi_5G={};
 Blockly.Arduino.linkit_wifi_5G_wait_until_ready=function(){
 	var a=Blockly.Arduino.valueToCode(this,"SSID",Blockly.Arduino.ORDER_ATOMIC)||"",b=Blockly.Arduino.valueToCode(this,"PASSWORD",Blockly.Arduino.ORDER_ATOMIC)||"";
 	//a=a.replace(/"/g,"");b=b.replace(/"/g,"");

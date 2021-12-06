@@ -1,5 +1,5 @@
 // 7697 5G Wi-Fi
-Blockly.Blocks.LinkIt7697_5g_wifi={};
+Blockly.Blocks.linkit_wifi_5G={};
 Blockly.Blocks.linkit_wifi_5G_wait_until_ready={
 	init:function(){
 		this.setHelpUrl(Blockly.Msg.LINKIT_SET_WIFI_HELPURL);
