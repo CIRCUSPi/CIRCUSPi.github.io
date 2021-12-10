@@ -292,6 +292,7 @@ Blockly.Msg.COLOR_RECOGNITION = "Color recognition";
 Blockly.Msg.TAG_RECOGNITION = "Tag recognition";
 Blockly.Msg.OBJECT_CLASSIFICATION = "Object classification";
 Blockly.Msg.HUSKYLENS_READ_DATA = "Get a set of data from HuskyLens";
+Blockly.Msg.HUSKYLENS_READ_NOW = "Detection object?";
 Blockly.Msg.GET_DATA_BLOCK = "Get block data";
 Blockly.Msg.B_XCENTER = "X Center";
 Blockly.Msg.B_YCENTER = "Y Center";

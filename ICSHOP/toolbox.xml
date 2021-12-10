@@ -373,6 +373,7 @@
 			<block type="huskylens_uart_init"></block>
 			<block type="huskylens_set_mode"></block>
 			<block type="huskylens_read_data"></block>
+			<block type="huskylens_read_now"></block>
 			<block type="huskylens_get_data_block"></block>
 			<block type="huskylens_get_data_arrow"></block>
 			<block type="huskylens_show_text">

@@ -1779,6 +1779,18 @@ Blockly.Blocks.huskylens_read_data={
   }
 };
 
+Blockly.Blocks.huskylens_read_now={
+  init:function() {
+    this.setHelpUrl(Blockly.Msg.HUSKYLENS_HELPURL);
+    this.setColour(Blockly.Blocks.huskylens.HUE);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.HUSKYLENS_READ_NOW);
+    this.setInputsInline(!0);
+    this.setOutput(!0,"Number");
+    this.setTooltip(Blockly.Msg.HUSKYLENS_TOOLTIP)
+  }
+};
+
 Blockly.Blocks.huskylens_get_data_block={
   init:function() {
     this.setHelpUrl(Blockly.Msg.HUSKYLENS_HELPURL);

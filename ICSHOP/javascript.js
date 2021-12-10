@@ -1136,8 +1136,12 @@ Blockly.Arduino.huskylens_set_mode=function() {
 };
 
 Blockly.Arduino.huskylens_read_data=function() {
-  Blockly.Arduino.definitions_.define_huskylens_init_array="int readData[5] = {};\nbyte dataType = 0;\nbyte idCount = 0;\n";
-  return"if (!huskylens.request()) {\n  Serial.println(F(\"Fail to request data from HUSKYLENS, recheck the connection!\"));\n}\nelse {\n  if (huskylens.available()) {\n    HUSKYLENSResult result = huskylens.read();\n    idCount = huskylens.countLearned();\n    if (result.command == COMMAND_RETURN_BLOCK){\n      dataType = 0;\n      readData[0] = result.xCenter;\n      readData[1] = result.yCenter;\n      readData[2] = result.width;\n      readData[3] = result.height;\n      readData[4] = result.ID;\n    }\n    else if (result.command == COMMAND_RETURN_ARROW){\n      dataType = 1;\n      readData[0] = result.xOrigin;\n      readData[1] = result.yOrigin;\n      readData[2] = result.xTarget;\n      readData[3] = result.yTarget;\n      readData[4] = result.ID;\n    }\n    else {\n      for (byte i=0; i<5; i++) {\n        readData[i] = 0;\n      }\n    }\n  }\n}\n";
+  Blockly.Arduino.definitions_.define_huskylens_init_array="int readData[5] = {};\nbyte dataType = 0;\nbyte idCount = 0;\nbyte detection_now = 0";
+  return"if (!huskylens.request()) {\n  Serial.println(F(\"Fail to request data from HUSKYLENS, recheck the connection!\"));\n}\nelse {\n  if (huskylens.available()) {\n    detection_now = 1;\n    HUSKYLENSResult result = huskylens.read();\n    idCount = huskylens.countLearned();\n    if (result.command == COMMAND_RETURN_BLOCK){\n      dataType = 0;\n      readData[0] = result.xCenter;\n      readData[1] = result.yCenter;\n      readData[2] = result.width;\n      readData[3] = result.height;\n      readData[4] = result.ID;\n    }\n    else if (result.command == COMMAND_RETURN_ARROW){\n      dataType = 1;\n      readData[0] = result.xOrigin;\n      readData[1] = result.yOrigin;\n      readData[2] = result.xTarget;\n      readData[3] = result.yTarget;\n      readData[4] = result.ID;\n    }\n    else {\n      for (byte i=0; i<5; i++) {\n        readData[i] = 0;\n      }\n    }\n  }\n  else {\n    detection_now = 0;\n  }\n}\n";
+};
+
+Blockly.Arduino.huskylens_read_now=function() {
+  return["detection_now",Blockly.Arduino.ORDER_ATOMIC];
 };
 
 Blockly.Arduino.huskylens_get_data_block=function() {

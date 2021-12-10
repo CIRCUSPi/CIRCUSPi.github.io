@@ -292,6 +292,7 @@ Blockly.Msg.COLOR_RECOGNITION = "顏色辨識";
 Blockly.Msg.TAG_RECOGNITION = "標籤辨識";
 Blockly.Msg.OBJECT_CLASSIFICATION = "物體分類";
 Blockly.Msg.HUSKYLENS_READ_DATA = "從HuskyLens 獲得一組數據";
+Blockly.Msg.HUSKYLENS_READ_NOW = "檢測到目標?";
 Blockly.Msg.GET_DATA_BLOCK = "取得框選數據:";
 Blockly.Msg.B_XCENTER = "中心點X 座標";
 Blockly.Msg.B_YCENTER = "中心點Y 座標";
