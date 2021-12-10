@@ -1819,7 +1819,7 @@ Blockly.Blocks.huskylens_get_data_arrow={
                                                 [Blockly.Msg.A_YORIGIN,"YO"],
                                                 [Blockly.Msg.A_XTARGET,"XT"],
                                                 [Blockly.Msg.A_YTARGET,"YT"],
-                                                [Blockly.Msg.A_ID,"ID"]
+                                                [Blockly.Msg.A_ID_,"ID"]
                                               ]),"ARROW_DATA");
     this.setInputsInline(!0);
     this.setOutput(!0,"Number");
