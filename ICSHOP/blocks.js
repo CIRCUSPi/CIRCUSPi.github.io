@@ -1786,7 +1786,7 @@ Blockly.Blocks.huskylens_read_now={
     this.appendDummyInput()
         .appendField(Blockly.Msg.HUSKYLENS_READ_NOW);
     this.setInputsInline(!0);
-    this.setOutput(!0,"Number");
+    this.setOutput(!0,"Boolean");
     this.setTooltip(Blockly.Msg.HUSKYLENS_TOOLTIP)
   }
 };
