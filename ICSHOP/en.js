@@ -310,6 +310,7 @@ Blockly.Msg.HUSKYLENS_XAXIS = "X:";
 Blockly.Msg.HUSKYLENS_YAXIS = "Y:";
 Blockly.Msg.HUSKYLENS_CLEAR_SCREEN = "Clear screen";
 Blockly.Msg.HUSKYLENS_COUNT_LEARNED = "Get the total number of IDs learned on the screen";
+Blockly.Msg.HUSKYLENS_COUNT_ALL_LEARNED = "Get the total number of IDs learned";
 Blockly.Msg.HUSKYLENS_WRITE_LEARN = "Learn the current goal and assign an ID number:";
 Blockly.Msg.HUSKYLENS_WRITE_FORGET = "Forget all learning data";
 Blockly.Msg.HUSKYLENS_LEARNED_ID = "Has the ID:";

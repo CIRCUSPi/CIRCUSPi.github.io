@@ -395,6 +395,7 @@
 			</block>
 			<block type="huskylens_clear_screen"></block>
 			<block type="huskylens_count_learned"></block>
+			<block type="huskylens_count_all_learned"></block>
 			<block type="huskylens_write_learn">
 				<value name="learn_id">
 					<block type="math_number">

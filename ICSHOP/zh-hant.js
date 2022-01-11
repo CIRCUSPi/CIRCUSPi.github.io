@@ -310,6 +310,7 @@ Blockly.Msg.HUSKYLENS_XAXIS = "X 座標:";
 Blockly.Msg.HUSKYLENS_YAXIS = "Y 座標:";
 Blockly.Msg.HUSKYLENS_CLEAR_SCREEN = "清除螢幕顯示";
 Blockly.Msg.HUSKYLENS_COUNT_LEARNED = "取得螢幕上已學習的ID 總數";
+Blockly.Msg.HUSKYLENS_COUNT_ALL_LEARNED = "取得已學習的ID 總數";
 Blockly.Msg.HUSKYLENS_WRITE_LEARN = "學習當前目標並賦予ID 編號:";
 Blockly.Msg.HUSKYLENS_WRITE_FORGET = "忘記所有學習數據";
 Blockly.Msg.HUSKYLENS_LEARNED_ID = "ID 編號:";

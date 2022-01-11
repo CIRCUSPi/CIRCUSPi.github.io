@@ -1197,6 +1197,10 @@ Blockly.Arduino.huskylens_count_learned=function() {
   return["idCount",Blockly.Arduino.ORDER_ATOMIC];
 };
 
+Blockly.Arduino.huskylens_count_all_learned=function() {
+  return["huskylens.countLearnedIDs()",Blockly.Arduino.ORDER_ATOMIC];
+};
+
 Blockly.Arduino.huskylens_write_learn=function() {
   var a=Blockly.Arduino.valueToCode(this,"learn_id",Blockly.Arduino.ORDER_ATOMIC)||"1";
   return"huskylens.writeLearn("+a+");\n";

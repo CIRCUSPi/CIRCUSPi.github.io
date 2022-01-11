@@ -1875,6 +1875,18 @@ Blockly.Blocks.huskylens_count_learned={
   }
 };
 
+Blockly.Blocks.huskylens_count_all_learned={
+  init:function() {
+    this.setHelpUrl(Blockly.Msg.HUSKYLENS_HELPURL);
+    this.setColour(Blockly.Blocks.huskylens.HUE);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.HUSKYLENS_COUNT_ALL_LEARNED);
+    this.setInputsInline(!0);
+    this.setOutput(!0,"Number");
+    this.setTooltip(Blockly.Msg.HUSKYLENS_TOOLTIP)
+  }
+};
+
 Blockly.Blocks.huskylens_write_learn={
   init:function(){
     this.setHelpUrl(Blockly.Msg.HUSKYLENS_HELPURL);
