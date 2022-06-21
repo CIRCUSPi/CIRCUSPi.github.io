@@ -250,6 +250,7 @@ Blockly.Arduino.ez_start_kit_button=function(){
 };
 */
 Blockly.Arduino.ez_start_kit_button=function(){
+  // test pins
   var a=this.getFieldValue("AB_BUTTON");
 	if (Blockly.Arduino.my_board_type=="7697"){
     var button_A = 0, button_B = 7;
