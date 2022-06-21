@@ -331,6 +331,7 @@ Blockly.Arduino.ez_start_kit_tone=function(){
 Blockly.Arduino.ez_start_kit_no_tone=function(){
   return"noTone(14);\n"
 };
+/*
 Blockly.Arduino.ez_start_kit_led=function(){
   var a=this.getFieldValue("EZ_LED"),
       b=Blockly.Arduino.valueToCode(this,"LVALUE",Blockly.Arduino.ORDER_ATOMIC)||"0";
@@ -351,6 +352,36 @@ Blockly.Arduino.ez_start_kit_led=function(){
   else {
     Blockly.Arduino.setups_["setup_green_"]="pinMode(11, OUTPUT);\n";
     return"analogWrite(11, "+b+");\n";
+  }
+};
+*/
+Blockly.Arduino.ez_start_kit_led=function(){
+  var a=this.getFieldValue("EZ_LED"),
+      b=Blockly.Arduino.valueToCode(this,"LVALUE",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  if (b < 0) {
+    b = 0;
+  }
+  if (b > 255) {
+    b = 255;
+  }
+	if (Blockly.Arduino.my_board_type=="7697"){
+    var red_led = 13, yellow_led = 12, green_led = 11;
+  } else if (Blockly.Arduino.my_board_type=="ESP32"){
+    var red_led = 16, yellow_led = 12, green_led = 13;
+  } else if (Blockly.Arduino.my_board_type=="Arduino"){
+    var red_led = 13, yellow_led = 12, green_led = 11;
+  }
+  if (a == "red") {
+    Blockly.Arduino.setups_["setup_red_"]="pinMode("+red_led+", OUTPUT);\n";
+    return"analogWrite("+red_led+", "+b+");\n";
+  }
+  else if (a == "yellow") {
+    Blockly.Arduino.setups_["setup_yellow_"]="pinMode("+yellow_led+", OUTPUT);\n";
+    return"analogWrite("+yellow_led+", "+b+");\n";
+  }
+  else {
+    Blockly.Arduino.setups_["setup_green_"]="pinMode("+green_led+", OUTPUT);\n";
+    return"analogWrite("+green_led+", "+b+");\n";
   }
 };
 Blockly.Arduino.ez_start_kit_neopixel_begin=function(){
