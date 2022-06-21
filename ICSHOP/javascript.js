@@ -231,12 +231,37 @@ Blockly.Arduino.mooncar_face_show=function(){
 
 // EZ Start Kit
 Blockly.Arduino.ez_start_kit={};
+/*
 Blockly.Arduino.ez_start_kit_button=function(){
   var a=this.getFieldValue("AB_BUTTON");
   Blockly.Arduino.setups_["setup_botton_"]="pinMode(0, INPUT_PULLUP);\n  pinMode(7, INPUT_PULLUP);\n";
   Blockly.Arduino.definitions_.define_button_a="bool a_button()\n{\n  if (digitalRead(0) == 0 && digitalRead(7) == 1) {\n    return true;\n  } else {\n    return false;\n  }\n}\n";
   Blockly.Arduino.definitions_.define_button_b="bool b_button()\n{\n  if (digitalRead(0) == 1 && digitalRead(7) == 0) {\n    return true;\n  } else {\n    return false;\n  }\n}\n";
   Blockly.Arduino.definitions_.define_button_c="bool c_button()\n{\n  if (digitalRead(0) == 0 && digitalRead(7) == 0) {\n    return true;\n  } else {\n    return false;\n  }\n}\n";
+  if (a == "A_") {
+    return["a_button()",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "B_") {
+    return["b_button()",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else {
+    return["c_button()",Blockly.Arduino.ORDER_ATOMIC];
+  }
+};
+*/
+Blockly.Arduino.ez_start_kit_button=function(){
+  var a=this.getFieldValue("AB_BUTTON");
+	if (Blockly.Arduino.my_board_type=="7697"){
+    var button_A = 0, button_B = 7;
+  } else if (Blockly.Arduino.my_board_type=="ESP32"){
+    var button_A = 5, button_B = 36;
+  } else if (Blockly.Arduino.my_board_type=="Arduino"){
+    var button_A = 4, button_B = 5;
+  }
+  Blockly.Arduino.setups_["setup_botton_"]="pinMode("+button_A+", INPUT_PULLUP);\n  pinMode("+button_B+", INPUT_PULLUP);\n";
+  Blockly.Arduino.definitions_.define_button_a="bool a_button()\n{\n  if (digitalRead("+button_A+") == 0 && digitalRead("+button_B+") == 1) {\n    return true;\n  } else {\n    return false;\n  }\n}\n";
+  Blockly.Arduino.definitions_.define_button_b="bool b_button()\n{\n  if (digitalRead("+button_A+") == 1 && digitalRead("+button_B+") == 0) {\n    return true;\n  } else {\n    return false;\n  }\n}\n";
+  Blockly.Arduino.definitions_.define_button_c="bool c_button()\n{\n  if (digitalRead("+button_A+") == 0 && digitalRead("+button_B+") == 0) {\n    return true;\n  } else {\n    return false;\n  }\n}\n";
   if (a == "A_") {
     return["a_button()",Blockly.Arduino.ORDER_ATOMIC];
   }
