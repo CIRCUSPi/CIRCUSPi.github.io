@@ -231,38 +231,12 @@ Blockly.Arduino.mooncar_face_show=function(){
 
 // EZ Start Kit
 Blockly.Arduino.ez_start_kit={};
-/*
 Blockly.Arduino.ez_start_kit_button=function(){
   var a=this.getFieldValue("AB_BUTTON");
   Blockly.Arduino.setups_["setup_botton_"]="pinMode(0, INPUT_PULLUP);\n  pinMode(7, INPUT_PULLUP);\n";
   Blockly.Arduino.definitions_.define_button_a="bool a_button()\n{\n  if (digitalRead(0) == 0 && digitalRead(7) == 1) {\n    return true;\n  } else {\n    return false;\n  }\n}\n";
   Blockly.Arduino.definitions_.define_button_b="bool b_button()\n{\n  if (digitalRead(0) == 1 && digitalRead(7) == 0) {\n    return true;\n  } else {\n    return false;\n  }\n}\n";
   Blockly.Arduino.definitions_.define_button_c="bool c_button()\n{\n  if (digitalRead(0) == 0 && digitalRead(7) == 0) {\n    return true;\n  } else {\n    return false;\n  }\n}\n";
-  if (a == "A_") {
-    return["a_button()",Blockly.Arduino.ORDER_ATOMIC];
-  }
-  else if (a == "B_") {
-    return["b_button()",Blockly.Arduino.ORDER_ATOMIC];
-  }
-  else {
-    return["c_button()",Blockly.Arduino.ORDER_ATOMIC];
-  }
-};
-*/
-Blockly.Arduino.ez_start_kit_button=function(){
-  // test pins
-  var a=this.getFieldValue("AB_BUTTON");
-	if (Blockly.Arduino.my_board_type=="7697"){
-    var button_A = 0, button_B = 7;
-  } else if (Blockly.Arduino.my_board_type=="ESP32"){
-    var button_A = 5, button_B = 36;
-  } else if (Blockly.Arduino.my_board_type=="Arduino"){
-    var button_A = 4, button_B = 5;
-  }
-  Blockly.Arduino.setups_["setup_botton_"]="pinMode("+button_A+", INPUT_PULLUP);\n  pinMode("+button_B+", INPUT_PULLUP);\n";
-  Blockly.Arduino.definitions_.define_button_a="bool a_button()\n{\n  if (digitalRead("+button_A+") == 0 && digitalRead("+button_B+") == 1) {\n    return true;\n  } else {\n    return false;\n  }\n}\n";
-  Blockly.Arduino.definitions_.define_button_b="bool b_button()\n{\n  if (digitalRead("+button_A+") == 1 && digitalRead("+button_B+") == 0) {\n    return true;\n  } else {\n    return false;\n  }\n}\n";
-  Blockly.Arduino.definitions_.define_button_c="bool c_button()\n{\n  if (digitalRead("+button_A+") == 0 && digitalRead("+button_B+") == 0) {\n    return true;\n  } else {\n    return false;\n  }\n}\n";
   if (a == "A_") {
     return["a_button()",Blockly.Arduino.ORDER_ATOMIC];
   }
@@ -331,7 +305,7 @@ Blockly.Arduino.ez_start_kit_tone=function(){
 Blockly.Arduino.ez_start_kit_no_tone=function(){
   return"noTone(14);\n"
 };
-/*
+
 Blockly.Arduino.ez_start_kit_led=function(){
   var a=this.getFieldValue("EZ_LED"),
       b=Blockly.Arduino.valueToCode(this,"LVALUE",Blockly.Arduino.ORDER_ATOMIC)||"0";
@@ -352,36 +326,6 @@ Blockly.Arduino.ez_start_kit_led=function(){
   else {
     Blockly.Arduino.setups_["setup_green_"]="pinMode(11, OUTPUT);\n";
     return"analogWrite(11, "+b+");\n";
-  }
-};
-*/
-Blockly.Arduino.ez_start_kit_led=function(){
-  var a=this.getFieldValue("EZ_LED"),
-      b=Blockly.Arduino.valueToCode(this,"LVALUE",Blockly.Arduino.ORDER_ATOMIC)||"0";
-  if (b < 0) {
-    b = 0;
-  }
-  if (b > 255) {
-    b = 255;
-  }
-	if (Blockly.Arduino.my_board_type=="7697"){
-    var red_led = 13, yellow_led = 12, green_led = 11;
-  } else if (Blockly.Arduino.my_board_type=="ESP32"){
-    var red_led = 16, yellow_led = 12, green_led = 13;
-  } else if (Blockly.Arduino.my_board_type=="Arduino"){
-    var red_led = 13, yellow_led = 12, green_led = 11;
-  }
-  if (a == "red") {
-    Blockly.Arduino.setups_["setup_red_"]="pinMode("+red_led+", OUTPUT);\n";
-    return"analogWrite("+red_led+", "+b+");\n";
-  }
-  else if (a == "yellow") {
-    Blockly.Arduino.setups_["setup_yellow_"]="pinMode("+yellow_led+", OUTPUT);\n";
-    return"analogWrite("+yellow_led+", "+b+");\n";
-  }
-  else {
-    Blockly.Arduino.setups_["setup_green_"]="pinMode("+green_led+", OUTPUT);\n";
-    return"analogWrite("+green_led+", "+b+");\n";
   }
 };
 Blockly.Arduino.ez_start_kit_neopixel_begin=function(){
