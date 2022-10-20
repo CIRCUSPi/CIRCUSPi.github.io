@@ -1996,7 +1996,8 @@ Blockly.Blocks.pixetto_uart_init={
         .appendField(Blockly.Msg.PIXETTO_UART_INIT);
     this.appendDummyInput()
         .appendField("RX")
-        .appendField(new Blockly.FieldDropdown([["2","2"],["3","3"]]),"RX_PIN");
+        //.appendField(new Blockly.FieldDropdown([["2","2"],["3","3"]]),"RX_PIN");
+	.appendField(new Blockly.FieldDropdown(profile["default"].digital),"RX_PIN");
     this.appendDummyInput()
         .appendField("TX")
         .appendField(new Blockly.FieldDropdown(profile["default"].digital),"TX_PIN");
