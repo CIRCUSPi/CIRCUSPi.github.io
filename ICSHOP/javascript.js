@@ -1260,7 +1260,7 @@ Blockly.Arduino.pixetto_uart_init=function() {
 
 Blockly.Arduino.pixetto_mode_setting=function() {
   var a=this.getFieldValue("PIXETTO_MODE");
-	Blockly.Arduino.definitions_.define_pixetto_mode="int m_nFuncID = "+a+";";
+	Blockly.Arduino.definitions_.define_pixetto_mode="m_nFuncID = "+a+";";
 	return"";
 };
 
