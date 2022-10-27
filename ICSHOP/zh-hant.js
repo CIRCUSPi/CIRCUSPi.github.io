@@ -336,6 +336,26 @@ Blockly.Msg.PIXETTO_HELPURL = "Pixetto";
 Blockly.Msg.PIXETTO_UART_INIT = "Pixetto 序列埠連接";
 Blockly.Msg.PIXETTO_UART_INIT2 = "初始化";
 Blockly.Msg.PIXETTO_TOOLTIP = "Pixetto";
+
+Blockly.Msg.PIXETTO_MODE_SETTING = "Pixetto 設定功能";
+Blockly.Msg.PIXETTO_FUNC_COLOR_DETECTION = "顏色偵測";
+Blockly.Msg.PIXETTO_FUNC_COLOR_CODE_DETECTION = "顏色組合偵測";
+Blockly.Msg.PIXETTO_FUNC_SHAPE_DETECTION = "形狀偵測";
+Blockly.Msg.PIXETTO_FUNC_SPHERE_DETECTION = "球體偵測";
+Blockly.Msg.PIXETTO_FUNC_TEMPLATE_MATCHING = "模板匹配";
+Blockly.Msg.PIXETTO_FUNC_KEYPOINTS = "特徵點偵測";
+Blockly.Msg.PIXETTO_FUNC_NEURAL_NETWORK = "神經網路辨識";
+Blockly.Msg.PIXETTO_FUNC_APRILTAG = "Apriltag(16h5)";
+Blockly.Msg.PIXETTO_FUNC_FACE_DETECTION = "人臉偵測";
+Blockly.Msg.PIXETTO_FUNC_TRAFFIC_SIGN_DETECTION = "交通號誌辨識";
+Blockly.Msg.PIXETTO_FUNC_HANDWRITTEN_DIGITS_DETECTION = "手寫數字辨識";
+Blockly.Msg.PIXETTO_FUNC_HANDWRITTEN_LETTERS_DETECTION = "手寫英文字母辨識";
+Blockly.Msg.PIXETTO_FUNC_CLOUD_DETECTION = "遠端運算";
+Blockly.Msg.PIXETTO_FUNC_LANES_DETECTION = "車道偵測";
+Blockly.Msg.PIXETTO_FUNC_EQUATION_DETECTION = "數字運算";
+Blockly.Msg.PIXETTO_FUNC_SIMPLE_CLASSIFIER = "簡易分類器";
+Blockly.Msg.PIXETTO_FUNC_VOICE_COMMAND = "語音命令";
+
 Blockly.Msg.PIXETTO_IS_DETECTION = "辨識到物體";
 Blockly.Msg.PIXETTO_COUNT_OBJECT = "偵測到的物件數量";
 Blockly.Msg.PIXETTO_COLOR_DETECTS = "顏色偵測到";

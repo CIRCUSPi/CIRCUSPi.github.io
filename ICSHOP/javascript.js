@@ -1258,6 +1258,12 @@ Blockly.Arduino.pixetto_uart_init=function() {
   return"";
 };
 
+Blockly.Arduino.pixetto_mode_setting=function() {
+  var a=this.getFieldValue("PIXETTO_MODE");
+	Blockly.Arduino.definitions_.define_pixetto_mode="int m_nFuncID = "+a+";";
+	return"";
+};
+
 Blockly.Arduino.pixetto_is_detection=function() {
   return["isDetected()",Blockly.Arduino.ORDER_ATOMIC];
 };

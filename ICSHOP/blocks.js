@@ -2010,6 +2010,37 @@ Blockly.Blocks.pixetto_uart_init={
   }
 };
 
+Blockly.Blocks.pixetto_mode_setting={
+  init:function() {
+    this.setHelpUrl(Blockly.Msg.PIXETTO_HELPURL);
+    this.setColour(Blockly.Blocks.pixetto.HUE1);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.PIXETTO_MODE_SETTING)
+				.appendField(new Blockly.FieldDropdown([[Blockly.Msg.PIXETTO_FUNC_COLOR_DETECTION,"1"],
+                                                [Blockly.Msg.PIXETTO_FUNC_COLOR_CODE_DETECTION,"2"],
+                                                [Blockly.Msg.PIXETTO_FUNC_SHAPE_DETECTION,"3"],
+                                                [Blockly.Msg.PIXETTO_FUNC_SPHERE_DETECTION,"4"],
+                                                [Blockly.Msg.PIXETTO_FUNC_TEMPLATE_MATCHING,"6"],
+																								[Blockly.Msg.PIXETTO_FUNC_KEYPOINTS,"8"],
+                                                [Blockly.Msg.PIXETTO_FUNC_NEURAL_NETWORK,"9"],
+																								[Blockly.Msg.PIXETTO_FUNC_APRILTAG,"10"],
+																								[Blockly.Msg.PIXETTO_FUNC_FACE_DETECTION,"11"],
+																								[Blockly.Msg.PIXETTO_FUNC_TRAFFIC_SIGN_DETECTION,"12"],
+																								[Blockly.Msg.PIXETTO_FUNC_HANDWRITTEN_DIGITS_DETECTION,"13"],
+																								[Blockly.Msg.PIXETTO_FUNC_HANDWRITTEN_LETTERS_DETECTION,"14"],
+																								[Blockly.Msg.PIXETTO_FUNC_CLOUD_DETECTION,"15"],
+																								[Blockly.Msg.PIXETTO_FUNC_LANES_DETECTION,"16"],
+																								[Blockly.Msg.PIXETTO_FUNC_EQUATION_DETECTION,"17"],
+																								[Blockly.Msg.PIXETTO_FUNC_SIMPLE_CLASSIFIER,"18"],
+																								[Blockly.Msg.PIXETTO_FUNC_VOICE_COMMAND,"19"]
+                                              ]),"PIXETTO_MODE");
+    this.setInputsInline(!0);
+    this.setPreviousStatement(!0,null);
+    this.setNextStatement(!0,null);
+    this.setTooltip(Blockly.Msg.PIXETTO_TOOLTIP)
+  }
+};
+
 Blockly.Blocks.pixetto_is_detection={
   init:function() {
     this.setHelpUrl(Blockly.Msg.PIXETTO_HELPURL);

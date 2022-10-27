@@ -332,6 +332,7 @@
 		</category>
 		<category id="category_pixetto" name="category_pixetto">
 		    <block type="pixetto_uart_init"></block>
+				<block type="pixetto_mode_setting"></block>
 		    <block type="pixetto_is_detection"></block>
 		    <block type="pixetto_count_object"></block>
 		    <block type="pixetto_color_detects"></block>
