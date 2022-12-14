@@ -1629,7 +1629,7 @@ Blockly.Arduino.apollo_move_motor=function(){
  return"motor_LR("+b+", "+a+");\n";
 };
 Blockly.Arduino.apollo_tracker=function(){
- Blockly.Arduino.definitions_.define_tracker="int tracker()\n{\n  if (digitalRead(14) == 1 && digitalRead(15) == 1) {\n    return 0;\n  } else if (digitalRead(14) == 0 && digitalRead(15) == 1) {\n    return 1;\n  } else if (digitalRead(14) == 1 && digitalRead(15) == 0){\n    return 2;\n  } else {\n    return 3;\n  }\n}\n";
+ Blockly.Arduino.definitions_.define_tracker="int tracker()\n{\n  if (digitalRead(14) == 1 && digitalRead(15) == 1) {\n    return 0;\n  } else if (digitalRead(14) == 0 && digitalRead(15) == 1) {\n    return 2;\n  } else if (digitalRead(14) == 1 && digitalRead(15) == 0){\n    return 1;\n  } else {\n    return 3;\n  }\n}\n";
  Blockly.Arduino.setups_["setup_tracker_"]="pinMode(14, INPUT);\n  pinMode(15, INPUT);\n";
  return["tracker()",Blockly.Arduino.ORDER_ATOMIC];
 };
