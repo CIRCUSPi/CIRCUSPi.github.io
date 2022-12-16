@@ -356,7 +356,7 @@ Blockly.Msg.PIXETTO_FUNC_EQUATION_DETECTION = "數字運算";
 Blockly.Msg.PIXETTO_FUNC_SIMPLE_CLASSIFIER = "簡易分類器";
 Blockly.Msg.PIXETTO_FUNC_VOICE_COMMAND = "語音命令";
 
-Blockly.Msg.PIXETTO_IS_DETECTION = "辨識到物體";
+Blockly.Msg.PIXETTO_IS_DETECTION = "完成辨識?";
 Blockly.Msg.PIXETTO_COUNT_OBJECT = "偵測到的物件數量";
 Blockly.Msg.PIXETTO_COLOR_DETECTS = "顏色偵測到";
 Blockly.Msg.PIXETTO_RED = "紅色";
