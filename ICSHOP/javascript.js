@@ -729,7 +729,7 @@ Blockly.Arduino.mfrc522_write_block=function(){
   Blockly.Arduino.definitions_.define_mfrc522_write_BLOCK="void writeBlock(byte _sector, byte _block, String _writeText) {\n  byte _blockData[16] = \"\";\n  _writeText.getBytes(_blockData, _writeText.length() + 1);\n  if (_sector < 0 || _sector > 15 || _block < 0 || _block > 3) {\n    return;\n  }\n  if (_sector == 0 && _block == 0) {\n    return;\n  }\n  byte blockNum = _sector * 4 + _block;\n  byte trailerBlock = _sector * 4 + 3;\n  status = (MFRC522::StatusCode) rfid.PCD_Authenticate(MFRC522::PICC_CMD_MF_AUTH_KEY_A, trailerBlock, &key, &(rfid.uid));\n  if (status != MFRC522::STATUS_OK) {\n    return;\n  }\n  status = (MFRC522::StatusCode) rfid.MIFARE_Write(blockNum, _blockData, 16);\n  if (status != MFRC522::STATUS_OK) {\n    return;\n  }\n}\n"
   Blockly.Arduino.setups_.setup_mfrc522="SPI.begin();\n  rfid.PCD_Init();\n";
   Blockly.Arduino.setups_.setup_mfrc522_2="for (byte i = 0; i < 6; i++) {\n  key.keyByte[i] = 0xFF;\n}\n";
-  return"if (mfrc522_readID_nostop() != \"\") {\n    writeBlock("+a+", "+b+", "+c+");\n"    rfid.PICC_HaltA();\n    rfid.PCD_StopCrypto1();\n}";
+  return"if (mfrc522_readID_nostop() != \"\") {\n    writeBlock("+a+", "+b+", "+c+");\n    rfid.PICC_HaltA();\n    rfid.PCD_StopCrypto1();\n}";
 };
 
 Blockly.Arduino.mfrc522_stop=function(){
