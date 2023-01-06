@@ -700,7 +700,7 @@ Blockly.Arduino.mfrc522_read_block=function(){
   Blockly.Arduino.setups_.setup_mfrc522="SPI.begin();\n  rfid.PCD_Init();\n";
   Blockly.Arduino.setups_.setup_mfrc522_2="for (byte i = 0; i < 6; i++) {\n    key.keyByte[i] = 0xFF;\n  }\n";
 
-  return["check_card_and_read("+a+", "+b+", buffer)",Blockly.Arduino.ORDER_ATOMIC];
+  return["check_card_and_read("+a+", "+b+")",Blockly.Arduino.ORDER_ATOMIC];
 };
 /*
 Blockly.Arduino.mfrc522_write_block=function(){
