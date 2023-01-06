@@ -668,7 +668,7 @@ Blockly.Arduino.mfrc522_read_nostop=function(){
   Blockly.Arduino.setups_.setup_mfrc522="SPI.begin();\n  rfid.PCD_Init();\n";
   return["mfrc522_readID_nostop()",Blockly.Arduino.ORDER_ATOMIC]
 };
-
+/*
 Blockly.Arduino.mfrc522_read_block=function(){
   var a=Blockly.Arduino.valueToCode(this,"SECTOR",Blockly.Arduino.ORDER_ATOMIC)||"0",
       b=Blockly.Arduino.valueToCode(this,"BLOCK",Blockly.Arduino.ORDER_ATOMIC)||"0";
@@ -684,6 +684,23 @@ Blockly.Arduino.mfrc522_read_block=function(){
   Blockly.Arduino.setups_.setup_mfrc522_2="for (byte i = 0; i < 6; i++) {\n    key.keyByte[i] = 0xFF;\n  }\n";
 
   return["readBlock("+a+", "+b+", buffer)",Blockly.Arduino.ORDER_ATOMIC];
+};
+*/
+Blockly.Arduino.mfrc522_read_block=function(){
+  var a=Blockly.Arduino.valueToCode(this,"SECTOR",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=Blockly.Arduino.valueToCode(this,"BLOCK",Blockly.Arduino.ORDER_ATOMIC)||"0";
+
+  Blockly.Arduino.definitions_.define_spi_include="#include <SPI.h>\n";
+  Blockly.Arduino.definitions_.define_mfrc522_include="#include <MFRC522.h>\n";
+  Blockly.Arduino.definitions_.define_mfrc522_inst="MFRC522 rfid(10, UINT8_MAX);\n";
+  Blockly.Arduino.definitions_.define_mfrc522_inst2="MFRC522::MIFARE_Key key;\nbyte buffer[18];\nMFRC522::StatusCode status;\n";
+  Blockly.Arduino.definitions_.define_mfrc522_readid_nostop='\nString mfrc522_readID_nostop()\n{\n  String ret;\n  if (rfid.PICC_IsNewCardPresent() && rfid.PICC_ReadCardSerial())\n  {\n    MFRC522::PICC_Type piccType = rfid.PICC_GetType(rfid.uid.sak);\n\n    for (byte i = 0; i < rfid.uid.size; i++) {\n      ret += (rfid.uid.uidByte[i] < 0x10 ? "0" : "");\n      ret += String(rfid.uid.uidByte[i], HEX);\n    }\n  }\n  return ret;\n}\n';
+  Blockly.Arduino.definitions_.define_mfrc522_read_BLOCK="String readBlock(byte _sector, byte _block, byte _blockData[])  {\n  if (_sector < 0 || _sector > 15 || _block < 0 || _block > 3) {\n    return \"error\";\n  }\n  byte blockNum = _sector * 4 + _block;\n  byte trailerBlock = _sector * 4 + 3;\n  status = (MFRC522::StatusCode) rfid.PCD_Authenticate(MFRC522::PICC_CMD_MF_AUTH_KEY_A, trailerBlock, &key, &(rfid.uid));\n  if (status != MFRC522::STATUS_OK) {\n    return \"error\";\n  }\n  byte buffersize = 18;\n  status = (MFRC522::StatusCode) rfid.MIFARE_Read(blockNum, _blockData, &buffersize);\n  if (status != MFRC522::STATUS_OK) {\n    return \"error\";\n  }\n  String outputText = String((char*)buffer);\n  return outputText;\n}\n";
+  Blockly.Arduino.definitions_.define_mfrc522_check_and_read_BLOCK="String check_card_and_read(int sector_, int block_) {\n  if (mfrc522_readID_nostop() != \"\") {\n    String readData_ = readBlock((int sector_), (int block_), buffer);\n    rfid.PICC_HaltA();\n    rfid.PCD_StopCrypto1();\n  } else {\n    String readData_ = \"error\";\n  }\n  return (readData_);\n}"
+  Blockly.Arduino.setups_.setup_mfrc522="SPI.begin();\n  rfid.PCD_Init();\n";
+  Blockly.Arduino.setups_.setup_mfrc522_2="for (byte i = 0; i < 6; i++) {\n    key.keyByte[i] = 0xFF;\n  }\n";
+
+  return["check_card_and_read("+a+", "+b+", buffer)",Blockly.Arduino.ORDER_ATOMIC];
 };
 
 Blockly.Arduino.mfrc522_write_block=function(){
