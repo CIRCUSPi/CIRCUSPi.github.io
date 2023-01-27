@@ -1130,7 +1130,7 @@ Blockly.Arduino.module_neopixel_begin=function(){
   var a=Blockly.Arduino.valueToCode(this,"NVALUE",Blockly.Arduino.ORDER_ATOMIC)||"0",
 		  b=Blockly.Arduino.valueToCode(this,"Name",Blockly.Arduino.ORDER_ATOMIC)||"",
 	    c=this.getFieldValue("TX_PIN"),
-			d= Blockly.Arduino.valueToCode(this,"LNUM",Blockly.Arduino.ORDER_ATOMIC)||"8";
+			d= Blockly.Arduino.valueToCode(this,"LNUM",Blockly.Arduino.ORDER_ATOMIC)||"0";
 	b = b.replace(/"/g,"");
 
   if (a < 0) {
