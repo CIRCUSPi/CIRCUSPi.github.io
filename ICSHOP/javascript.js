@@ -1170,7 +1170,7 @@ Blockly.Arduino.module_neopixel_show=function(){
 Blockly.Arduino.module_neopixel_clear=function(){
   var a=Blockly.Arduino.valueToCode(this,"Name",Blockly.Arduino.ORDER_ATOMIC)||"";
 	a = a.replace(/"/g,"");
-  return a+".clear();\n"
+  return a+".clear();\n"+a+".show();\n"+a+".show();\n"
 };
 
 Blockly.Arduino.module_neopixel_setbrightness=function(){
