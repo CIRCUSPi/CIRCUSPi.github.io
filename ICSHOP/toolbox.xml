@@ -1301,6 +1301,11 @@
 			<block type="sgp30_read"></block>
 			<block type="sgp30_read_sensor"></block>
 			<block type="m5_mini_rfid"></block>
+			<block type="module_neopixel_begin"></block>
+			<block type="module_neopixel_setpixelcolor"></block>
+			<block type="module_neopixel_custom_setpixelcolor"></block>
+			<block type="module_neopixel_show"></block>
+			<block type="module_neopixel_clear"></block>
 		</category>
 		<category id="category_am7020" name="category_am7020">
 			<block type="am7020_init"></block>

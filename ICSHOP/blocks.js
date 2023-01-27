@@ -1708,6 +1708,119 @@ Blockly.Blocks.m5_mini_rfid={
   }
 };
 
+
+
+
+
+Blockly.Blocks.NFC_RFID_write_block={
+  init:function(){
+    this.setHelpUrl(Blockly.Msg.NFC_RFID_HELPURL);
+    this.setColour(Blockly.Blocks.NFC_RFID.HUE);
+    this.appendValueInput("SECTOR")
+        .setCheck("Number")
+        .appendField(Blockly.Msg.NFC_RFID_write_sector_TITLE);
+    this.appendValueInput("Data")
+        .appendField(Blockly.Msg.NFC_RFID_write_data_TITLE);
+    this.setPreviousStatement(!0,null);
+    this.setNextStatement(!0,null);
+    this.setInputsInline(!0);
+    this.setTooltip(Blockly.Msg.NFC_RFID_TOOLTIP)
+  }
+};
+//-------------------------------------
+Blockly.Blocks.module_neopixel_begin={
+  init:function(){
+    this.setHelpUrl(Blockly.Msg.NEOPIXEL_BEGIN_HELPURL);
+    this.setColour(Blockly.Blocks.ez_start_kit.HUE9);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.MODULE_NEO_NAME);
+		this.appendValueInput("Name")
+        .setCheck("String");
+		this.appendDummyInput()
+        .appendField("PINS")
+        .appendField(new Blockly.FieldDropdown(profile["default"].digital),"TX_PIN");
+		this.appendDummyInput()
+        .appendField(Blockly.Msg.MODULE_NEO_BRIGHTNESS);
+    this.appendValueInput("NVALUE")
+        .setCheck("Number");
+    this.setInputsInline(!0);
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setTooltip(Blockly.Msg.NEOPIXEL_BEGIN_TOOLTIP)},
+};
+Blockly.Blocks.module_neopixel_setpixelcolor={
+  init:function(){
+    this.setHelpUrl(Blockly.Msg.NEOPIXEL_CUSTOM_SETPIXELCOLOR_HELPURL);
+    this.setColour(Blockly.Blocks.ez_start_kit.HUE9);
+		this.appendValueInput("Name")
+        .setCheck("String");
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.MODULE_NEOPIXEL_TITLE);
+    this.appendValueInput("TARGET")
+        .setCheck("Number")
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField(Blockly.Msg.NEOPIXEL_CUSTOM_SETPIXELCOLOR)
+        .appendField(new Blockly.FieldColour("#00ff00"),"RGB");
+    this.setInputsInline(!0);
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setTooltip(Blockly.Msg.NEOPIXEL_CUSTOM_SETPIXELCOLOR_TOOLTIP)},
+};
+Blockly.Blocks.module_neopixel_custom_setpixelcolor={
+  init:function(){
+    this.setHelpUrl(Blockly.Msg.NEOPIXEL_CUSTOM_SETPIXELCOLOR_HELPURL);
+    this.setColour(Blockly.Blocks.ez_start_kit.HUE9);
+		this.appendValueInput("Name")
+        .setCheck("String");
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.MODULE_NEOPIXEL_TITLE);
+    this.appendValueInput("TARGET")
+        .setCheck("Number")
+    this.appendValueInput("R")
+        .setCheck("Number")
+        .appendField(Blockly.Msg.NEOPIXEL_CUSTOM_SETPIXELCOLOR_R);
+    this.appendValueInput("G")
+        .setCheck("Number")
+        .appendField(Blockly.Msg.NEOPIXEL_CUSTOM_SETPIXELCOLOR_G);
+    this.appendValueInput("B")
+        .setCheck("Number")
+        .appendField(Blockly.Msg.NEOPIXEL_CUSTOM_SETPIXELCOLOR_B);
+    this.setInputsInline(!0);
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setTooltip(Blockly.Msg.NEOPIXEL_CUSTOM_SETPIXELCOLOR_TOOLTIP)},
+};
+Blockly.Blocks.module_neopixel_show={
+  init:function(){
+    this.setHelpUrl(Blockly.Msg.NEOPIXEL_SHOW_HELPURL);
+    this.setColour(Blockly.Blocks.ez_start_kit.HUE9);
+		this.appendValueInput("Name")
+        .setCheck("String");
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.MODULE_NEOPIXEL_TITLE)
+        .appendField(Blockly.Msg.NEOPIXEL_SHOW);
+    this.setInputsInline(!0);
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setTooltip(Blockly.Msg.NEOPIXEL_SHOW_TOOLTIP)},
+};
+
+Blockly.Blocks.module_neopixel_clear={
+  init:function(){
+    this.setHelpUrl(Blockly.Msg.NEOPIXEL_SHOW_HELPURL);
+    this.setColour(Blockly.Blocks.ez_start_kit.HUE9);
+		this.appendValueInput("Name")
+        .setCheck("String");
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.MODULE_NEOPIXEL_CLEAR);
+    this.setInputsInline(!0);
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setTooltip(Blockly.Msg.NEOPIXEL_SHOW_TOOLTIP)},
+};
+//-------------------------------------
+
 // HUSKYLENS
 Blockly.Blocks.huskylens={};
 Blockly.Blocks.huskylens.HUE=30;

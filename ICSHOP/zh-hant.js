@@ -275,6 +275,10 @@ Blockly.Msg.SGP30_READ_TYPE = "取得SGP30 感測器資料";
 Blockly.Msg.SGP30_TVOC = "TVOC";
 Blockly.Msg.SGP30_eCO2 = "eCO2";
 Blockly.Msg.M5_MINI_RFID = "M5 Mini RFID 讀取識別碼(I2C)";
+Blockly.Msg.MODULE_NEO_NAME = "初始化WS2812名稱";
+Blockly.Msg.MODULE_NEO_BRIGHTNESS = "設定亮度(0~255)";
+Blockly.Msg.MODULE_NEOPIXEL_TITLE = "WS2812";
+Blockly.Msg.MODULE_NEOPIXEL_CLEAR = "關閉WS2812";
 
 // HUSKYLENS
 Blockly.Msg.CATEGORY_HUSKYLENS = "HuskyLens";

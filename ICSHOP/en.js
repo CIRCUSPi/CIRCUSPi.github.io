@@ -275,6 +275,10 @@ Blockly.Msg.SGP30_READ_TYPE = "Get SGP30 Sensor data";
 Blockly.Msg.SGP30_TVOC = "TVOC";
 Blockly.Msg.SGP30_eCO2 = "eCO2";
 Blockly.Msg.M5_MINI_RFID = "M5 Mini RFID read identifier(I2C)";
+Blockly.Msg.MODULE_NEO_NAME = "Setup WS2812 name";
+Blockly.Msg.MODULE_NEO_BRIGHTNESS = "brightness(0~255)";
+Blockly.Msg.MODULE_NEOPIXEL_TITLE = "WS2812";
+Blockly.Msg.MODULE_NEOPIXEL_CLEAR = "Clear WS2812";
 
 // HUSKYLENS
 Blockly.Msg.CATEGORY_HUSKYLENS = "HuskyLens";

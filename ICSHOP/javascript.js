@@ -1125,6 +1125,49 @@ Blockly.Arduino.m5_mini_rfid=function() {
   return["readRFID()",Blockly.Arduino.ORDER_ATOMIC];
 };
 
+//-------------------------------------------------
+Blockly.Arduino.module_neopixel_begin=function(){
+  var a=Blockly.Arduino.valueToCode(this,"NVALUE",Blockly.Arduino.ORDER_ATOMIC)||"0",
+		  b=Blockly.Arduino.valueToCode(this,"Name",Blockly.Arduino.ORDER_ATOMIC)||"",
+	    c=this.getFieldValue("TX_PIN");
+
+  if (a < 0) {
+    a = 0;
+  }
+  if (a > 255) {
+    a = 255;
+  }
+  Blockly.Arduino.definitions_.define_include_neopixel="#include <Adafruit_NeoPixel.h>\n";
+  Blockly.Arduino.definitions_.define_neopixel="Adafruit_NeoPixel "+b+" = Adafruit_NeoPixel(3, "+c+",NEO_GRB + NEO_KHZ800);\n";
+  Blockly.Arduino.setups_.setup_neopixel_begin=b+".begin();\n";
+  Blockly.Arduino.setups_.setup_neopixel_brightness=b+".setBrightness("+a+");\n";
+  return""
+};
+Blockly.Arduino.module_neopixel_setpixelcolor=function(){
+  var a=Blockly.Arduino.valueToCode(this,"TARGET",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=this.getFieldValue("RGB"),
+			c=Blockly.Arduino.valueToCode(this,"Name",Blockly.Arduino.ORDER_ATOMIC)||"";
+  return c+".setPixelColor("+a+","+c+".Color("+hexToR(b)+","+hexToG(b)+","+hexToB(b)+"));\n"
+};
+Blockly.Arduino.module_neopixel_custom_setpixelcolor=function(){
+  var a=Blockly.Arduino.valueToCode(this,"TARGET",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=Blockly.Arduino.valueToCode(this,"R",Blockly.Arduino.ORDER_ATOMIC)||"255",
+      c=Blockly.Arduino.valueToCode(this,"G",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      d=Blockly.Arduino.valueToCode(this,"B",Blockly.Arduino.ORDER_ATOMIC)||"0",
+			e=Blockly.Arduino.valueToCode(this,"Name",Blockly.Arduino.ORDER_ATOMIC)||"";
+  return e+".setPixelColor("+a+", "+e+".Color("+b+","+c+","+d+"));\n"
+};
+Blockly.Arduino.module_neopixel_show=function(){
+	var a=Blockly.Arduino.valueToCode(this,"Name",Blockly.Arduino.ORDER_ATOMIC)||"";
+  return a+".show();\n"+a+".show();\n"
+};
+
+Blockly.Arduino.module_neopixel_clear=function(){
+  var a=Blockly.Arduino.valueToCode(this,"Name",Blockly.Arduino.ORDER_ATOMIC)||"";
+  return a+".clear();\n"
+};
+//-------------------------------------------------
+
 // HUSKYLENS
 Blockly.Arduino.huskylens={};
 Blockly.Arduino.huskylens_i2c_init=function() {
