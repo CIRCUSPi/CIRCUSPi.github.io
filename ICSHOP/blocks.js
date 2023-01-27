@@ -1740,6 +1740,10 @@ Blockly.Blocks.module_neopixel_begin={
         .appendField("PINS")
         .appendField(new Blockly.FieldDropdown(profile["default"].digital),"TX_PIN");
 		this.appendDummyInput()
+        .appendField(Blockly.Msg.MODULE_NEO_NUMBER);
+    this.appendValueInput("LNUM")
+        .setCheck("Number");
+		this.appendDummyInput()
         .appendField(Blockly.Msg.MODULE_NEO_BRIGHTNESS);
     this.appendValueInput("NVALUE")
         .setCheck("Number");
@@ -1818,6 +1822,21 @@ Blockly.Blocks.module_neopixel_clear={
     this.setPreviousStatement(!0);
     this.setNextStatement(!0);
     this.setTooltip(Blockly.Msg.NEOPIXEL_SHOW_TOOLTIP)},
+};
+Blockly.Blocks.module_neopixel_setbrightness={
+  init:function(){
+    this.setHelpUrl(Blockly.Msg.NEOPIXEL_BEGIN_HELPURL);
+    this.setColour(Blockly.Blocks.ez_start_kit.HUE9);
+		this.appendValueInput("Name")
+        .setCheck("String");
+		this.appendDummyInput()
+        .appendField(Blockly.Msg.MODULE_NEO_BRIGHTNESS);
+    this.appendValueInput("NVALUE")
+        .setCheck("Number");
+    this.setInputsInline(!0);
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setTooltip(Blockly.Msg.NEOPIXEL_BEGIN_TOOLTIP)},
 };
 //-------------------------------------
 

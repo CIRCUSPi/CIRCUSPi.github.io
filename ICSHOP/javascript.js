@@ -1129,7 +1129,8 @@ Blockly.Arduino.m5_mini_rfid=function() {
 Blockly.Arduino.module_neopixel_begin=function(){
   var a=Blockly.Arduino.valueToCode(this,"NVALUE",Blockly.Arduino.ORDER_ATOMIC)||"0",
 		  b=Blockly.Arduino.valueToCode(this,"Name",Blockly.Arduino.ORDER_ATOMIC)||"",
-	    c=this.getFieldValue("TX_PIN");
+	    c=this.getFieldValue("TX_PIN"),
+			d= Blockly.Arduino.valueToCode(this,"LNUM",Blockly.Arduino.ORDER_ATOMIC)||"8";
 	b = b.replace(/"/g,"");
 
   if (a < 0) {
@@ -1139,7 +1140,7 @@ Blockly.Arduino.module_neopixel_begin=function(){
     a = 255;
   }
   Blockly.Arduino.definitions_.define_include_neopixel="#include <Adafruit_NeoPixel.h>\n";
-  Blockly.Arduino.definitions_["define_neopixel_"+b]="Adafruit_NeoPixel "+b+" = Adafruit_NeoPixel(3, "+c+",NEO_GRB + NEO_KHZ800);\n";
+  Blockly.Arduino.definitions_["define_neopixel_"+b]="Adafruit_NeoPixel "+b+" = Adafruit_NeoPixel("+d+", "+c+",NEO_GRB + NEO_KHZ800);\n";
   Blockly.Arduino.setups_["setup_neopixel_begin_"+b]=b+".begin();\n";
   Blockly.Arduino.setups_["setup_neopixel_brightness_"+b]=b+".setBrightness("+a+");\n";
   return""
@@ -1170,6 +1171,13 @@ Blockly.Arduino.module_neopixel_clear=function(){
   var a=Blockly.Arduino.valueToCode(this,"Name",Blockly.Arduino.ORDER_ATOMIC)||"";
 	a = a.replace(/"/g,"");
   return a+".clear();\n"
+};
+
+Blockly.Arduino.module_neopixel_setbrightness=function(){
+  var a=Blockly.Arduino.valueToCode(this,"Name",Blockly.Arduino.ORDER_ATOMIC)||"",
+	    b=Blockly.Arduino.valueToCode(this,"NVALUE",Blockly.Arduino.ORDER_ATOMIC)||"30";
+	a = a.replace(/"/g,"");
+	return a+".setBrightness("+b+");\n"
 };
 //-------------------------------------------------
 

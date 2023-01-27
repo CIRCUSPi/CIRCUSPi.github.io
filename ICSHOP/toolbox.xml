@@ -1307,6 +1307,11 @@
 						<field name="TEXT">LED1</field>
 				  </block>
 			  </value>
+				<value name="LNUM">
+					<block type="math_number">
+						<field name="NUM">8</field>
+					</block>
+				</value>
 				<value name="NVALUE">
 					<block type="math_number">
 						<field name="NUM">30</field>
@@ -1363,6 +1368,18 @@
 				<value name="B">
 					<block type="math_number">
 						<field name="NUM">0</field>
+					</block>
+				</value>
+			</block>
+			<block type="module_neopixel_setbrightness">
+				<value name="Name">
+				  <block type="text">
+						<field name="TEXT">LED1</field>
+				  </block>
+			  </value>
+				<value name="NVALUE">
+					<block type="math_number">
+						<field name="NUM">30</field>
 					</block>
 				</value>
 			</block>
