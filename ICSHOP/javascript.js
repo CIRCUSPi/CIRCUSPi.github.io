@@ -1130,6 +1130,7 @@ Blockly.Arduino.module_neopixel_begin=function(){
   var a=Blockly.Arduino.valueToCode(this,"NVALUE",Blockly.Arduino.ORDER_ATOMIC)||"0",
 		  b=Blockly.Arduino.valueToCode(this,"Name",Blockly.Arduino.ORDER_ATOMIC)||"",
 	    c=this.getFieldValue("TX_PIN");
+	b = b.replace(/"/g,"");
 
   if (a < 0) {
     a = 0;
@@ -1147,6 +1148,7 @@ Blockly.Arduino.module_neopixel_setpixelcolor=function(){
   var a=Blockly.Arduino.valueToCode(this,"TARGET",Blockly.Arduino.ORDER_ATOMIC)||"0",
       b=this.getFieldValue("RGB"),
 			c=Blockly.Arduino.valueToCode(this,"Name",Blockly.Arduino.ORDER_ATOMIC)||"";
+	c = c.replace(/"/g,"");
   return c+".setPixelColor("+a+","+c+".Color("+hexToR(b)+","+hexToG(b)+","+hexToB(b)+"));\n"
 };
 Blockly.Arduino.module_neopixel_custom_setpixelcolor=function(){
@@ -1155,15 +1157,18 @@ Blockly.Arduino.module_neopixel_custom_setpixelcolor=function(){
       c=Blockly.Arduino.valueToCode(this,"G",Blockly.Arduino.ORDER_ATOMIC)||"0",
       d=Blockly.Arduino.valueToCode(this,"B",Blockly.Arduino.ORDER_ATOMIC)||"0",
 			e=Blockly.Arduino.valueToCode(this,"Name",Blockly.Arduino.ORDER_ATOMIC)||"";
+	e = e.replace(/"/g,"");
   return e+".setPixelColor("+a+", "+e+".Color("+b+","+c+","+d+"));\n"
 };
 Blockly.Arduino.module_neopixel_show=function(){
 	var a=Blockly.Arduino.valueToCode(this,"Name",Blockly.Arduino.ORDER_ATOMIC)||"";
+	a = a.replace(/"/g,"");
   return a+".show();\n"+a+".show();\n"
 };
 
 Blockly.Arduino.module_neopixel_clear=function(){
   var a=Blockly.Arduino.valueToCode(this,"Name",Blockly.Arduino.ORDER_ATOMIC)||"";
+	a = a.replace(/"/g,"");
   return a+".clear();\n"
 };
 //-------------------------------------------------

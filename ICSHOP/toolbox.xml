@@ -1301,11 +1301,71 @@
 			<block type="sgp30_read"></block>
 			<block type="sgp30_read_sensor"></block>
 			<block type="m5_mini_rfid"></block>
-			<block type="module_neopixel_begin"></block>
-			<block type="module_neopixel_setpixelcolor"></block>
-			<block type="module_neopixel_custom_setpixelcolor"></block>
-			<block type="module_neopixel_show"></block>
-			<block type="module_neopixel_clear"></block>
+			<block type="module_neopixel_begin">
+				<value name="Name">
+				  <block type="text">
+						<field name="TEXT">LED1</field>
+				  </block>
+			  </value>
+				<value name="NVALUE">
+					<block type="math_number">
+						<field name="NUM">30</field>
+					</block>
+				</value>
+			</block>
+			<block type="module_neopixel_show">
+				<value name="Name">
+				  <block type="text">
+						<field name="TEXT">LED1</field>
+				  </block>
+			  </value>
+			</block>
+			<block type="module_neopixel_clear">
+				<value name="Name">
+				  <block type="text">
+						<field name="TEXT">LED1</field>
+				  </block>
+			  </value>
+			</block>
+			<block type="module_neopixel_setpixelcolor">
+				<value name="Name">
+				  <block type="text">
+						<field name="TEXT">LED1</field>
+				  </block>
+			  </value>
+				<value name="TARGET">
+					<block type="math_number">
+						<field name="NUM">0</field>
+					</block>
+				</value>
+			</block>
+			<block type="module_neopixel_custom_setpixelcolor">
+				<value name="Name">
+				  <block type="text">
+						<field name="TEXT">LED1</field>
+				  </block>
+			  </value>
+				<value name="TARGET">
+					<block type="math_number">
+						<field name="NUM">0</field>
+					</block>
+				</value>
+				<value name="R">
+					<block type="math_number">
+						<field name="NUM">255</field>
+					</block>
+				</value>
+				<value name="G">
+					<block type="math_number">
+						<field name="NUM">0</field>
+					</block>
+				</value>
+				<value name="B">
+					<block type="math_number">
+						<field name="NUM">0</field>
+					</block>
+				</value>
+			</block>
 		</category>
 		<category id="category_am7020" name="category_am7020">
 			<block type="am7020_init"></block>
