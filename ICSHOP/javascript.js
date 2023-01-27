@@ -1138,7 +1138,6 @@ Blockly.Arduino.module_neopixel_begin=function(){
   if (a > 255) {
     a = 255;
   }
-	Blockly.Arduino.definitions_["define_neopixel_"+a]
   Blockly.Arduino.definitions_.define_include_neopixel="#include <Adafruit_NeoPixel.h>\n";
   Blockly.Arduino.definitions_.define_neopixel["_"+b]="Adafruit_NeoPixel "+b+" = Adafruit_NeoPixel(3, "+c+",NEO_GRB + NEO_KHZ800);\n";
   Blockly.Arduino.setups_.setup_neopixel_begin["_"+b]=b+".begin();\n";
