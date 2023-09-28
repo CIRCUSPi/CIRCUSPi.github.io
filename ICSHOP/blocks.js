@@ -204,6 +204,29 @@ Blockly.Blocks.mooncar_face_show={init:function(){
   this.setNextStatement(!0,null);
   this.setTooltip(Blockly.Msg.MOVE_CAR_TOOLTIP)}
 };
+Blockly.Blocks.mooncar_neopixel_begin={
+  init:function(){
+    this.setHelpUrl(Blockly.Msg.NEOPIXEL_BEGIN_HELPURL);
+    this.setColour(Blockly.Blocks.ez_start_kit.HUE9);
+    /*
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.INITIALIZES_SETUP_APPENDTEXT)
+        .appendField(Blockly.Msg.NEOPIXEL_TITLE)
+        .appendField(Blockly.Msg.NEOPIXEL_BEGIN_NUM)
+        .appendField(new Blockly.FieldTextInput("16"),"NUM");
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.NEOPIXEL_BEGIN_PIN)
+        .appendField(new Blockly.FieldDropdown(profile["default"].digital),"PIN");
+    */
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.EZ_NEOPIXEL_BEGIN_BRIGHTNESS)
+    this.appendValueInput("NVALUE")
+        .setCheck("Number");
+    this.setInputsInline(!0);
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setTooltip(Blockly.Msg.NEOPIXEL_BEGIN_TOOLTIP)},
+};
 
 // EZ Start Kit
 Blockly.Blocks.ez_start_kit={};

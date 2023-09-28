@@ -54,15 +54,54 @@
 			<block type="mooncar_ir_remote_read_type"></block>
 			<block type="mooncar_ir_remote_send"></block>
 			<block type="mooncar_face_show"></block>
-			<block type="neopixel_begin"></block>
-			<block type="neopixel_setpixelcolor">
+			<block type="ez_start_kit_custom_tone">
+				<value name="FREQ">
+					<block type="math_number">
+						<field name="NUM">255</field>
+					</block>
+				</value>
+				<value name="DURATION">
+					<block type="math_number">
+						<field name="NUM">300</field>
+					</block>
+				</value>
+			</block>
+			<block type="ez_start_kit_tone"></block>
+			<block type="ez_start_kit_no_tone"></block>
+			<block type="ez_start_kit_led">
+				<value name="LVALUE">
+					<block type="math_number">
+						<field name="NUM">255</field>
+					</block>
+				</value>
+			</block>
+			<block type="mooncar_neopixel_begin">
+				<value name="NVALUE">
+					<block type="math_number">
+						<field name="NUM">30</field>
+					</block>
+				</value>
+			</block>
+			<block type="ez_start_kit_neopixel_setpixelcolor">
 				<value name="TARGET">
 					<block type="math_number">
 						<field name="NUM">0</field>
 					</block>
 				</value>
 			</block>
-			<block type="neopixel_custom_setpixelcolor">
+			<block type="ez_start_kit_neopixel_setpixelcolor_hex">
+				<value name="TARGET">
+					<block type="math_number">
+						<field name="NUM">0</field>
+					</block>
+				</value>
+				<value name="RGB_HEX">
+					<block type="text">
+						<field name="TEXT">#FFFFFF</field>
+					</block>
+				</value>
+			</block>
+			<block type="ez_start_kit_neopixel_custom_setpixelcolor">
 				<value name="TARGET">
 					<block type="math_number">
 						<field name="NUM">0</field>
@@ -84,10 +123,11 @@
 					</block>
 				</value>
 			</block>
-			<block type="neopixel_show"></block>
-			<block type="oled_display_setting"></block>
-			<block type="oled_display_clear"></block>
-			<block type="oled_display_draw_commands">
+			<block type="ez_start_kit_neopixel_show"></block>
+			<block type="ez_start_kit_neopixel_clear"></block>
+			<block type="ez_start_kit_oled_display_setting"></block>
+			<block type="ez_start_kit_oled_display_clear"></block>
+			<block type="ez_start_kit_oled_display_draw_commands">
 				<statement name="DRAW_CMD">
 					<block type="oled_display_draw_text">
 						<value name="START_X">
@@ -131,6 +171,34 @@
 						</next>
 					</block>
 				</statement>
+			</block>
+			<block type="ez_start_kit_oled_display_set_font"></block>
+			<block type="ez_start_kit_oled_display_set_album">
+			  <value name="ALBUM">
+				<block type="text">
+				  <field name="TEXT">XBM</field>
+				</block>
+			  </value>
+			</block>
+			<block type="ez_start_kit_oled_display_show_album"></block>
+			<block type="ez_start_kit_oled_display_set_album2">
+			  <value name="Name">
+				  <block type="text">
+					<field name="TEXT">Name</field>
+				  </block>
+			  </value>
+			  <value name="Data">
+				  <block type="text">
+					<field name="TEXT">XBM</field>
+				  </block>
+			  </value>
+			</block>
+			<block type="ez_start_kit_oled_display_show_album2">
+			  <value name="Name">
+				  <block type="text">
+					<field name="TEXT">Name</field>
+				  </block>
+			  </value>
 			</block>
 		</category>
 		<category id="category_apollo" name="category_apollo">
