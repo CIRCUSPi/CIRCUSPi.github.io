@@ -11,43 +11,89 @@ Blockly.Arduino.mooncar={};
 Blockly.Arduino.mooncar_move_car=function(){
   var a=this.getFieldValue("STAT"),
       b=Blockly.Arduino.valueToCode(this,"SPEED",Blockly.Arduino.ORDER_ATOMIC)||"0";
-  Blockly.Arduino.setups_["setup_mooncar_"]="pinMode(17, OUTPUT);\n  pinMode(12, OUTPUT);\n  pinMode(16, OUTPUT);\n  pinMode(13, OUTPUT);\n";
+
+  if (Blockly.Arduino.my_board_type=="7697"){
+    var m1A = 17;
+    var m1B = 12;
+    var m2A = 16;
+    var m2B = 13;
+  } else if (Blockly.Arduino.my_board_type=="Pico"){
+    var m1A = 8;
+    var m1B = 16;
+    var m2A = 28;
+    var m2B = 18;
+  }
+  
+  Blockly.Arduino.setups_["setup_mooncar_"]="pinMode("+m1A+", OUTPUT);\n  pinMode("+m1B+", OUTPUT);\n  pinMode("+m2A+", OUTPUT);\n  pinMode("+m2B+", OUTPUT);\n";
 
   if (a == "FORWARD") {
-    return"analogWrite(17, "+b+");\nanalogWrite(12, 0);\nanalogWrite(16, "+b+");\nanalogWrite(13, 0);\n"
+    return"analogWrite("+m1A+", "+b+");\nanalogWrite("+m1B+", 0);\nanalogWrite("+m2A+", "+b+");\nanalogWrite("+m2B+", 0);\n"
   } else if (a == "BACKWARD"){
-    return"analogWrite(17, 0);\nanalogWrite(12, "+b+");\nanalogWrite(16, 0);\nanalogWrite(13, "+b+");\n"
+    return"analogWrite("+m1A+", 0);\nanalogWrite("+m1B+", "+b+");\nanalogWrite("+m2A+", 0);\nanalogWrite("+m2B+", "+b+");\n"
   } else if (a == "LEFT") {
-    return"analogWrite(17, 0);\nanalogWrite(12, "+b+");\nanalogWrite(16, "+b+");\nanalogWrite(13, 0);\n"
+    return"analogWrite("+m1A+", 0);\nanalogWrite("+m1B+", "+b+");\nanalogWrite("+m2A+", "+b+");\nanalogWrite("+m2B+", 0);\n"
   } else if (a == "RIGHT") {
-    return"analogWrite(17, "+b+");\nanalogWrite(12, 0);\nanalogWrite(16, 0);\nanalogWrite(13, "+b+");\n"
+    return"analogWrite("+m1A+", "+b+");\nanalogWrite("+m1B+", 0);\nanalogWrite("+m2A+", 0);\nanalogWrite("+m2B+", "+b+");\n"
   } else {
-    return"analogWrite(17, 0);\nanalogWrite(12, 0);\nanalogWrite(16, 0);\nanalogWrite(13, 0);\n"
+    return"analogWrite("+m1A+", 0);\nanalogWrite("+m1B+", 0);\nanalogWrite("+m2A+", 0);\nanalogWrite("+m2B+", 0);\n"
   }
 };
 Blockly.Arduino.mooncar_move_motor=function(){
   var a=Blockly.Arduino.valueToCode(this,"SPEED_L",Blockly.Arduino.ORDER_ATOMIC)||"0",
       b=Blockly.Arduino.valueToCode(this,"SPEED_R",Blockly.Arduino.ORDER_ATOMIC)||"0";
-  Blockly.Arduino.definitions_.define_move_motor="void motor_LR(int ML, int MR)\n{\n  if (ML > 0) {\n    analogWrite(17, ML);\n    analogWrite(12, 0);\n  }else {\n    analogWrite(17, 0);\n    analogWrite(12, ML*(-1));\n  }\n  if (MR > 0) {\n    analogWrite(16, MR);\n    analogWrite(13, 0);\n  }else {\n    analogWrite(16, 0);\n    analogWrite(13, MR*(-1));\n  }\n}\n";
-  Blockly.Arduino.setups_["setup_mooncar_"]="pinMode(17, OUTPUT);\n  pinMode(12, OUTPUT);\n  pinMode(16, OUTPUT);\n  pinMode(13, OUTPUT);\n";
+
+  if (Blockly.Arduino.my_board_type=="7697"){
+    var m1A = 17;
+    var m1B = 12;
+    var m2A = 16;
+    var m2B = 13;
+  } else if (Blockly.Arduino.my_board_type=="Pico"){
+    var m1A = 8;
+    var m1B = 16;
+    var m2A = 28;
+    var m2B = 18;
+  }
+  Blockly.Arduino.definitions_.define_move_motor="void motor_LR(int ML, int MR)\n{\n  if (ML > 0) {\n    analogWrite("+m1A+", ML);\n    analogWrite("+m1B+", 0);\n  }else {\n    analogWrite("+m1A+", 0);\n    analogWrite("+m1B+", ML*(-1));\n  }\n  if (MR > 0) {\n    analogWrite("+m2A+", MR);\n    analogWrite("+m2B+", 0);\n  }else {\n    analogWrite("+m2A+", 0);\n    analogWrite("+m2B+", MR*(-1));\n  }\n}\n";
+  Blockly.Arduino.setups_["setup_mooncar_"]="pinMode("+m1A+", OUTPUT);\n  pinMode("+m1B+", OUTPUT);\n  pinMode("+m2A+", OUTPUT);\n  pinMode("+m2B+", OUTPUT);\n";
   return"motor_LR("+a+", "+b+");\n";
 };
 Blockly.Arduino.mooncar_tracker=function(){
-  Blockly.Arduino.definitions_.define_tracker="int tracker()\n{\n  if (digitalRead(10) == 1 && digitalRead(11) == 1) {\n    return 0;\n  } else if (digitalRead(10) == 0 && digitalRead(11) == 1) {\n    return 1;\n  } else if (digitalRead(10) == 1 && digitalRead(11) == 0){\n    return 2;\n  } else {\n    return 3;\n  }\n}\n";
-  Blockly.Arduino.setups_["setup_tracker_"]="pinMode(10, INPUT);\n  pinMode(11, INPUT);\n";
+  if (Blockly.Arduino.my_board_type=="7697"){
+    var lsA = 11;
+    var lsB = 10;
+  } else if (Blockly.Arduino.my_board_type=="Pico"){
+    var lsA = 19;
+    var lsB = 17;
+  }
+  Blockly.Arduino.definitions_.define_tracker="int tracker()\n{\n  if (digitalRead("+lsB+") == 1 && digitalRead("+lsA+") == 1) {\n    return 0;\n  } else if (digitalRead("+lsB+") == 0 && digitalRead("+lsA+") == 1) {\n    return 1;\n  } else if (digitalRead("+lsB+") == 1 && digitalRead("+lsA+") == 0){\n    return 2;\n  } else {\n    return 3;\n  }\n}\n";
+  Blockly.Arduino.setups_["setup_tracker_"]="pinMode("+lsB+", INPUT);\n  pinMode("+lsA+", INPUT);\n";
   return["tracker()",Blockly.Arduino.ORDER_ATOMIC];
 };
 Blockly.Arduino.mooncar_sonar=function(){
+  if (Blockly.Arduino.my_board_type=="7697"){
+    var tr = 2;
+    var ec = 5;
+  } else if (Blockly.Arduino.my_board_type=="Pico"){
+    var tr = 0;
+    var ec = 9;
+  }
   Blockly.Arduino.definitions_['define_sonar_']="#include <Ultrasonic.h>\n";
-  Blockly.Arduino.definitions_['define_sonar_set']="Ultrasonic ultrasonic_(2, 5);"
+  Blockly.Arduino.definitions_['define_sonar_set']="Ultrasonic ultrasonic_("+tr+", "+ec+");"
   return ["ultrasonic_.convert(ultrasonic_.timing(), Ultrasonic::CM)", Blockly.Arduino.ORDER_ATOMIC];
 };
 Blockly.Arduino.mooncar_button=function(){
   var a=this.getFieldValue("AB_BUTTON");
-  Blockly.Arduino.setups_["setup_botton_"]="pinMode(0, INPUT_PULLUP);\n  pinMode(7, INPUT_PULLUP);\n";
-  Blockly.Arduino.definitions_.define_button_a="bool a_button()\n{\n  if (digitalRead(0) == 0 && digitalRead(7) == 1) {\n    return true;\n  } else {\n    return false;\n  }\n}\n";
-  Blockly.Arduino.definitions_.define_button_b="bool b_button()\n{\n  if (digitalRead(0) == 1 && digitalRead(7) == 0) {\n    return true;\n  } else {\n    return false;\n  }\n}\n";
-  Blockly.Arduino.definitions_.define_button_c="bool c_button()\n{\n  if (digitalRead(0) == 0 && digitalRead(7) == 0) {\n    return true;\n  } else {\n    return false;\n  }\n}\n";
+  if (Blockly.Arduino.my_board_type=="7697"){
+    var btA = 0;
+    var btB = 7;
+  } else if (Blockly.Arduino.my_board_type=="Pico"){
+    var btA = 2;
+    var btB = 20;
+  }
+  Blockly.Arduino.setups_["setup_botton_"]="pinMode("+btA+", INPUT_PULLUP);\n  pinMode("+btB+", INPUT_PULLUP);\n";
+  Blockly.Arduino.definitions_.define_button_a="bool a_button()\n{\n  if (digitalRead("+btA+") == 0 && digitalRead("+btB+") == 1) {\n    return true;\n  } else {\n    return false;\n  }\n}\n";
+  Blockly.Arduino.definitions_.define_button_b="bool b_button()\n{\n  if (digitalRead("+btA+") == 1 && digitalRead("+btB+") == 0) {\n    return true;\n  } else {\n    return false;\n  }\n}\n";
+  Blockly.Arduino.definitions_.define_button_c="bool c_button()\n{\n  if (digitalRead("+btA+") == 0 && digitalRead("+btB+") == 0) {\n    return true;\n  } else {\n    return false;\n  }\n}\n";
 
   if (a == "A_") {
     return["a_button()",Blockly.Arduino.ORDER_ATOMIC];
@@ -61,6 +107,11 @@ Blockly.Arduino.mooncar_button=function(){
 };
 Blockly.Arduino.mooncar_init_tcs=function(){
   var a=Blockly.Arduino.valueToCode(this,"RANGE",Blockly.Arduino.ORDER_ATOMIC)||"5";
+  if (Blockly.Arduino.my_board_type=="7697"){
+    var fl = 7;
+  } else if (Blockly.Arduino.my_board_type=="Pico"){
+    var fl = 20;
+  }
   Blockly.Arduino.definitions_.define_write="#include <Wire.h>";
   Blockly.Arduino.definitions_.define_tcs="#include \"Adafruit_TCS34725.h\"";
   Blockly.Arduino.definitions_.define_tcs_var="int now[3], rec_r[3], rec_g[3], rec_b[3], rec_y[3], rec_a[3], rec_p[3], rec_c1[3], rec_c2[3], rec_c3[3], range_ = "+a+";";
@@ -69,8 +120,9 @@ Blockly.Arduino.mooncar_init_tcs=function(){
   Blockly.Arduino.definitions_.define_tcs_red="int tcs_read_red()\n{\n  tcs.getRawData(&r_, &g_, &b_, &c_);\n  return r_;\n}\n";
   Blockly.Arduino.definitions_.define_tcs_green="int tcs_read_green()\n{\n  tcs.getRawData(&r_, &g_, &b_, &c_);\n  return g_;\n}\n";
   Blockly.Arduino.definitions_.define_tcs_blue="int tcs_read_blue()\n{\n  tcs.getRawData(&r_, &g_, &b_, &c_);\n  return b_;\n}\n";
-  Blockly.Arduino.setups_["tcs_"]||(Blockly.Arduino.setups_["tcs_"]="tcs.begin();");
-  return"digitalWrite(7, LOW);\n";
+  Blockly.Arduino.setups_["tcs_"]||(Blockly.Arduino.setups_["tcs_"]="tcs.begin();\n");
+  Blockly.Arduino.setups_["setup_flash_light_"]="pinMode("+fl+", OUTPUT);\n";
+  return"digitalWrite("+fl+", LOW);\n";
 };
 Blockly.Arduino.mooncar_read_tcs=function(){
   var a=this.getFieldValue("TCS");
@@ -86,12 +138,17 @@ Blockly.Arduino.mooncar_read_tcs=function(){
 };
 Blockly.Arduino.mooncar_flash_light=function(){
   var a=this.getFieldValue("TCS_LIGHT");
-  Blockly.Arduino.setups_["setup_flash_light_"]="pinMode(7, OUTPUT);\n";
+  if (Blockly.Arduino.my_board_type=="7697"){
+    var fl = 7;
+  } else if (Blockly.Arduino.my_board_type=="Pico"){
+    var fl = 20;
+  }
+  Blockly.Arduino.setups_["setup_flash_light_"]="pinMode("+fl+", OUTPUT);\n";
   if (a == "ON") {
-    return"digitalWrite(7, LOW);\n";
+    return"digitalWrite("+fl+", LOW);\n";
   }
   else {
-    return"digitalWrite(7, HIGH);\n";
+    return"digitalWrite("+fl+", HIGH);\n";
   }
 };
 Blockly.Arduino.mooncar_record_tcs=function(){
@@ -164,8 +221,13 @@ Blockly.Arduino.mooncar_chack_tcs=function(){
   }
 };
 Blockly.Arduino.mooncar_ir_remote_read=function(){
+  if (Blockly.Arduino.my_board_type=="7697"){
+    var irR = 15;
+  } else if (Blockly.Arduino.my_board_type=="Pico"){
+    var irR = 27;
+  }
   Blockly.Arduino.definitions_.define_irremote="#include <IRremote.h>";
-  Blockly.Arduino.definitions_.define_irremote_init="IRrecv irrecv(15);";
+  Blockly.Arduino.definitions_.define_irremote_init="IRrecv irrecv("+irR+");";
   Blockly.Arduino.definitions_.define_irremote_decode="decode_results results;";
   Blockly.Arduino.setups_["irremote_"]||(Blockly.Arduino.setups_["irremote_"]="irrecv.enableIRIn();\n");
   return"if (irrecv.decode(&results)) {\n  "+Blockly.Arduino.statementToCode(this,"IR_READ")+"\n  irrecv.resume();\n}\n";
@@ -180,8 +242,15 @@ Blockly.Arduino.mooncar_ir_remote_read_type=function(){
 Blockly.Arduino.mooncar_ir_remote_send=function(){
   var a=this.getFieldValue("IR_TYPE"),
       b=Blockly.Arduino.valueToCode(this,"IR_SEND",Blockly.Arduino.ORDER_ATOMIC)||"0";
-  Blockly.Arduino.definitions_.define_irremote="#include <IRremote.h>";
-  Blockly.Arduino.definitions_.define_irremote_init="IRsend irsend;";
+  Blockly.Arduino.definitions_.define_irremote="#define NO_LED_FEEDBACK_CODE\n#include <PinDefinitionsAndMore.h>\n#include <IRremote.h>\n";
+  
+  if (Blockly.Arduino.my_board_type=="7697"){
+    Blockly.Arduino.definitions_.define_irpins="#define IR_SEND_PIN 3\n";
+  } else if (Blockly.Arduino.my_board_type=="Pico"){
+    Blockly.Arduino.definitions_.define_irpins="#define IR_SEND_PIN 6\n";
+  }
+
+  Blockly.Arduino.setups_.setup_irremote="IrSender.begin();\n";
   Blockly.Arduino.definitions_.define_ir_type="int x2i(char *s)\n{\n  int x = 0;\n  for(;;) {\n    char c = *s;\n    if (c >= '0' && c <= '9') {\n      x *= 16;\n      x += c - '0';\n    }    else if (c >= 'a' && c <= 'f') {\n      x *= 16;\n      x += (c - 'a') + 10;\n    }\n    else break;\n    s++;\n  }\n  return x;\n}";
   if (a == "NEC") {
     return"irsend.sendNEC(x2i("+b+"), 32);\n"
