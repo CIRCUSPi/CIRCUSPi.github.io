@@ -241,7 +241,8 @@ Blockly.Arduino.mooncar_chack_tcs=function(){
 };
 Blockly.Arduino.mooncar_ir_remote_read=function(){
 
-  Blockly.Arduino.definitions_.define_irremote="#include <IRremote.hpp>\ndecode_results results;\nString myCodeType;\nString myIRcode;\n";
+  Blockly.Arduino.definitions_.define_irremote="#include <IRremote.hpp>\n";
+  Blockly.Arduino.definitions_.define_irread="decode_results results;\nString myCodeType;\nString myIRcode;\n";
   if (Blockly.Arduino.my_board_type=="7697"){
     Blockly.Arduino.definitions_.define_irrpins="#define MY_IR_RECEIVE_PIN 15\n";
     var fl = 7;
@@ -263,8 +264,7 @@ Blockly.Arduino.mooncar_ir_remote_read_type=function(){
 Blockly.Arduino.mooncar_ir_remote_send=function(){
   var a=this.getFieldValue("IR_TYPE"),
       b=Blockly.Arduino.valueToCode(this,"IR_SEND",Blockly.Arduino.ORDER_ATOMIC)||"0";
-  Blockly.Arduino.definitions_.define_irremote="#define NO_LED_FEEDBACK_CODE\n#include <PinDefinitionsAndMore.h>\n#include <IRremote.hpp>\n";
-  
+  Blockly.Arduino.definitions_.define_irread="#define NO_LED_FEEDBACK_CODE\n#include <PinDefinitionsAndMore.h>\n";
   if (Blockly.Arduino.my_board_type=="7697"){
     Blockly.Arduino.definitions_.define_irspins="#define IR_SEND_PIN 3\n";
     var fl = 7;
@@ -272,17 +272,18 @@ Blockly.Arduino.mooncar_ir_remote_send=function(){
     Blockly.Arduino.definitions_.define_irspins="#define IR_SEND_PIN 6\n";
     var fl = 20;
   }
+  Blockly.Arduino.definitions_.define_irremote="#include <IRremote.hpp>\n";
   Blockly.Arduino.setups_["setup_flash_light_"]="pinMode("+fl+", OUTPUT);\ndigitalWrite("+fl+", HIGH);\n";
   Blockly.Arduino.setups_.setup_irremote="IrSender.begin();\n";
   Blockly.Arduino.definitions_.define_ir_type="int x2i(char *s)\n{\n  int x = 0;\n  for(;;) {\n    char c = *s;\n    if (c >= '0' && c <= '9') {\n      x *= 16;\n      x += c - '0';\n    }    else if (c >= 'a' && c <= 'f') {\n      x *= 16;\n      x += (c - 'a') + 10;\n    }\n    else break;\n    s++;\n  }\n  return x;\n}";
   if (a == "NEC") {
-    return"irsend.sendNEC(x2i("+b+"), 32);\n"
+    return"IrSender.sendNEC(x2i("+b+"), 32);\n"
   } else if (a == "SONY"){
-    return"irsend.sendSony(x2i("+b+"), 12);\n"
+    return"IrSender.sendSony(x2i("+b+"), 12);\n"
   } else if (a == "RC5") {
-    return"irsend.sendRC5(x2i("+b+"), 12);\n"
+    return"IrSender.sendRC5(x2i("+b+"), 12);\n"
   } else {
-    return"irsend.sendRC6(x2i("+b+"), 20);\n"
+    return"IrSender.sendRC6(x2i("+b+"), 20);\n"
   }
 };
 Blockly.Arduino.mooncar_face_show=function(){
