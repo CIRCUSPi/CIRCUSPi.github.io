@@ -240,8 +240,6 @@ Blockly.Arduino.mooncar_chack_tcs=function(){
   }
 };
 Blockly.Arduino.mooncar_ir_remote_read=function(){
-
-  Blockly.Arduino.definitions_.define_irremote="#include <IRremote.hpp>\n";
   Blockly.Arduino.definitions_.define_irread="decode_results results;\nString myCodeType;\nString myIRcode;\n";
   if (Blockly.Arduino.my_board_type=="7697"){
     Blockly.Arduino.definitions_.define_irrpins="#define MY_IR_RECEIVE_PIN 15\n";
@@ -250,6 +248,7 @@ Blockly.Arduino.mooncar_ir_remote_read=function(){
     Blockly.Arduino.definitions_.define_irrpins="#define MY_IR_RECEIVE_PIN 27\n";
     var fl = 20;
   }
+  Blockly.Arduino.definitions_.define_irremote="#include <IRremote.hpp>\n";
   Blockly.Arduino.setups_["setup_flash_light_"]="pinMode("+fl+", OUTPUT);\n  digitalWrite("+fl+", HIGH);\n";
   Blockly.Arduino.setups_["irremote_"]||(Blockly.Arduino.setups_["irremote_"]="IrReceiver.begin(MY_IR_RECEIVE_PIN);\n");
   return"if (IrReceiver.decode(&results)) {\n  "+Blockly.Arduino.statementToCode(this,"IR_READ")+"\n  IrReceiver.resume();\n}\n";
@@ -272,7 +271,7 @@ Blockly.Arduino.mooncar_ir_remote_send=function(){
     Blockly.Arduino.definitions_.define_irspins="#define IR_SEND_PIN 6\n";
     var fl = 20;
   }
-  Blockly.Arduino.definitions_.define_irremote2="#include <IRremote.hpp>\n";
+  Blockly.Arduino.definitions_.define_irremote="#include <IRremote.hpp>\n";
   Blockly.Arduino.setups_["setup_flash_light_"]="pinMode("+fl+", OUTPUT);\n  digitalWrite("+fl+", HIGH);\n";
   Blockly.Arduino.setups_.setup_irremote="IrSender.begin();\n";
   Blockly.Arduino.definitions_.define_ir_x2i="int x2i(char *s)\n{\n  int x = 0;\n  for(;;) {\n    char c = *s;\n    if (c >= '0' && c <= '9') {\n      x *= 16;\n      x += c - '0';\n    }    else if (c >= 'a' && c <= 'f') {\n      x *= 16;\n      x += (c - 'a') + 10;\n    }\n    else break;\n    s++;\n  }\n  return x;\n}";
