@@ -248,15 +248,16 @@ Blockly.Arduino.mooncar_ir_remote_read=function(){
     Blockly.Arduino.definitions_.define_irrpins="#define MY_IR_RECEIVE_PIN 27\n";
     var fl = 20;
   }
-  Blockly.Arduino.definitions_.define_irremote="#include <IRremote.hpp>\n";
   Blockly.Arduino.setups_["setup_flash_light_"]="pinMode("+fl+", OUTPUT);\n  digitalWrite("+fl+", HIGH);\n";
   Blockly.Arduino.setups_["irremote_"]||(Blockly.Arduino.setups_["irremote_"]="IrReceiver.begin(MY_IR_RECEIVE_PIN);\n");
   return"if (IrReceiver.decode(&results)) {\n  "+Blockly.Arduino.statementToCode(this,"IR_READ")+"\n  IrReceiver.resume();\n}\n";
 };
 Blockly.Arduino.mooncar_ir_remote_read_value=function(){
+  Blockly.Arduino.definitions_.define_irremote="#include <IRremote.hpp>\n";
   return["String(results.value, HEX)",Blockly.Arduino.ORDER_ATOMIC];
 };
 Blockly.Arduino.mooncar_ir_remote_read_type=function(){
+  Blockly.Arduino.definitions_.define_irremote="#include <IRremote.hpp>\n";
   Blockly.Arduino.definitions_.define_ir_type="String ir_type(int tip)\n{\n  if (tip == 14) {\n    return\"RC5\";\n  } else if (tip == 15){\n    return\"RC6\";\n  } else if (tip == 7){\n    return\"NEC\";\n  } else if (tip == 18){\n    return\"Sony\";\n  } else if (tip == 8){\n    return\"Panasonic\";\n  } else if (tip == 4){\n    return\"JVC\";\n  } else if (tip == 16){\n    return\"Samsung\";\n  } else if (tip == 5){\n    return\"LG\";\n  } else if (tip == 3){\n    return\"Sharp\";\n  }else {\n    return\"None\";\n  }\n}\n";
   return["ir_type(results.decode_type)",Blockly.Arduino.ORDER_ATOMIC];
 };
