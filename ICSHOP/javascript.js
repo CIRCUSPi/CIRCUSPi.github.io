@@ -468,8 +468,16 @@ Blockly.Arduino.ez_start_kit_custom_tone=function(){
     var tpins = 26;
   } else if (Blockly.Arduino.my_board_type=="ESP32"){
     var tpins = 14;
+    Blockly.Arduino.definitions_.define_buzzer="#include <Tone32.h>\n";
   }
-  return"tone("+tpins+", "+a+", "+b+");\n"
+
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    return"tone("+tpins+", "+a+", "+b+", 0);\n"
+  }
+  else {
+    return"tone("+tpins+", "+a+", "+b+");\n"
+  }
+  
 };
 Blockly.Arduino.ez_start_kit_tone=function(){
   var a=this.getFieldValue("FREQ");
@@ -479,9 +487,17 @@ Blockly.Arduino.ez_start_kit_tone=function(){
     var tpins = 26;
   } else if (Blockly.Arduino.my_board_type=="ESP32"){
     var tpins = 14;
+    Blockly.Arduino.definitions_.define_buzzer="#include <Tone32.h>\n";
   }
 
-  return"tone("+tpins+", "+a+");\n"
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    return"tone("+tpins+", "+a+", 0, 0);\n"
+  }
+  else {
+    return"tone("+tpins+", "+a+");\n"
+  }
+
+
 };
 Blockly.Arduino.ez_start_kit_no_tone=function(){
   if (Blockly.Arduino.my_board_type=="7697"){
@@ -490,9 +506,16 @@ Blockly.Arduino.ez_start_kit_no_tone=function(){
     var tpins = 26;
   } else if (Blockly.Arduino.my_board_type=="ESP32"){
     var tpins = 14;
+    Blockly.Arduino.definitions_.define_buzzer="#include <Tone32.h>\n";
   }
 
-  return"noTone("+tpins+");\n"
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    return"noTone("+tpins+", 0);\n"
+  }
+  else {
+    return"noTone("+tpins+");\n"
+  }
+  
 };
 Blockly.Arduino.ez_start_kit_led=function(){
   var a=this.getFieldValue("EZ_LED"),
