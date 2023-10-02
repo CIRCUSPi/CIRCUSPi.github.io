@@ -348,10 +348,22 @@ Blockly.Arduino.mooncar_neopixel_begin=function(){
 Blockly.Arduino.ez_start_kit={};
 Blockly.Arduino.ez_start_kit_button=function(){
   var a=this.getFieldValue("AB_BUTTON");
-  Blockly.Arduino.setups_["setup_botton_"]="pinMode(0, INPUT_PULLUP);\n  pinMode(7, INPUT_PULLUP);\n";
-  Blockly.Arduino.definitions_.define_button_a="bool a_button()\n{\n  if (digitalRead(0) == 0 && digitalRead(7) == 1) {\n    return true;\n  } else {\n    return false;\n  }\n}\n";
-  Blockly.Arduino.definitions_.define_button_b="bool b_button()\n{\n  if (digitalRead(0) == 1 && digitalRead(7) == 0) {\n    return true;\n  } else {\n    return false;\n  }\n}\n";
-  Blockly.Arduino.definitions_.define_button_c="bool c_button()\n{\n  if (digitalRead(0) == 0 && digitalRead(7) == 0) {\n    return true;\n  } else {\n    return false;\n  }\n}\n";
+
+  if (Blockly.Arduino.my_board_type=="7697"){
+    var btA = 0;
+    var btB = 7;
+  } else if (Blockly.Arduino.my_board_type=="Pico"){
+    var btA = 2;
+    var btB = 20;
+  } else if (Blockly.Arduino.my_board_type=="ESP32"){
+    var btA = 5;
+    var btB = 36;
+  }
+
+  Blockly.Arduino.setups_["setup_botton_"]="pinMode("+btA+", INPUT_PULLUP);\n  pinMode("+btB+", INPUT_PULLUP);\n";
+  Blockly.Arduino.definitions_.define_button_a="bool a_button()\n{\n  if (digitalRead("+btA+") == 0 && digitalRead("+btB+") == 1) {\n    return true;\n  } else {\n    return false;\n  }\n}\n";
+  Blockly.Arduino.definitions_.define_button_b="bool b_button()\n{\n  if (digitalRead("+btA+") == 1 && digitalRead("+btB+") == 0) {\n    return true;\n  } else {\n    return false;\n  }\n}\n";
+  Blockly.Arduino.definitions_.define_button_c="bool c_button()\n{\n  if (digitalRead("+btA+") == 0 && digitalRead("+btB+") == 0) {\n    return true;\n  } else {\n    return false;\n  }\n}\n";
   if (a == "A_") {
     return["a_button()",Blockly.Arduino.ORDER_ATOMIC];
   }
@@ -363,19 +375,43 @@ Blockly.Arduino.ez_start_kit_button=function(){
   }
 };
 Blockly.Arduino.ez_start_kit_vr=function(){
-  Blockly.Arduino.definitions_.define_vr="int vr_value()\n{\n  return analogRead(A2);\n}\n";
-  Blockly.Arduino.setups_["setup_vr_"]="pinMode(A2, INPUT);\n";
+  if (Blockly.Arduino.my_board_type=="7697"){
+    var vr_pins = "A2";
+  } else if (Blockly.Arduino.my_board_type=="Pico"){
+    var vr_pins = 28;
+  } else if (Blockly.Arduino.my_board_type=="ESP32"){
+    var vr_pins = 34;
+  }
+
+  Blockly.Arduino.definitions_.define_vr="int vr_value()\n{\n  return analogRead("+vr_pins+");\n}\n";
+  Blockly.Arduino.setups_["setup_vr_"]="pinMode("+vr_pins+", INPUT);\n";
   return["vr_value()",Blockly.Arduino.ORDER_ATOMIC];
 };
 Blockly.Arduino.ez_start_kit_phr=function(){
-  Blockly.Arduino.definitions_.define_phr="int phr_value()\n{\n  return analogRead(A1);\n}\n";
-  Blockly.Arduino.setups_["setup_phr_"]="pinMode(A1, INPUT);\n";
+  if (Blockly.Arduino.my_board_type=="7697"){
+    var phr_pins = "A1";
+  } else if (Blockly.Arduino.my_board_type=="Pico"){
+    var phr_pins = 27;
+  } else if (Blockly.Arduino.my_board_type=="ESP32"){
+    var phr_pins = 39;
+  }
+
+  Blockly.Arduino.definitions_.define_phr="int phr_value()\n{\n  return analogRead("+phr_pins+");\n}\n";
+  Blockly.Arduino.setups_["setup_phr_"]="pinMode("+phr_pins+", INPUT);\n";
   return["phr_value()",Blockly.Arduino.ORDER_ATOMIC];
 };
 Blockly.Arduino.ez_start_kit_dht=function(){
   var a=this.getFieldValue("EZ_DHT");
+  if (Blockly.Arduino.my_board_type=="7697"){
+    var dht_pins = 10;
+  } else if (Blockly.Arduino.my_board_type=="Pico"){
+    var dht_pins = 17;
+  } else if (Blockly.Arduino.my_board_type=="ESP32"){
+    var dht_pins = 15;
+  }
+
   Blockly.Arduino.definitions_['define_dht_']="#include <DHT.h>\n";
-  Blockly.Arduino.definitions_['define_dht_set']="DHT dht11_p10(10, DHT11);\n";
+  Blockly.Arduino.definitions_['define_dht_set']="DHT dht11_p10("+dht_pins+", DHT11);\n";
   Blockly.Arduino.setups_["setup_dht_"]="dht11_p10.begin();\n";
   if (a == "ez_t") {
     return["dht11_p10.readTemperature()",Blockly.Arduino.ORDER_ATOMIC];
