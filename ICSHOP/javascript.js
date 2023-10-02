@@ -422,21 +422,32 @@ Blockly.Arduino.ez_start_kit_dht=function(){
 };
 Blockly.Arduino.ez_start_kit_relay=function(){
   var a=this.getFieldValue("EZ_RELAY");
-  Blockly.Arduino.setups_["setup_relaay_"]="pinMode(5, OUTPUT);\n";
+  if (Blockly.Arduino.my_board_type=="7697"){
+    var relay_pins = 5;
+  } else if (Blockly.Arduino.my_board_type=="Pico"){
+    var relay_pins = 9;
+  } else if (Blockly.Arduino.my_board_type=="ESP32"){
+    var relay_pins = 25;
+  }
+
+  Blockly.Arduino.setups_["setup_relaay_"]="pinMode("+relay_pins+", OUTPUT);\n";
   if (a == "ON") {
-    return"digitalWrite(5, HIGH);\n";
+    return"digitalWrite("+relay_pins+", HIGH);\n";
   }
   else {
-    return"digitalWrite(5, LOW);\n";
+    return"digitalWrite("+relay_pins+", LOW);\n";
   }
 };
 Blockly.Arduino.ez_start_kit_remote_read=function(){
   Blockly.Arduino.definitions_.define_irremote="#include <IRremote.hpp>\ndecode_results results;\nString myCodeType;\nString myIRcode;\n";
   if (Blockly.Arduino.my_board_type=="7697"){
-    Blockly.Arduino.definitions_.define_irrpins="#define MY_IR_RECEIVE_PIN 15\n";
+    Blockly.Arduino.definitions_.define_irrpins="#define MY_IR_RECEIVE_PIN 17\n";
   } else if (Blockly.Arduino.my_board_type=="Pico"){
-    Blockly.Arduino.definitions_.define_irrpins="#define MY_IR_RECEIVE_PIN 27\n";
+    Blockly.Arduino.definitions_.define_irrpins="#define MY_IR_RECEIVE_PIN 8\n";
+  } else if (Blockly.Arduino.my_board_type=="ESP32"){
+    Blockly.Arduino.definitions_.define_irrpins="#define MY_IR_RECEIVE_PIN 33\n";
   }
+
   Blockly.Arduino.setups_["irremote_"]||(Blockly.Arduino.setups_["irremote_"]="IrReceiver.begin(MY_IR_RECEIVE_PIN);\n");
   return"if (IrReceiver.decode(&results)) {\n  "+Blockly.Arduino.statementToCode(this,"IR_READ")+"\n  IrReceiver.resume();\n}\n";
 };
@@ -455,6 +466,8 @@ Blockly.Arduino.ez_start_kit_custom_tone=function(){
     var tpins = 14;
   } else if (Blockly.Arduino.my_board_type=="Pico"){
     var tpins = 26;
+  } else if (Blockly.Arduino.my_board_type=="ESP32"){
+    var tpins = 14;
   }
   return"tone("+tpins+", "+a+", "+b+");\n"
 };
@@ -464,7 +477,10 @@ Blockly.Arduino.ez_start_kit_tone=function(){
     var tpins = 14;
   } else if (Blockly.Arduino.my_board_type=="Pico"){
     var tpins = 26;
+  } else if (Blockly.Arduino.my_board_type=="ESP32"){
+    var tpins = 14;
   }
+
   return"tone("+tpins+", "+a+");\n"
 };
 Blockly.Arduino.ez_start_kit_no_tone=function(){
@@ -472,13 +488,30 @@ Blockly.Arduino.ez_start_kit_no_tone=function(){
     var tpins = 14;
   } else if (Blockly.Arduino.my_board_type=="Pico"){
     var tpins = 26;
+  } else if (Blockly.Arduino.my_board_type=="ESP32"){
+    var tpins = 14;
   }
+
   return"noTone("+tpins+");\n"
 };
-
 Blockly.Arduino.ez_start_kit_led=function(){
   var a=this.getFieldValue("EZ_LED"),
       b=Blockly.Arduino.valueToCode(this,"LVALUE",Blockly.Arduino.ORDER_ATOMIC)||"0";
+
+  if (Blockly.Arduino.my_board_type=="7697"){
+    var red_led_pins = 13;
+    var yellow_led_pins = 12;
+    var green_led_pins = 11;
+  } else if (Blockly.Arduino.my_board_type=="Pico"){
+    var red_led_pins = 18;
+    var yellow_led_pins = 16;
+    var green_led_pins = 19;
+  } else if (Blockly.Arduino.my_board_type=="ESP32"){
+    var red_led_pins = 16;
+    var yellow_led_pins = 12;
+    var green_led_pins = 13;
+  }
+  
   if (b < 0) {
     b = 0;
   }
@@ -486,16 +519,16 @@ Blockly.Arduino.ez_start_kit_led=function(){
     b = 255;
   }
   if (a == "red") {
-    Blockly.Arduino.setups_["setup_red_"]="pinMode(13, OUTPUT);\n";
-    return"analogWrite(13, "+b+");\n";
+    Blockly.Arduino.setups_["setup_red_"]="pinMode("+red_led_pins+", OUTPUT);\n";
+    return"analogWrite("+red_led_pins+", "+b+");\n";
   }
   else if (a == "yellow") {
-    Blockly.Arduino.setups_["setup_yellow_"]="pinMode(12, OUTPUT);\n";
-    return"analogWrite(12, "+b+");\n";
+    Blockly.Arduino.setups_["setup_yellow_"]="pinMode("+yellow_led_pins+", OUTPUT);\n";
+    return"analogWrite("+yellow_led_pins+", "+b+");\n";
   }
   else {
-    Blockly.Arduino.setups_["setup_green_"]="pinMode(11, OUTPUT);\n";
-    return"analogWrite(11, "+b+");\n";
+    Blockly.Arduino.setups_["setup_green_"]="pinMode("+green_led_pins+", OUTPUT);\n";
+    return"analogWrite("+green_led_pins+", "+b+");\n";
   }
 };
 Blockly.Arduino.ez_start_kit_neopixel_begin=function(){
@@ -511,6 +544,8 @@ Blockly.Arduino.ez_start_kit_neopixel_begin=function(){
     Blockly.Arduino.definitions_.define_neopixel="Adafruit_NeoPixel pixels = Adafruit_NeoPixel(3, 4,NEO_GRB + NEO_KHZ800);\n";
   } else if (Blockly.Arduino.my_board_type=="Pico"){
     Blockly.Arduino.definitions_.define_neopixel="Adafruit_NeoPixel pixels = Adafruit_NeoPixel(3, 21,NEO_GRB + NEO_KHZ800);\n";
+  } else if (Blockly.Arduino.my_board_type=="ESP32"){
+    Blockly.Arduino.definitions_.define_neopixel="Adafruit_NeoPixel pixels = Adafruit_NeoPixel(3, 26,NEO_GRB + NEO_KHZ800);\n";
   }
 
   Blockly.Arduino.setups_.setup_neopixel_begin="pixels.begin();\n";
