@@ -833,22 +833,22 @@
 			<block type="otto_init_">
 				<value name="YL">
 					<block type="math_number">
-						<field name="NUM">0</field>
+						<field name="NUM">21</field>
 					</block>
 				</value>
 				<value name="YR">
 					<block type="math_number">
-						<field name="NUM">0</field>
+						<field name="NUM">4</field>
 					</block>
 				</value>
 				<value name="RL">
 					<block type="math_number">
-						<field name="NUM">0</field>
+						<field name="NUM">22</field>
 					</block>
 				</value>
 				<value name="RR">
 					<block type="math_number">
-						<field name="NUM">0</field>
+						<field name="NUM">14</field>
 					</block>
 				</value>
 			</block>
