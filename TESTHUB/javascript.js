@@ -720,6 +720,17 @@ Blockly.Arduino.otto_init_=function(){
   return""
 };
 
+Blockly.Arduino.otto_ultrasonic_init_=function(){
+  var a=Blockly.Arduino.valueToCode(this,"trig",Blockly.Arduino.ORDER_ATOMIC)||0,
+      b=Blockly.Arduino.valueToCode(this,"echo",Blockly.Arduino.ORDER_ATOMIC)||0;
+  Blockly.Arduino.definitions_.define_include_otto="#include <Otto.h>\n";
+  Blockly.Arduino.definitions_.define_define_otto_item="Otto __otto;\n";
+  Blockly.Arduino.definitions_.define_define_otto_ultrasonic_init_trigger="#define OTTO_PIN_ULTRASONIC_TRIGGER "+a;
+  Blockly.Arduino.definitions_.define_define_otto_ultrasonic_init_echo="#define OTTO_PIN_ULTRASONIC_ECHO "+b;
+  Blockly.Arduino.setups_.setup_otto_ultrasonic_init="__otto.initUltrasonic(OTTO_PIN_ULTRASONIC_TRIGGER, OTTO_PIN_ULTRASONIC_ECHO);";
+  return""
+};
+
 // RockBot
 Blockly.Arduino.RockBot={};
 Blockly.Arduino.RockBot_motor_go=function(){

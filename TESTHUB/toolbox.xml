@@ -984,7 +984,18 @@
 				</value>
 			</block>
 			<block type="otto_height"></block>
-			<block type="otto_ultrasonic_init"></block>
+			<block type="otto_ultrasonic_init_">
+				<value name="trig">
+					<block type="math_number">
+						<field name="NUM">27</field>
+					</block>
+				</value>
+				<value name="echo">
+					<block type="math_number">
+						<field name="NUM">39</field>
+					</block>
+				</value>
+			</block>
 			<block type="otto_ultrasonic_distance"></block>
 		</category>
 		<category id="category_RockBot" name="category_RockBot">

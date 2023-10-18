@@ -621,6 +621,23 @@ Blockly.Blocks.otto_init_={
   }
 };
 
+Blockly.Blocks.otto_ultrasonic_init_={
+  init:function(){
+      this.setHelpUrl(Blockly.Msg.OTTO_HELPURL);
+      this.setColour(Blockly.Blocks.otto.HUE);
+      this.appendDummyInput()
+          .appendField(Blockly.Msg.OTTO_ULTRASONIC_INIT_TITLE);
+      this.appendField(Blockly.Msg.OTTO_TRIGGER_PIN)
+          .appendValueInput("trig").setCheck("Number");
+      this.appendField(Blockly.Msg.OTTO_TRIGGER_PIN)
+          .appendValueInput("echo").setCheck("Number");
+      this.setInputsInline(!0);
+      this.setPreviousStatement(!0,null);
+      this.setNextStatement(!0,null);
+      this.setTooltip(Blockly.Msg.OTTO_ULTRASONIC_INIT_TOOLTIP)
+  }
+};
+
 // RockBot
 Blockly.Blocks.RockBot={};
 Blockly.Blocks.RockBot.HUE1=300;
