@@ -609,8 +609,7 @@ Blockly.Blocks.otto_init_={
       this.setHelpUrl(Blockly.Msg.OTTO_HELPURL);
       this.setColour(Blockly.Blocks.otto.HUE);
       this.appendDummyInput()
-          .appendField(Blockly.Msg.OTTO_INIT_TITLE)
-          .appendField(Blockly.Msg.OTTO_LEFT_LEG);
+          .appendField(Blockly.Msg.OTTO_INIT_TITLE);
       this.appendValueInput("YL").setCheck("Number").appendField(Blockly.Msg.OTTO_LEFT_LEG);
       this.appendValueInput("YR").setCheck("Number").appendField(Blockly.Msg.OTTO_RIGHT_LEG);
       this.appendValueInput("RL").setCheck("Number").appendField(Blockly.Msg.OTTO_LEFT_FOOT);

@@ -829,7 +829,7 @@
 		    </block>
 		    <block type="mooncar_face_show"></block>
 		</category>
-		<category id="category_otto_" name="Otto">
+		<category id="category_otto_" name="category_otto_">
 			<block type="otto_init_">
 				<value name="YL">
 					<block type="math_number">
