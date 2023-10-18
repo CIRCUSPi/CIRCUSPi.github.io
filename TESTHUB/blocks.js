@@ -627,10 +627,8 @@ Blockly.Blocks.otto_ultrasonic_init_={
       this.setColour(Blockly.Blocks.otto.HUE);
       this.appendDummyInput()
           .appendField(Blockly.Msg.OTTO_ULTRASONIC_INIT_TITLE);
-      this.appendField(Blockly.Msg.OTTO_TRIGGER_PIN)
-          .appendValueInput("trig").setCheck("Number");
-      this.appendField(Blockly.Msg.OTTO_TRIGGER_PIN)
-          .appendValueInput("echo").setCheck("Number");
+      this.appendValueInput("trig").setCheck("Number").appendField(Blockly.Msg.OTTO_TRIGGER_PIN);
+      this.appendValueInput("echo").setCheck("Number").appendField(Blockly.Msg.OTTO_ECHO_PIN);
       this.setInputsInline(!0);
       this.setPreviousStatement(!0,null);
       this.setNextStatement(!0,null);
