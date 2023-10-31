@@ -95,6 +95,9 @@ Blockly.Msg.EZ_OLED_DISPLAY_ALBUM_NAME = "Custom OLED dot matrix(128*64) name:";
 Blockly.Msg.EZ_OLED_DISPLAY_ALBUM_XBM = "XBM:";
 Blockly.Msg.SHOW_ALBUM_NAME = "Show OLED dot matrix name";
 
+// otto_go
+Blockly.Msg.OTTO_BUTTON = "Otto Push Button";
+
 // RockBot
 Blockly.Msg.CATEGORY_RockBot = "RockBot";
 Blockly.Msg.RockBot_HELPURL = "RockBot";

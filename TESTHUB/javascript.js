@@ -720,6 +720,11 @@ Blockly.Arduino.otto_init_=function(){
   return""
 };
 
+Blockly.Arduino.otto_button=function(){
+  Blockly.Arduino.setups_["setup_botton_"]="pinMode(35, INPUT_PULLUP);\n";
+  return["!digitalRead(35)",Blockly.Arduino.ORDER_ATOMIC];
+};
+
 Blockly.Arduino.otto_ultrasonic_init_=function(){
   var a=Blockly.Arduino.valueToCode(this,"trig",Blockly.Arduino.ORDER_ATOMIC)||0,
       b=Blockly.Arduino.valueToCode(this,"echo",Blockly.Arduino.ORDER_ATOMIC)||0;

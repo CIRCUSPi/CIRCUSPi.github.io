@@ -875,6 +875,7 @@
 				</value>
 			</block>
 			<block type="otto_home"></block>
+			<block type="otto_button"></block>
 			<block type="otto_walk">
 				<value name="DISTANCE">
 					<block type="math_number">
