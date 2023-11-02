@@ -96,6 +96,9 @@ Blockly.Msg.EZ_OLED_DISPLAY_ALBUM_NAME = "自訂OLED點陣圖(128*64)名稱:";
 Blockly.Msg.EZ_OLED_DISPLAY_ALBUM_XBM = "XBM:";
 Blockly.Msg.SHOW_ALBUM_NAME = "顯示OLED點陣圖名稱:";
 
+// otto_go
+Blockly.Msg.OTTO_BUTTON = "Otto 按鈕按下";
+
 // RockBot
 Blockly.Msg.CATEGORY_RockBot = "RockBot";
 Blockly.Msg.RockBot_HELPURL = "RockBot";

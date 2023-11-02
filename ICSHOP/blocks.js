@@ -603,6 +603,51 @@ Blockly.Blocks.ez_start_kit_oled_display_show_album2={init:function(){
   this.setTooltip(Blockly.Msg.OLED_DISPLAY_TOOLTIP)}
 };
 
+// OTTO GO
+Blockly.Blocks.otto_init_={
+  init:function(){
+      this.setHelpUrl(Blockly.Msg.OTTO_HELPURL);
+      this.setColour(Blockly.Blocks.otto.HUE);
+      this.appendDummyInput()
+          .appendField(Blockly.Msg.OTTO_INIT_TITLE);
+      this.appendValueInput("YL").setCheck("Number").appendField(Blockly.Msg.OTTO_LEFT_LEG);
+      this.appendValueInput("YR").setCheck("Number").appendField(Blockly.Msg.OTTO_RIGHT_LEG);
+      this.appendValueInput("RL").setCheck("Number").appendField(Blockly.Msg.OTTO_LEFT_FOOT);
+      this.appendValueInput("RR").setCheck("Number").appendField(Blockly.Msg.OTTO_RIGHT_FOOT);
+      this.setInputsInline(!0);
+      this.setPreviousStatement(!0,null);
+      this.setNextStatement(!0,null);
+      this.setTooltip(Blockly.Msg.OTTO_INIT_TOOLTIP)
+  }
+};
+
+Blockly.Blocks.otto_button={
+  init:function(){
+    this.setHelpUrl(Blockly.Msg.OTTO_HELPURL);
+    this.setColour(Blockly.Blocks.otto.HUE);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.OTTO_BUTTON);
+    this.setInputsInline(!0);
+    this.setOutput(!0,"Boolean");
+    this.setTooltip(Blockly.Msg.OTTO_INIT_TOOLTIP)
+  }
+};
+
+Blockly.Blocks.otto_ultrasonic_init_={
+  init:function(){
+      this.setHelpUrl(Blockly.Msg.OTTO_HELPURL);
+      this.setColour(Blockly.Blocks.otto.HUE);
+      this.appendDummyInput()
+          .appendField(Blockly.Msg.OTTO_ULTRASONIC_INIT_TITLE);
+      this.appendValueInput("trig").setCheck("Number").appendField(Blockly.Msg.OTTO_TRIGGER_PIN);
+      this.appendValueInput("echo").setCheck("Number").appendField(Blockly.Msg.OTTO_ECHO_PIN);
+      this.setInputsInline(!0);
+      this.setPreviousStatement(!0,null);
+      this.setNextStatement(!0,null);
+      this.setTooltip(Blockly.Msg.OTTO_ULTRASONIC_INIT_TOOLTIP)
+  }
+};
+
 // RockBot
 Blockly.Blocks.RockBot={};
 Blockly.Blocks.RockBot.HUE1=300;

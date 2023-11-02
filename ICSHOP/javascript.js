@@ -703,6 +703,39 @@ Blockly.Arduino.ez_start_kit_oled_display_show_album2=function(){
 
 };
 
+//OTTO GO
+Blockly.Arduino.otto_init_=function(){
+  var a=Blockly.Arduino.valueToCode(this,"YL",Blockly.Arduino.ORDER_ATOMIC)||0,
+      b=Blockly.Arduino.valueToCode(this,"YR",Blockly.Arduino.ORDER_ATOMIC)||0,
+      c=Blockly.Arduino.valueToCode(this,"RL",Blockly.Arduino.ORDER_ATOMIC)||0,
+      d=Blockly.Arduino.valueToCode(this,"RR",Blockly.Arduino.ORDER_ATOMIC)||0;
+  Blockly.Arduino.definitions_.define_include_otto="#include <Otto.h>\n";
+  Blockly.Arduino.definitions_.define_define_otto_item="Otto __otto;\n";
+  Blockly.Arduino.definitions_.define_define_otto_ascii="/*\n                  --------------- \n                 |     O   O     |\n                 |---------------|\n  RIGHT LEG ==>  |               | <== LEFT LEG \n                  --------------- \n                     ||     ||\n                     ||     ||\n RIGHT FOOT ==>   -----     -----  <== LEFT FOOT \n                 |-----     -----|\n*/\n";
+  Blockly.Arduino.definitions_.define_define_otto_init_yl="#define OTTO_PIN_LEFT_LEG "+a;
+  Blockly.Arduino.definitions_.define_define_otto_init_yr="#define OTTO_PIN_RIGHT_LEG "+b;
+  Blockly.Arduino.definitions_.define_define_otto_init_rl="#define OTTO_PIN_LEFT_FOOT "+c;
+  Blockly.Arduino.definitions_.define_define_otto_init_rr="#define OTTO_PIN_RIGHT_FOOT "+d;
+  Blockly.Arduino.setups_.setup_otto_init="__otto.initLegs(OTTO_PIN_LEFT_LEG, OTTO_PIN_RIGHT_LEG, OTTO_PIN_LEFT_FOOT, OTTO_PIN_RIGHT_FOOT, false);";
+  return""
+};
+
+Blockly.Arduino.otto_button=function(){
+  Blockly.Arduino.setups_["setup_botton_"]="pinMode(35, INPUT_PULLUP);\n";
+  return["!digitalRead(35)",Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.otto_ultrasonic_init_=function(){
+  var a=Blockly.Arduino.valueToCode(this,"trig",Blockly.Arduino.ORDER_ATOMIC)||0,
+      b=Blockly.Arduino.valueToCode(this,"echo",Blockly.Arduino.ORDER_ATOMIC)||0;
+  Blockly.Arduino.definitions_.define_include_otto="#include <Otto.h>\n";
+  Blockly.Arduino.definitions_.define_define_otto_item="Otto __otto;\n";
+  Blockly.Arduino.definitions_.define_define_otto_ultrasonic_init_trigger="#define OTTO_PIN_ULTRASONIC_TRIGGER "+a;
+  Blockly.Arduino.definitions_.define_define_otto_ultrasonic_init_echo="#define OTTO_PIN_ULTRASONIC_ECHO "+b;
+  Blockly.Arduino.setups_.setup_otto_ultrasonic_init="__otto.initUltrasonic(OTTO_PIN_ULTRASONIC_TRIGGER, OTTO_PIN_ULTRASONIC_ECHO);";
+  return""
+};
+
 // RockBot
 Blockly.Arduino.RockBot={};
 Blockly.Arduino.RockBot_motor_go=function(){
