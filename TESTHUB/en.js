@@ -96,6 +96,7 @@ Blockly.Msg.EZ_OLED_DISPLAY_ALBUM_XBM = "XBM:";
 Blockly.Msg.SHOW_ALBUM_NAME = "Show OLED dot matrix name";
 
 // otto_go
+Blockly.Msg.OTTO_SETTING_TITLE = "Otto sets all servo motors to 90 degrees";
 Blockly.Msg.OTTO_BUTTON = "Otto Push Button";
 
 // RockBot

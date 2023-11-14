@@ -704,6 +704,12 @@ Blockly.Arduino.ez_start_kit_oled_display_show_album2=function(){
 };
 
 //OTTO GO
+Blockly.Arduino.otto_setting=function(){
+  Blockly.Arduino.definitions_.define_include_otto_reset="#include <Otto.h>\n\n#define OTTO_PIN_LEFT_LEG 21\n#define OTTO_PIN_RIGHT_LEG 4\n#define OTTO_PIN_LEFT_FOOT 22\n#define OTTO_PIN_RIGHT_FOOT 14\n#define OTTO_TRIM_LEFT_LEG 0\n#define OTTO_TRIM_RIGHT_LEG 0\n#define OTTO_TRIM_LEFT_FOOT 0\n#define OTTO_TRIM_RIGHT_FOOT 0\n\nOtto __otto;\n\n/*\n                  ---------------\n                 |     O   O     |\n                 |---------------|\n  RIGHT LEG ==>  |               | <== LEFT LEG\n                  ---------------\n                     ||     ||\n                     ||     ||\n RIGHT FOOT ==>   -----     -----  <== LEFT FOOT\n                 |-----     -----|\n*/";
+  Blockly.Arduino.setups_.setup_otto_reset="__otto.initLegs(OTTO_PIN_LEFT_LEG, OTTO_PIN_RIGHT_LEG, OTTO_PIN_LEFT_FOOT, OTTO_PIN_RIGHT_FOOT, true);\n  __otto.setTrims(OTTO_TRIM_LEFT_LEG, OTTO_TRIM_RIGHT_LEG, OTTO_TRIM_LEFT_FOOT, OTTO_TRIM_RIGHT_FOOT);\n  delay(1000);\n  __otto.home();";
+  return""
+};
+
 Blockly.Arduino.otto_init_=function(){
   var a=Blockly.Arduino.valueToCode(this,"YL",Blockly.Arduino.ORDER_ATOMIC)||0,
       b=Blockly.Arduino.valueToCode(this,"YR",Blockly.Arduino.ORDER_ATOMIC)||0,

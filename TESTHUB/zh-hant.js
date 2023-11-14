@@ -97,6 +97,7 @@ Blockly.Msg.EZ_OLED_DISPLAY_ALBUM_XBM = "XBM:";
 Blockly.Msg.SHOW_ALBUM_NAME = "顯示OLED點陣圖名稱:";
 
 // otto_go
+Blockly.Msg.OTTO_SETTING_TITLE = "Otto 設定全部伺服馬達至90度";
 Blockly.Msg.OTTO_BUTTON = "Otto 按鈕按下";
 
 // RockBot
