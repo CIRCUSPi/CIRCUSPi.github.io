@@ -604,6 +604,19 @@ Blockly.Blocks.ez_start_kit_oled_display_show_album2={init:function(){
 };
 
 // OTTO GO
+Blockly.Blocks.otto_setting={
+  init:function(){
+    this.setHelpUrl(Blockly.Msg.OTTO_HELPURL);
+    this.setColour(Blockly.Blocks.otto.HUE);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.OTTO_SETTING_TITLE);
+    this.setInputsInline(!0);
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setTooltip(Blockly.Msg.OTTO_INIT_TOOLTIP)
+  }
+};
+
 Blockly.Blocks.otto_init_={
   init:function(){
       this.setHelpUrl(Blockly.Msg.OTTO_HELPURL);

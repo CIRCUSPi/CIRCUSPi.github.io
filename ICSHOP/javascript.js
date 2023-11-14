@@ -704,6 +704,12 @@ Blockly.Arduino.ez_start_kit_oled_display_show_album2=function(){
 };
 
 //OTTO GO
+Blockly.Arduino.otto_setting=function(){
+  Blockly.Arduino.definitions_.define_include_otto_reset="#include <Servo.h>\n\nServo servo1;\nServo servo2;\nServo servo3;\nServo servo4;\n\nString text;";
+  Blockly.Arduino.setups_.setup_otto_reset="Serial.begin(115200);\n  servo1.attach(21);\n  servo2.attach(4);\n  servo3.attach(22);\n  servo4.attach(14);\n  delay(500);\n  servo1.write(90);\n  servo2.write(90);\n  servo3.write(90);\n  servo4.write(90);\n  delay(500);\n\n  while(1) {\n    while (Serial.available() > 0) {\n      char inByte = Serial.read();\n      if (inByte != '\\n') {\n        text += inByte;\n      }\n      else {\n        String servoNumber = text.substring(0, 2);\n        int servoValue = (text.substring(3, 6)).toInt();\n  \n        if (servoNumber == \"s1\") {\n          servo1.write(servoValue);\n        }\n        else if (servoNumber == \"s2\") {\n          servo2.write(servoValue);\n        }\n        else if (servoNumber == \"s3\") {\n          servo3.write(servoValue);\n        }\n        else if (servoNumber == \"s4\") {\n          servo4.write(servoValue);\n        }\n        text = \"\";\n        break;\n      }\n    }\n    delay(15);\n  }";
+  return""
+};
+
 Blockly.Arduino.otto_init_=function(){
   var a=Blockly.Arduino.valueToCode(this,"YL",Blockly.Arduino.ORDER_ATOMIC)||0,
       b=Blockly.Arduino.valueToCode(this,"YR",Blockly.Arduino.ORDER_ATOMIC)||0,
