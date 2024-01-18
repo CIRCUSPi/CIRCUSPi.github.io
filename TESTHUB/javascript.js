@@ -1359,6 +1359,36 @@ Blockly.Arduino.pca9685_servo_write=function(){
 
 // Sensor Big
 Blockly.Arduino.sensor_big={};
+Blockly.Arduino.gps_neo_6m_init=function(){
+  var tx=Blockly.Arduino.valueToCode(this,"TX",Blockly.Arduino.ORDER_ATOMIC)||0,
+      rx=Blockly.Arduino.valueToCode(this,"RX",Blockly.Arduino.ORDER_ATOMIC)||0;
+  Blockly.Arduino.definitions_.define_include_gps_neo_6m_init="#include <SoftwareSerial.h>\nSoftwareSerial gpio_ss("+tx+", "+rx+"); //RXPin, TXPin\n\n#include <TinyGPSPlus.h>\nTinyGPSPlus gps;\n\nconst int gpsBufferSize = 256;\nchar gpsBuffer[gpsBufferSize];\nint gps_index = 0;\nString gps_get_lat = \"0.0\";\nString gps_get_lng = \"0.0\";\nString gps_get_date = \"INVALID\";\nString gps_get_time = \"INVALID\";\nint count_read_data = 0;\n";
+  Blockly.Arduino.setups_.setup_gps_neo_6m_init="gpio_ss.begin(9600);\n";
+  return""
+};
+
+Blockly.Arduino.gps_neo_6m_read=function(){
+  Blockly.Arduino.definitions_.define_include_gps_neo_6m_read="void readNEO6M() {\n  while (true) {\n    if (gpio_ss.available() > 0) {\n      char incomingChar = gpio_ss.read();\n      if (incomingChar != '\\n') {\n        gpsBuffer[gps_index] = incomingChar;\n        gps_index++;\n        if (gps_index >= gpsBufferSize) {\n          gps_index = 0;\n          count_read_data = 0;\n        }\n      } else {\n        gpsBuffer[gps_index] = '\\n';\n        gps_index++;\n        count_read_data++;\n        if (count_read_data >= 4) {\n          gpsBuffer[gps_index] = '\\n';\n          gpsBuffer[gps_index+1] = '\\0';\n          processCompleteString(gpsBuffer);\n          gps_index = 0;\n          count_read_data = 0;\n          break;\n        }\n      }\n    }\n  }\n}\n\nvoid displayInfo()\n{\n  if (gps.location.isValid())\n  {\n    gps_get_lat = String(gps.location.lat(), 6);\n    gps_get_lng = String(gps.location.lng(), 6);\n  }\n\n  if (gps.date.isValid())\n  {\n    gps_get_date = String(gps.date.year()) + \"/\" + String(gps.date.month()) + \"/\" + String(gps.date.day());\n  }\n\n  if (gps.time.isValid())\n  {\n    String time_text = \"\";\n    if (gps.time.hour() < 10) time_text += \"0\";\n    time_text += String(gps.time.hour()) + \":\";\n    if (gps.time.minute() < 10) time_text += \"0\";\n    time_text += String(gps.time.minute()) + \":\";\n    if (gps.time.second() < 10) time_text += \"0\";\n    gps_get_time = time_text + String(gps.time.second());\n  } \n}\n\nvoid processCompleteString(char* data) {\n  while (*data)\n    if (gps.encode(*data++))\n      displayInfo();\n}\n";
+  return"readNEO6M();\n"
+};
+
+Blockly.Arduino.gps_neo_6m_data=function(){
+  var a=this.getFieldValue("GPS_DATA");
+
+  if (a == "gps_lat") {
+    return["gps_get_lat",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "gps_lng") {
+    return["gps_get_lng",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else if (a == "gps_date") {
+    return["gps_get_date",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else {
+    return["gps_get_time",Blockly.Arduino.ORDER_ATOMIC];
+  }
+};
+
 Blockly.Arduino.pms5003_t_read=function(){
   var a=this.getFieldValue("RX_PIN"),
       b=this.getFieldValue("TX_PIN");

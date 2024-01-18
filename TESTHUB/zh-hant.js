@@ -268,6 +268,17 @@ Blockly.Msg.servo_degree = "角度";
 Blockly.Msg.CATEGORY_SENSOR_BIG = "感測模組擴充";
 Blockly.Msg.sensor_big_HELPURL = "Sensor Big";
 Blockly.Msg.sensor_big_TOOLTIP = "Sensor Big";
+
+Blockly.Msg.GPS_NEO_6M_INIT_TITLE = "初始化GPS模組(NEO-6M)";
+Blockly.Msg.GPS_NEO_6M_INIT_TX = "TX 連接";
+Blockly.Msg.GPS_NEO_6M_INIT_RX = "RX 連接";
+Blockly.Msg.GPS_NEO_6M_READ = "GPS模組(NEO-6M)接收資料";
+Blockly.Msg.GPS_NEO_6M_DATA = "GPS模組(NEO-6M)取得";
+Blockly.Msg.GPS_NEO_6M_DATA_LAT = "緯度";
+Blockly.Msg.GPS_NEO_6M_DATA_LNG = "經度";
+Blockly.Msg.GPS_NEO_6M_DATA_DATE = "日期";
+Blockly.Msg.GPS_NEO_6M_DATA_TIME = "時間";
+
 Blockly.Msg.PMS5003_T_TITLE = "PM2.5 感測器連接";
 Blockly.Msg.PMS5003_T_LAST = "讀取資料";
 Blockly.Msg.PMS_READ_VALIE = "取得PM2.5 感測器資料";
