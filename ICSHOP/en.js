@@ -268,6 +268,17 @@ Blockly.Msg.servo_degree = "degree";
 Blockly.Msg.CATEGORY_SENSOR_BIG = "Sensor Expansion";
 Blockly.Msg.sensor_big_HELPURL = "Sensor Big";
 Blockly.Msg.sensor_big_TOOLTIP = "Sensor Big";
+
+Blockly.Msg.GPS_NEO_6M_INIT_TITLE = "Initialize GPS module (NEO-6M)";
+Blockly.Msg.GPS_NEO_6M_INIT_TX = "TX connection";
+Blockly.Msg.GPS_NEO_6M_INIT_RX = "RX connection";
+Blockly.Msg.GPS_NEO_6M_READ = "GPS module (NEO-6M) receives data";
+Blockly.Msg.GPS_NEO_6M_DATA = "Obtain GPS module (NEO-6M)";
+Blockly.Msg.GPS_NEO_6M_DATA_LAT = "latitude";
+Blockly.Msg.GPS_NEO_6M_DATA_LNG = "longitude";
+Blockly.Msg.GPS_NEO_6M_DATA_DATE = "date";
+Blockly.Msg.GPS_NEO_6M_DATA_TIME = "time";
+
 Blockly.Msg.PMS5003_T_TITLE = "PM2.5 Sensor set";
 Blockly.Msg.PMS5003_T_LAST = "read data";
 Blockly.Msg.PMS_READ_VALIE = "Get PM2.5 Sensor data";

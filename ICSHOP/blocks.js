@@ -1709,7 +1709,53 @@ Blockly.Blocks.pca9685_servo_write={
 
 // Sensor Big
 Blockly.Blocks.sensor_big={};
+Blockly.Blocks.sensor_big.HUE0=240;
 Blockly.Blocks.sensor_big.HUE=30;
+Blockly.Blocks.gps_neo_6m_init={
+  init:function(){
+      this.setHelpUrl(Blockly.Msg.sensor_big_HELPURL);
+      this.setColour(Blockly.Blocks.sensor_big.HUE0);
+      this.appendDummyInput()
+          .appendField(Blockly.Msg.GPS_NEO_6M_INIT_TITLE);
+      this.appendValueInput("TX").setCheck("Number").appendField(Blockly.Msg.GPS_NEO_6M_INIT_TX);
+      this.appendValueInput("RX").setCheck("Number").appendField(Blockly.Msg.GPS_NEO_6M_INIT_RX);
+      this.setInputsInline(!0);
+      this.setPreviousStatement(!0,null);
+      this.setNextStatement(!0,null);
+      this.setTooltip(Blockly.Msg.sensor_big_TOOLTIP)
+  }
+};
+
+Blockly.Blocks.gps_neo_6m_read={
+  init:function(){
+    this.setHelpUrl(Blockly.Msg.sensor_big_HELPURL);
+    this.setColour(Blockly.Blocks.sensor_big.HUE0);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.GPS_NEO_6M_READ);
+    this.setInputsInline(!0);
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setTooltip(Blockly.Msg.sensor_big_TOOLTIP)
+  }
+};
+
+Blockly.Blocks.gps_neo_6m_data={
+  init:function(){
+    this.setHelpUrl(Blockly.Msg.sensor_big_HELPURL);
+    this.setColour(Blockly.Blocks.sensor_big.HUE0);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.GPS_NEO_6M_DATA)
+        .appendField(new Blockly.FieldDropdown([[Blockly.Msg.GPS_NEO_6M_DATA_LAT,"gps_lat"],
+                                                [Blockly.Msg.GPS_NEO_6M_DATA_LNG,"gps_lng"],
+                                                [Blockly.Msg.GPS_NEO_6M_DATA_DATE,"gps_date"],
+                                                [Blockly.Msg.GPS_NEO_6M_DATA_TIME,"gps_time"]
+                                              ]),"GPS_DATA");
+    this.setInputsInline(!0);
+    this.setOutput(!0,"String");
+    this.setTooltip(Blockly.Msg.sensor_big_TOOLTIP)
+  }
+};
+
 Blockly.Blocks.pms5003_t_read={
   init:function(){
     this.setHelpUrl(Blockly.Msg.sensor_big_HELPURL);

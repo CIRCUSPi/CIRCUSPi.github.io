@@ -1534,6 +1534,20 @@
 			</block>
 		</category>
 		<category id="category_sensor_big" name="category_sensor_big">
+			<block type="gps_neo_6m_init">
+				<value name="TX">
+					<block type="math_number">
+						<field name="NUM">2</field>
+					</block>
+				</value>
+				<value name="RX">
+					<block type="math_number">
+						<field name="NUM">3</field>
+					</block>
+				</value>
+			</block>
+			<block type="gps_neo_6m_read"></block>
+			<block type="gps_neo_6m_data"></block>
 			<block type="pms5003_t_read"></block>
 			<block type="pms5003_t_read_sensor"></block>
 			<block type="sgp30_read"></block>
