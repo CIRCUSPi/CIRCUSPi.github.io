@@ -228,6 +228,25 @@ Blockly.Blocks.mooncar_neopixel_begin={
     this.setTooltip(Blockly.Msg.NEOPIXEL_BEGIN_TOOLTIP)},
 };
 
+// Rabboni
+Blockly.Blocks.rabboni={};
+Blockly.Blocks.rabboni.HUE1=0;
+Blockly.Blocks.amb82mini_bt_connect_rabboni={
+  init:function(){
+    this.setHelpUrl(Blockly.Msg.RABBONI_HELPURL);
+    this.setColour(Blockly.Blocks.rabboni.HUE1);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.AMB82MINI_BT_CONNECT_RABBONI);
+    this.appendValueInput("mac_address")
+        .setCheck("String");
+    this.setInputsInline(!0);
+    this.setPreviousStatement(!0,null);
+    this.setNextStatement(!0,null);
+    this.setTooltip(Blockly.Msg.RABBONI_TOOLTIP)
+  }
+};
+
+
 // EZ Start Kit
 Blockly.Blocks.ez_start_kit={};
 Blockly.Blocks.ez_start_kit.HUE1=30;

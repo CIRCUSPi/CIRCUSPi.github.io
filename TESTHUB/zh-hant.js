@@ -52,6 +52,11 @@ Blockly.Msg.C3 = "自訂3";
 Blockly.Msg.CHACK_TCS = "檢查顏色是否為紀錄的";
 Blockly.Msg.CHACK_VALUE = "?";
 
+// Rabboni
+Blockly.Msg.RABBONI_HELPURL = "Rabboni";
+Blockly.Msg.RABBONI_TOOLTIP = "Rabboni";
+Blockly.Msg.AMB82MINI_BT_CONNECT_RABBONI = "AMB82-mini藍牙連接Rabboni MAC位址";
+
 // ez_start_kit
 Blockly.Msg.CATEGORY_ZE_START_KIT = "EZ Start Kit";
 Blockly.Msg.EZ_HELPURL = "EZ Start Kit";

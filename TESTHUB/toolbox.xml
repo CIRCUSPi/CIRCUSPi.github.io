@@ -200,6 +200,15 @@
 			</block>
 			<block type="mooncar_face_show"></block>
 		</category>
+		<category id="category_rabboni" name="category_rabboni">
+			<block type="amb82mini_bt_connect_rabboni">
+				<value name="mac_address">
+					<block type="text">
+						<field name="TEXT">00:00:00:00:00:00</field>
+					</block>
+				</value>
+			</block>
+		</category>
 		<category id="category_apollo" name="category_apollo">
 			<block type="apollo_factory"></block>
 			<block type="apollo_factory_game">
