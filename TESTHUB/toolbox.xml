@@ -224,14 +224,6 @@
 					</block>
 				</value>
 			</block>
-			<block type="amb82mini_get_wifi_ip"></block>
-			<block type="amb82mini_capture_save_sd">
-				<value name="Name">
-						<block type="text">
-							<field name="TEXT"></field>
-						</block>
-				</value>
-			</block>
 		</category>
 		<category id="category_apollo" name="category_apollo">
 			<block type="apollo_factory"></block>
