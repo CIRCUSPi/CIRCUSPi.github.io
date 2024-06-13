@@ -417,16 +417,28 @@ Blockly.Arduino.rabboni_imu_direction=function(){
 	 }
 };
 
+//================================================================
 // AMB82-mini simple
 Blockly.Arduino.amb82mini_simple={};
 Blockly.Arduino.amb82mini_rtsp_setting=function(){
-	var a=Blockly.Arduino.valueToCode(this,"SSID",Blockly.Arduino.ORDER_ATOMIC)||"",b=Blockly.Arduino.valueToCode(this,"PASSWORD",Blockly.Arduino.ORDER_ATOMIC)||"";
-	Blockly.Arduino.definitions_.define_amb82mini_rtsp_wifi_connect_title="#include \"WiFi.h\"\n#include \"StreamIO.h\"\n#include \"RTSP.h\"\n#include \"VideoStreamOverlay.h\"\n\n\n#define CHANNELVID  0\n#define CHANNELJPEG 1\n\nVideoSetting configVID(VIDEO_FHD, CAM_FPS, VIDEO_H264, 0);\nVideoSetting configJPEG(VIDEO_FHD, CAM_FPS, VIDEO_JPEG, 1);\n\nRTSP rtsp;\nStreamIO videoStreamer(1, 1);\n\nchar ssid[] = \""+a+""\";\nchar pass[] = \""+b+""\";\nint status = WL_IDLE_STATUS;";
+	var a=Blockly.Arduino.valueToCode(this,"SSID",Blockly.Arduino.ORDER_ATOMIC)||"",
+	    b=Blockly.Arduino.valueToCode(this,"PASSWORD",Blockly.Arduino.ORDER_ATOMIC)||"";
+  Blockly.Arduino.definitions_.define_amb82mini_rtsp_setting="#include \"WiFi.h\"\n#include \"StreamIO.h\"\n#include \"RTSP.h\"\n#include \"VideoStreamOverlay.h\"\n\n\n#define CHANNELVID  0\n#define CHANNELJPEG 1\n\nVideoSetting configVID(VIDEO_FHD, CAM_FPS, VIDEO_H264, 0);\nVideoSetting configJPEG(VIDEO_FHD, CAM_FPS, VIDEO_JPEG, 1);\n\nRTSP rtsp;\nStreamIO videoStreamer(1, 1);\n\nchar ssid[] = "+a+";\nchar pass[] = "+b+";\nint status = WL_IDLE_STATUS;";
 	Blockly.Arduino.setups_["setup_amb82mini_rtsp_wifi_connect_"]="while (status != WL_CONNECTED) {\n        Serial.print(\"Attempting to connect to WPA SSID: \");\n        Serial.println(ssid);\n        status = WiFi.begin(ssid, pass);\n        delay(2000);\n    }\n    Camera.configVideoChannel(CHANNELVID, configVID);\n    Camera.configVideoChannel(CHANNELJPEG, configJPEG);\n    Camera.videoInit();\n\n    rtsp.configVideo(configVID);\n    rtsp.begin();\n\n    videoStreamer.registerInput(Camera.getStream(CHANNELVID));\n    videoStreamer.registerOutput(rtsp);\n    if (videoStreamer.begin() != 0) {\n        Serial.println(\"StreamIO link start failed\");\n    }\n\n    Camera.channelBegin(CHANNELVID);\n    Camera.channelBegin(CHANNELJPEG);\n\n    OSD.configVideo(CHANNELVID, configVID);\n    OSD.begin();";
 	return"";
 };
 
+Blockly.Arduino.amb82mini_get_wifi_ip=function(){
+	 return["\"rtsp://\"+String(WiFi.localIP())+\":554\"",Blockly.Arduino.ORDER_ATOMIC];
+};
 
+Blockly.Arduino.amb82mini_capture_save_sd=function(){
+	Blockly.Arduino.definitions_.define_amb82mini_capture_save_sd_title="#include \"AmebaFatFS.h\"\nuint32_t img_addr = 0;\nuint32_t img_len = 0;\nAmebaFatFS fs;";
+	 var a=Blockly.Arduino.valueToCode(this,"Name",Blockly.Arduino.ORDER_ATOMIC)||"";
+	 return"fs.begin();\nFile file = fs.open(String(fs.getRootPath()) + String("+a+") + \".jpg\");\ndelay(1000);\nCamera.getImage(CHANNELJPEG, &img_addr, &img_len);\nfile.write((uint8_t*)img_addr, img_len);\nfile.close();\nfs.end();";
+};
+
+//================================================================
 
 // EZ Start Kit
 Blockly.Arduino.ez_start_kit={};

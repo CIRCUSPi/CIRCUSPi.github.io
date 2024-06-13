@@ -259,7 +259,6 @@ Blockly.Blocks.rabboni_imu_data={
 	}
 };
 
-
 Blockly.Blocks.rabboni_imu_direction={
 	init:function(){
 		this.setHelpUrl(Blockly.Msg.RABBONI_HELPURL);
@@ -272,8 +271,7 @@ Blockly.Blocks.rabboni_imu_direction={
 	  this.setTooltip(Blockly.Msg.RABBONI_TOOLTIP)
 	}
 };
-
-
+//================================================================
 // AMB82-mini simple
 Blockly.Blocks.amb82mini_simple={};
 Blockly.Blocks.amb82mini_simple.HUE1=240;
@@ -296,6 +294,37 @@ Blockly.Blocks.amb82mini_rtsp_setting={
     this.setTooltip(Blockly.Msg.AMB82_MINI_SIMPLE_TOOLTIP)
   }
 };
+
+Blockly.Blocks.amb82mini_get_wifi_ip={
+	init:function(){
+		this.setHelpUrl(Blockly.Msg.AMB82_MINI_SIMPLE_HELPURL);
+    this.setColour(Blockly.Blocks.amb82mini_simple.HUE1);
+	  this.appendDummyInput()
+	      .appendField(Blockly.Msg.AMB82_MINI_SIMPLE_IP);
+	  this.setInputsInline(!0);
+	  this.setOutput(!0,"String");
+	  this.setTooltip(Blockly.Msg.AMB82_MINI_SIMPLE_TOOLTIP)
+	}
+};
+
+Blockly.Blocks.amb82mini_capture_save_sd={
+	init:function(){
+		this.setHelpUrl(Blockly.Msg.AMB82_MINI_SIMPLE_HELPURL);
+    this.setColour(Blockly.Blocks.amb82mini_simple.HUE1);
+	  this.appendDummyInput()
+	      .appendField(Blockly.Msg.AMB82_MINI_SIMPLE_SAVE_NAME);
+	  this.appendValueInput("Name")
+	      .setCheck("String");
+		this.appendDummyInput()
+	      .appendField(Blockly.Msg.AMB82_MINI_SIMPLE_SAVE_SD_CARD);
+	  this.setInputsInline(!0);
+	  this.setPreviousStatement(!0,null);
+	  this.setNextStatement(!0,null);
+	  this.setTooltip(Blockly.Msg.AMB82_MINI_SIMPLE_TOOLTIP)
+	}
+};
+//================================================================
+
 
 // EZ Start Kit
 Blockly.Blocks.ez_start_kit={};
