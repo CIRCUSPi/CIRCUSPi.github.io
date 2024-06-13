@@ -57,6 +57,10 @@ Blockly.Msg.RABBONI_HELPURL = "Rabboni";
 Blockly.Msg.RABBONI_TOOLTIP = "Rabboni";
 Blockly.Msg.AMB82MINI_BT_CONNECT_RABBONI = "AMB82-mini藍牙連接Rabboni MAC位址";
 Blockly.Msg.RABBONI_IMU_DATA = "取得Rabboni IMU";
+Blockly.Msg.RABBONI_IMU_DIRECTION = "取得Rabboni傾斜方向";
+Blockly.Msg.rabboni_radian = "弧度";
+Blockly.Msg.rabboni_angle = "角度";
+Blockly.Msg.rabboni_strength = "強度";
 
 // ez_start_kit
 Blockly.Msg.CATEGORY_ZE_START_KIT = "EZ Start Kit";

@@ -403,6 +403,20 @@ Blockly.Arduino.amb82mini_bt_connect_rabboni=function(){
    }
  };
 
+ Blockly.Arduino.rabboni_imu_direction=function(){
+	 Blockly.Arduino.definitions_.define_rabboni_direction_sub="float imu_direction(int choose) {\n  float theta = atan2(accel_y_data, accel_x_data);\n  float r = sqrt(accel_x_data * accel_x_data + accel_y_data * accel_y_data);\n  if (choose == 1) {\n    return theta;\n  }\n  else if (choose == 2) {\n    return theta * (180.0 / PI);\n  }\n  else {\n    return r;\n  }\n}";
+   var a=this.getFieldValue("IMU_DIRECTION");
+   if (a == "radian") {
+     return["imu_direction(1)",Blockly.Arduino.ORDER_ATOMIC];
+   }
+   else if (a == "angle") {
+     return["imu_direction(2)",Blockly.Arduino.ORDER_ATOMIC];
+   }
+   else {
+     return["imu_direction(3)",Blockly.Arduino.ORDER_ATOMIC];
+   }
+ };
+
 // EZ Start Kit
 Blockly.Arduino.ez_start_kit={};
 Blockly.Arduino.ez_start_kit_button=function(){

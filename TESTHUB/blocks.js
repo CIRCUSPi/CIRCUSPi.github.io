@@ -259,6 +259,18 @@ Blockly.Blocks.rabboni_imu_data={
 	}
 };
 
+Blockly.Blocks.rabboni_imu_direction={
+	init:function(){
+		this.setHelpUrl(Blockly.Msg.RABBONI_HELPURL);
+    this.setColour(Blockly.Blocks.rabboni.HUE1);
+	  this.appendDummyInput()
+	      .appendField(Blockly.Msg.RABBONI_IMU_DIRECTION)
+	      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.rabboni_radian,"radian"],[Blockly.Msg.rabboni_angle,"angle"],[Blockly.Msg.rabboni_strength,"strength"]]),"IMU_DIRECTION");
+	  this.setInputsInline(!0);
+	  this.setOutput(!0,"Number");
+	  this.setTooltip(Blockly.Msg.RABBONI_TOOLTIP)
+	}
+};
 
 // EZ Start Kit
 Blockly.Blocks.ez_start_kit={};

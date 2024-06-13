@@ -57,6 +57,10 @@ Blockly.Msg.RABBONI_HELPURL = "Rabboni";
 Blockly.Msg.RABBONI_TOOLTIP = "Rabboni";
 Blockly.Msg.AMB82MINI_BT_CONNECT_RABBONI = "AMB82-mini Bluetooth connection Rabboni MAC address";
 Blockly.Msg.RABBONI_IMU_DATA = "Get Rabboni IMU";
+Blockly.Msg.RABBONI_IMU_DIRECTION = "Get Rabboni tilt direction";
+Blockly.Msg.rabboni_radian = "radian";
+Blockly.Msg.rabboni_angle = "angle";
+Blockly.Msg.rabboni_strength = "strength";
 
 // ez_start_kit
 Blockly.Msg.CATEGORY_ZE_START_KIT = "EZ Start Kit";
