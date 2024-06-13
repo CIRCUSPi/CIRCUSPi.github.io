@@ -297,7 +297,7 @@ Blockly.Blocks.amb82mini_rtsp_setting={
   }
 };
 
-Blockly.Blocks.amb82mini_wifi_ip={
+Blockly.Blocks.amb82mini_get_wifi_ip={
 	init:function(){
 		this.setHelpUrl(Blockly.Msg.AMB82_MINI_SIMPLE_HELPURL);
     this.setColour(Blockly.Blocks.amb82mini_simple.HUE1);
