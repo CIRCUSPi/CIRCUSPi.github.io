@@ -230,7 +230,7 @@ Blockly.Blocks.mooncar_neopixel_begin={
 
 // Rabboni
 Blockly.Blocks.rabboni={};
-Blockly.Blocks.rabboni.HUE1=0;
+Blockly.Blocks.rabboni.HUE1=300;
 Blockly.Blocks.amb82mini_bt_connect_rabboni={
   init:function(){
     this.setHelpUrl(Blockly.Msg.RABBONI_HELPURL);
@@ -244,6 +244,19 @@ Blockly.Blocks.amb82mini_bt_connect_rabboni={
     this.setNextStatement(!0,null);
     this.setTooltip(Blockly.Msg.RABBONI_TOOLTIP)
   }
+};
+
+Blockly.Blocks.rabboni_imu_data={
+	init:function(){
+		this.setHelpUrl(Blockly.Msg.RABBONI_HELPURL);
+    this.setColour(Blockly.Blocks.rabboni.HUE1);
+	  this.appendDummyInput()
+	      .appendField(Blockly.Msg.RABBONI_IMU_DATA)
+	      .appendField(new Blockly.FieldDropdown([["accel x","accel_x"],["accel y","accel_y"],["accel z","accel_z"],["gyro x","gyro_x"],["gyro y","gyro_y"],["gyro z","gyro_z"]]),"IMU_DATA");
+	  this.setInputsInline(!0);
+	  this.setOutput(!0,"Number");
+	  this.setTooltip(Blockly.Msg.RABBONI_TOOLTIP)
+	}
 };
 
 

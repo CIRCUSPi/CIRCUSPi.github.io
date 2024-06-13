@@ -375,10 +375,32 @@ Blockly.Arduino.mooncar_neopixel_begin=function(){
 Blockly.Arduino.rabboni={};
 Blockly.Arduino.amb82mini_bt_connect_rabboni=function(){
   var a=Blockly.Arduino.valueToCode(this,"mac_address",Blockly.Arduino.ORDER_ATOMIC)||"";
-  Blockly.Arduino.definitions_.define_amb82mini_bt_connect_rabboni_title="#include \"BLEDevice.h\"\n\n#define RABBONI_MAC_ADDRESS     "+a+"\n#define RABBONI_DEVICE_NAME     \"RABBONI\"\n#define RABBONI_SERVICE_UUID    \"1600\"\n#define RABBONI_SENSOR_UUID     \"1601\"\n\n\nBLEAdvertData foundDevice;\nBLEAdvertData targetDevice;\nBLEClient* client;\nBLERemoteService* sensorService;\nBLERemoteCharacteristic* snesorChar;\nbool notifyState = true;\nint8_t connID;\n\nfloat accel_x_data = 0.0;\nfloat accel_y_data = 0.0;\nfloat accel_z_data = 0.0;\nfloat gyro_x_data = 0.0;\nfloat gyro_y_data = 0.0;\nfloat gyro_z_data = 0.0;";
+  Blockly.Arduino.definitions_.define_amb82mini_bt_connect_rabboni_title="#include \"BLEDevice.h\"\n\n#define RABBONI_MAC_ADDRESS     \""+a+"\"\n#define RABBONI_DEVICE_NAME     \"RABBONI\"\n#define RABBONI_SERVICE_UUID    \"1600\"\n#define RABBONI_SENSOR_UUID     \"1601\"\n\n\nBLEAdvertData foundDevice;\nBLEAdvertData targetDevice;\nBLEClient* client;\nBLERemoteService* sensorService;\nBLERemoteCharacteristic* snesorChar;\nbool notifyState = true;\nint8_t connID;\n\nfloat accel_x_data = 0.0;\nfloat accel_y_data = 0.0;\nfloat accel_z_data = 0.0;\nfloat gyro_x_data = 0.0;\nfloat gyro_y_data = 0.0;\nfloat gyro_z_data = 0.0;";
   Blockly.Arduino.definitions_.define_amb82mini_bt_connect_rabboni_sub="void scanCB(T_LE_CB_DATA* p_data) {\n    foundDevice.parseScanInfo(p_data);\n    if (foundDevice.hasName()) {\n        if (foundDevice.getName() == String(RABBONI_DEVICE_NAME)) {\n            Serial.print(\"Found RABBONI BLE Device at address \");\n            Serial.println(foundDevice.getAddr().str());\n            if (strcmp(foundDevice.getAddr().str(), RABBONI_MAC_ADDRESS) == 0) {\n              Serial.print(\"Mac address match!\");\n              targetDevice = foundDevice;\n            } else {\n              Serial.print(\"Mac address mismatch!\");\n            }\n        }\n    }\n    uint8_t serviceCount = foundDevice.getServiceCount();\n        if (serviceCount > 0) {\n        BLEUUID* serviceList = foundDevice.getServiceList();\n            for (uint8_t i = 0; i < serviceCount; i++) {\n                if (serviceList[i] == BLEUUID(RABBONI_SERVICE_UUID)) {\n                Serial.print(\"Found RABBONI Service at address \");\n                Serial.println(foundDevice.getAddr().str());\n            }\n        }\n    }\n}\n\nvoid notificationCB (BLERemoteCharacteristic* chr, uint8_t* data, uint16_t len) {\n    int16_t accel_x = (data[0] << 8) | data[1];\n    int16_t accel_y = (data[2] << 8) | data[3];\n    int16_t accel_z = (data[4] << 8) | data[5];\n    int16_t gyro_x = (data[6] << 8) | data[7];\n    int16_t gyro_y = (data[8] << 8) | data[9];\n    int16_t gyro_z = (data[10] << 8) | data[11];\n\n    float accel_x_scaled = accel_x / 16384.0f;\n    float accel_y_scaled = accel_y / 16384.0f;\n    float accel_z_scaled = accel_z / 16384.0f;\n    float gyro_x_scaled = gyro_x / 131.0f;\n    float gyro_y_scaled = gyro_y / 131.0f;\n    float gyro_z_scaled = gyro_z / 131.0f;\n    accel_x_data = accel_x_scaled;\n    accel_y_data = accel_y_scaled;\n    accel_z_data = accel_z_scaled;\n    gyro_x_data = gyro_x_scaled;\n    gyro_y_data = gyro_y_scaled;\n    gyro_z_data = gyro_z_scaled;\n}";
   Blockly.Arduino.setups_["setup_amb82mini_bt_connect_rabboni_"]="BLE.init();\n    BLE.configScan()->setScanMode(GAP_SCAN_MODE_ACTIVE);\n    BLE.configScan()->setScanInterval(500);   // Start a scan every 500ms\n    BLE.configScan()->setScanWindow(250);     // Each scan lasts for 250ms\n    BLE.setScanCallback(scanCB);\n    BLE.beginCentral(1);\n\n    BLE.configScan()->startScan(2000);    // Scan for 2 seconds, then stop\n    BLE.configConnection()->connect(targetDevice, 2000);\n    delay(2000);\n    connID = BLE.configConnection()->getConnId(targetDevice);\n\n    if (!BLE.connected(connID)) {\n        Serial.println(\"BLE not connected\");\n    } else {\n        BLE.configClient();\n        client = BLE.addClient(connID);\n        client->discoverServices();\n        Serial.print(\"Discovering services of connected device\");\n        do {\n            Serial.print(\".\");\n            delay(1000);\n        } while (!(client->discoveryDone()));\n        Serial.println();\n        \n        // client->printServices();\n        sensorService = client->getService(RABBONI_SERVICE_UUID);\n        \n        if (sensorService != nullptr) {\n            snesorChar = sensorService->getCharacteristic(RABBONI_SENSOR_UUID);\n            if (snesorChar != nullptr) {\n                Serial.println(\"Sensor characteristic found\");\n                snesorChar->enableNotifyIndicate();\n                snesorChar->setNotifyCallback(notificationCB);\n            }\n        }\n        else {\n          Serial.println(\"connnect characteristic Error\");\n          while(true){}\n        }\n    }";
   return""
+ };
+
+ Blockly.Arduino.mooncar_button=function(){
+   var a=this.getFieldValue("IMU_DATA");
+   if (a == "accel_x") {
+     return["accel_x_data",Blockly.Arduino.ORDER_ATOMIC];
+   }
+   else if (a == "accel_y") {
+     return["accel_y_data",Blockly.Arduino.ORDER_ATOMIC];
+   }
+	 else if (a == "accel_z") {
+     return["accel_z_data",Blockly.Arduino.ORDER_ATOMIC];
+   }
+	 else if (a == "gyro_x") {
+     return["gyro_x_data",Blockly.Arduino.ORDER_ATOMIC];
+   }
+	 else if (a == "gyro_y") {
+     return["gyro_y_data",Blockly.Arduino.ORDER_ATOMIC];
+   }
+   else {
+     return["gyro_z_data",Blockly.Arduino.ORDER_ATOMIC];
+   }
  };
 
 // EZ Start Kit

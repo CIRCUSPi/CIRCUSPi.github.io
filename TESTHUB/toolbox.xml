@@ -208,6 +208,7 @@
 					</block>
 				</value>
 			</block>
+			<block type="rabboni_imu_data"></block>
 		</category>
 		<category id="category_apollo" name="category_apollo">
 			<block type="apollo_factory"></block>

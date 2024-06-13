@@ -56,6 +56,7 @@ Blockly.Msg.CHACK_VALUE = "Color?";
 Blockly.Msg.RABBONI_HELPURL = "Rabboni";
 Blockly.Msg.RABBONI_TOOLTIP = "Rabboni";
 Blockly.Msg.AMB82MINI_BT_CONNECT_RABBONI = "AMB82-mini Bluetooth connection Rabboni MAC address";
+Blockly.Msg.RABBONI_IMU_DATA = "Get Rabboni IMU";
 
 // ez_start_kit
 Blockly.Msg.CATEGORY_ZE_START_KIT = "EZ Start Kit";
