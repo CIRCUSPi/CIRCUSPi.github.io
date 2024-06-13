@@ -211,6 +211,22 @@
 			<block type="rabboni_imu_data"></block>
 			<block type="rabboni_imu_direction"></block>
 		</category>
+		<category id="category_amb82_mini_simple" name="category_amb82_mini_simple">
+			<block type="amb82mini_rtsp_setting">
+				<value name="SSID">
+					<block type="text">
+						<field name="TEXT"></field>
+					</block>
+				</value>
+				<value name="PASSWORD">
+					<block type="text">
+						<field name="TEXT"></field>
+					</block>
+				</value>
+			</block>
+			<block type="amb82mini_get_wifi_ip"></block>
+			<block type="amb82mini_capture_save_sd"></block>
+		</category>
 		<category id="category_apollo" name="category_apollo">
 			<block type="apollo_factory"></block>
 			<block type="apollo_factory_game">

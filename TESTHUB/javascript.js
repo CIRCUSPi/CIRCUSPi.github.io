@@ -379,43 +379,64 @@ Blockly.Arduino.amb82mini_bt_connect_rabboni=function(){
   Blockly.Arduino.definitions_.define_amb82mini_bt_connect_rabboni_sub="void scanCB(T_LE_CB_DATA* p_data) {\n    foundDevice.parseScanInfo(p_data);\n    if (foundDevice.hasName()) {\n        if (foundDevice.getName() == String(RABBONI_DEVICE_NAME)) {\n            Serial.print(\"Found RABBONI BLE Device at address \");\n            Serial.println(foundDevice.getAddr().str());\n            if (strcmp(foundDevice.getAddr().str(), RABBONI_MAC_ADDRESS) == 0) {\n              Serial.print(\"Mac address match!\");\n              targetDevice = foundDevice;\n            } else {\n              Serial.print(\"Mac address mismatch!\");\n            }\n        }\n    }\n    uint8_t serviceCount = foundDevice.getServiceCount();\n        if (serviceCount > 0) {\n        BLEUUID* serviceList = foundDevice.getServiceList();\n            for (uint8_t i = 0; i < serviceCount; i++) {\n                if (serviceList[i] == BLEUUID(RABBONI_SERVICE_UUID)) {\n                Serial.print(\"Found RABBONI Service at address \");\n                Serial.println(foundDevice.getAddr().str());\n            }\n        }\n    }\n}\n\nvoid notificationCB (BLERemoteCharacteristic* chr, uint8_t* data, uint16_t len) {\n    int16_t accel_x = (data[0] << 8) | data[1];\n    int16_t accel_y = (data[2] << 8) | data[3];\n    int16_t accel_z = (data[4] << 8) | data[5];\n    int16_t gyro_x = (data[6] << 8) | data[7];\n    int16_t gyro_y = (data[8] << 8) | data[9];\n    int16_t gyro_z = (data[10] << 8) | data[11];\n\n    float accel_x_scaled = accel_x / 16384.0f;\n    float accel_y_scaled = accel_y / 16384.0f;\n    float accel_z_scaled = accel_z / 16384.0f;\n    float gyro_x_scaled = gyro_x / 131.0f;\n    float gyro_y_scaled = gyro_y / 131.0f;\n    float gyro_z_scaled = gyro_z / 131.0f;\n    accel_x_data = accel_x_scaled;\n    accel_y_data = accel_y_scaled;\n    accel_z_data = accel_z_scaled;\n    gyro_x_data = gyro_x_scaled;\n    gyro_y_data = gyro_y_scaled;\n    gyro_z_data = gyro_z_scaled;\n}";
   Blockly.Arduino.setups_["setup_amb82mini_bt_connect_rabboni_"]="BLE.init();\n    BLE.configScan()->setScanMode(GAP_SCAN_MODE_ACTIVE);\n    BLE.configScan()->setScanInterval(500);   // Start a scan every 500ms\n    BLE.configScan()->setScanWindow(250);     // Each scan lasts for 250ms\n    BLE.setScanCallback(scanCB);\n    BLE.beginCentral(1);\n\n    BLE.configScan()->startScan(2000);    // Scan for 2 seconds, then stop\n    BLE.configConnection()->connect(targetDevice, 2000);\n    delay(2000);\n    connID = BLE.configConnection()->getConnId(targetDevice);\n\n    if (!BLE.connected(connID)) {\n        Serial.println(\"BLE not connected\");\n    } else {\n        BLE.configClient();\n        client = BLE.addClient(connID);\n        client->discoverServices();\n        Serial.print(\"Discovering services of connected device\");\n        do {\n            Serial.print(\".\");\n            delay(1000);\n        } while (!(client->discoveryDone()));\n        Serial.println();\n        \n        // client->printServices();\n        sensorService = client->getService(RABBONI_SERVICE_UUID);\n        \n        if (sensorService != nullptr) {\n            snesorChar = sensorService->getCharacteristic(RABBONI_SENSOR_UUID);\n            if (snesorChar != nullptr) {\n                Serial.println(\"Sensor characteristic found\");\n                snesorChar->enableNotifyIndicate();\n                snesorChar->setNotifyCallback(notificationCB);\n            }\n        }\n        else {\n          Serial.println(\"connnect characteristic Error\");\n          while(true){}\n        }\n    }";
   return""
- };
+};
 
- Blockly.Arduino.rabboni_imu_data=function(){
-   var a=this.getFieldValue("IMU_DATA");
-   if (a == "accel_x") {
-     return["accel_x_data",Blockly.Arduino.ORDER_ATOMIC];
-   }
-   else if (a == "accel_y") {
-     return["accel_y_data",Blockly.Arduino.ORDER_ATOMIC];
-   }
-	 else if (a == "accel_z") {
-     return["accel_z_data",Blockly.Arduino.ORDER_ATOMIC];
-   }
-	 else if (a == "gyro_x") {
-     return["gyro_x_data",Blockly.Arduino.ORDER_ATOMIC];
-   }
-	 else if (a == "gyro_y") {
-     return["gyro_y_data",Blockly.Arduino.ORDER_ATOMIC];
-   }
-   else {
-     return["gyro_z_data",Blockly.Arduino.ORDER_ATOMIC];
-   }
- };
+Blockly.Arduino.rabboni_imu_data=function(){
+ var a=this.getFieldValue("IMU_DATA");
+ if (a == "accel_x") {
+   return["accel_x_data",Blockly.Arduino.ORDER_ATOMIC];
+ }
+ else if (a == "accel_y") {
+   return["accel_y_data",Blockly.Arduino.ORDER_ATOMIC];
+ }
+ else if (a == "accel_z") {
+   return["accel_z_data",Blockly.Arduino.ORDER_ATOMIC];
+ }
+ else if (a == "gyro_x") {
+   return["gyro_x_data",Blockly.Arduino.ORDER_ATOMIC];
+ }
+ else if (a == "gyro_y") {
+   return["gyro_y_data",Blockly.Arduino.ORDER_ATOMIC];
+ }
+ else {
+   return["gyro_z_data",Blockly.Arduino.ORDER_ATOMIC];
+ }
+};
 
- Blockly.Arduino.rabboni_imu_direction=function(){
+Blockly.Arduino.rabboni_imu_direction=function(){
 	 Blockly.Arduino.definitions_.define_rabboni_direction_sub="float imu_direction(int choose) {\n  float theta = atan2(accel_y_data, accel_x_data);\n  float r = sqrt(accel_x_data * accel_x_data + accel_y_data * accel_y_data);\n  if (choose == 1) {\n    return theta;\n  }\n  else if (choose == 2) {\n    return theta * (180.0 / PI);\n  }\n  else {\n    return r;\n  }\n}";
-   var a=this.getFieldValue("IMU_DIRECTION");
-   if (a == "radian") {
-     return["imu_direction(1)",Blockly.Arduino.ORDER_ATOMIC];
-   }
-   else if (a == "angle") {
-     return["imu_direction(2)",Blockly.Arduino.ORDER_ATOMIC];
-   }
-   else {
-     return["imu_direction(3)",Blockly.Arduino.ORDER_ATOMIC];
-   }
- };
+	 var a=this.getFieldValue("IMU_DIRECTION");
+	 if (a == "radian") {
+	   return["imu_direction(1)",Blockly.Arduino.ORDER_ATOMIC];
+	 }
+	 else if (a == "angle") {
+	   return["imu_direction(2)",Blockly.Arduino.ORDER_ATOMIC];
+	 }
+	 else {
+	   return["imu_direction(3)",Blockly.Arduino.ORDER_ATOMIC];
+	 }
+};
+
+// AMB82-mini simple
+Blockly.Arduino.amb82mini_simple={};
+Blockly.Arduino.amb82mini_rtsp_setting=function(){
+	var a=Blockly.Arduino.valueToCode(this,"SSID",Blockly.Arduino.ORDER_ATOMIC)||"",b=Blockly.Arduino.valueToCode(this,"PASSWORD",Blockly.Arduino.ORDER_ATOMIC)||"";
+	Blockly.Arduino.definitions_.define_amb82mini_rtsp_wifi_connect_title="#include \"WiFi.h\"\n#include \"StreamIO.h\"\n#include \"RTSP.h\"\n#include \"VideoStreamOverlay.h\"\n\n\n#define CHANNELVID  0\n#define CHANNELJPEG 1\n\nVideoSetting configVID(VIDEO_FHD, CAM_FPS, VIDEO_H264, 0);\nVideoSetting configJPEG(VIDEO_FHD, CAM_FPS, VIDEO_JPEG, 1);\n\nRTSP rtsp;\nStreamIO videoStreamer(1, 1);\n\nchar ssid[] = \""+a+""\";\nchar pass[] = \""+b+""\";\nint status = WL_IDLE_STATUS;";
+	Blockly.Arduino.setups_["setup_amb82mini_rtsp_wifi_connect_"]="while (status != WL_CONNECTED) {\n        Serial.print(\"Attempting to connect to WPA SSID: \");\n        Serial.println(ssid);\n        status = WiFi.begin(ssid, pass);\n        delay(2000);\n    }\n    Camera.configVideoChannel(CHANNELVID, configVID);\n    Camera.configVideoChannel(CHANNELJPEG, configJPEG);\n    Camera.videoInit();\n\n    rtsp.configVideo(configVID);\n    rtsp.begin();\n\n    videoStreamer.registerInput(Camera.getStream(CHANNELVID));\n    videoStreamer.registerOutput(rtsp);\n    if (videoStreamer.begin() != 0) {\n        Serial.println(\"StreamIO link start failed\");\n    }\n\n    Camera.channelBegin(CHANNELVID);\n    Camera.channelBegin(CHANNELJPEG);\n\n    OSD.configVideo(CHANNELVID, configVID);\n    OSD.begin();";
+	return"";
+};
+
+Blockly.Arduino.amb82mini_wifi_ip=function(){
+	 return["rtsp://"+String(WiFi.localIP())+":554",Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.amb82mini_capture_save_sd=function(){
+	Blockly.Arduino.definitions_.define_amb82mini_capture_save_sd_title="#include \"AmebaFatFS.h\"\nuint32_t img_addr = 0;\nuint32_t img_len = 0;\nAmebaFatFS fs;";
+	 var a=Blockly.Arduino.valueToCode(this,"Name",Blockly.Arduino.ORDER_ATOMIC)||"";
+	 return"fs.begin();\nFile file = fs.open(String(fs.getRootPath()) + String("+a+") + \".jpg\");\ndelay(1000);\nCamera.getImage(CHANNELJPEG, &img_addr, &img_len);\nfile.write((uint8_t*)img_addr, img_len);\nfile.close();\nfs.end();";
+};
+
+
 
 // EZ Start Kit
 Blockly.Arduino.ez_start_kit={};

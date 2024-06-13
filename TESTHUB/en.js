@@ -62,6 +62,14 @@ Blockly.Msg.rabboni_radian = "radian";
 Blockly.Msg.rabboni_angle = "angle";
 Blockly.Msg.rabboni_strength = "strength";
 
+// AMB82-mini simple
+Blockly.Msg.AMB82_MINI_SIMPLE_HELPURL = "AMB82-mini simple";
+Blockly.Msg.AMB82_MINI_SIMPLE_TOOLTIP = "AMB82-mini simple";
+Blockly.Msg.AMB82_MINI_WIFI_SETTING = "AMB82-mini RTSP Wi-Fi Connect";
+Blockly.Msg.AMB82_MINI_SIMPLE_IP = "Get RTSP URL";
+Blockly.Msg.AMB82_MINI_SIMPLE_SAVE_NAME = "Save JPG name";
+Blockly.Msg.AMB82_MINI_SIMPLE_SAVE_SD_CARD = "in SD Card";
+
 // ez_start_kit
 Blockly.Msg.CATEGORY_ZE_START_KIT = "EZ Start Kit";
 Blockly.Msg.EZ_HELPURL = "EZ Start Kit";

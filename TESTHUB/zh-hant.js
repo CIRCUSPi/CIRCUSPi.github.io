@@ -62,6 +62,14 @@ Blockly.Msg.rabboni_radian = "弧度";
 Blockly.Msg.rabboni_angle = "角度";
 Blockly.Msg.rabboni_strength = "強度";
 
+// AMB82-mini simple
+Blockly.Msg.AMB82_MINI_SIMPLE_HELPURL = "AMB82-mini simple";
+Blockly.Msg.AMB82_MINI_SIMPLE_TOOLTIP = "AMB82-mini simple";
+Blockly.Msg.AMB82_MINI_WIFI_SETTING = "AMB82-mini RTSP Wi-Fi連接";
+Blockly.Msg.AMB82_MINI_SIMPLE_IP = "取得RTSP網址";
+Blockly.Msg.AMB82_MINI_SIMPLE_SAVE_NAME = "拍照儲存名稱";
+Blockly.Msg.AMB82_MINI_SIMPLE_SAVE_SD_CARD = "在SD卡";
+
 // ez_start_kit
 Blockly.Msg.CATEGORY_ZE_START_KIT = "EZ Start Kit";
 Blockly.Msg.EZ_HELPURL = "EZ Start Kit";

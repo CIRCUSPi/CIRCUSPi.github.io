@@ -230,7 +230,7 @@ Blockly.Blocks.mooncar_neopixel_begin={
 
 // Rabboni
 Blockly.Blocks.rabboni={};
-Blockly.Blocks.rabboni.HUE1=300;
+Blockly.Blocks.rabboni.HUE1=180;
 Blockly.Blocks.amb82mini_bt_connect_rabboni={
   init:function(){
     this.setHelpUrl(Blockly.Msg.RABBONI_HELPURL);
@@ -259,6 +259,7 @@ Blockly.Blocks.rabboni_imu_data={
 	}
 };
 
+
 Blockly.Blocks.rabboni_imu_direction={
 	init:function(){
 		this.setHelpUrl(Blockly.Msg.RABBONI_HELPURL);
@@ -269,6 +270,59 @@ Blockly.Blocks.rabboni_imu_direction={
 	  this.setInputsInline(!0);
 	  this.setOutput(!0,"Number");
 	  this.setTooltip(Blockly.Msg.RABBONI_TOOLTIP)
+	}
+};
+
+
+// AMB82-mini simple
+Blockly.Blocks.amb82mini_simple={};
+Blockly.Blocks.amb82mini_simple.HUE1=240;
+Blockly.Blocks.amb82mini_rtsp_setting={
+	init:function(){
+		this.setHelpUrl(Blockly.Msg.AMB82_MINI_SIMPLE_HELPURL);
+    this.setColour(Blockly.Blocks.amb82mini_simple.HUE1);
+		this.appendDummyInput()
+				.appendField(Blockly.Msg.AMB82_MINI_WIFI_SETTING);
+		this.appendValueInput("SSID")
+				.setCheck("String")
+				.setAlign(Blockly.ALIGN_RIGHT)
+				.appendField(Blockly.Msg.LINKIT_SET_WIFI_SSID);
+		this.appendValueInput("PASSWORD")
+        .setCheck("String")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField(Blockly.Msg.LINKIT_SET_WIFI_PASSWORD);
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setTooltip(Blockly.Msg.AMB82_MINI_SIMPLE_TOOLTIP)
+  }
+};
+
+Blockly.Blocks.amb82mini_wifi_ip={
+	init:function(){
+		this.setHelpUrl(Blockly.Msg.AMB82_MINI_SIMPLE_HELPURL);
+    this.setColour(Blockly.Blocks.amb82mini_simple.HUE1);
+	  this.appendDummyInput()
+	      .appendField(Blockly.Msg.AMB82_MINI_SIMPLE_IP)
+	  this.setInputsInline(!0);
+	  this.setOutput(!0,"String");
+	  this.setTooltip(Blockly.Msg.AMB82_MINI_SIMPLE_TOOLTIP)
+	}
+};
+
+Blockly.Blocks.amb82mini_capture_save_sd={
+	init:function(){
+		this.setHelpUrl(Blockly.Msg.AMB82_MINI_SIMPLE_HELPURL);
+    this.setColour(Blockly.Blocks.amb82mini_simple.HUE1);
+	  this.appendDummyInput()
+	      .appendField(Blockly.Msg.AMB82_MINI_SIMPLE_SAVE_NAME);
+	  this.appendValueInput("Name")
+	      .setCheck("String");
+		this.appendDummyInput()
+	      .appendField(Blockly.Msg.AMB82_MINI_SIMPLE_SAVE_SD_CARD);
+	  this.setInputsInline(!0);
+	  this.setPreviousStatement(!0,null);
+	  this.setNextStatement(!0,null);
+	  this.setTooltip(Blockly.Msg.AMB82_MINI_SIMPLE_TOOLTIP)
 	}
 };
 
