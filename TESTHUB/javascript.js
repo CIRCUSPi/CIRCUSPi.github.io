@@ -426,7 +426,7 @@ Blockly.Arduino.amb82mini_rtsp_setting=function(){
 	return"";
 };
 
-Blockly.Arduino.amb82mini_wifi_ip=function(){
+Blockly.Arduino.amb82mini_get_wifi_ip=function(){
 	 return["rtsp://"+String(WiFi.localIP())+":554",Blockly.Arduino.ORDER_ATOMIC];
 };
 

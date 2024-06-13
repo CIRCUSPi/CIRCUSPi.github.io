@@ -302,7 +302,7 @@ Blockly.Blocks.amb82mini_get_wifi_ip={
 		this.setHelpUrl(Blockly.Msg.AMB82_MINI_SIMPLE_HELPURL);
     this.setColour(Blockly.Blocks.amb82mini_simple.HUE1);
 	  this.appendDummyInput()
-	      .appendField(Blockly.Msg.AMB82_MINI_SIMPLE_IP)
+	      .appendField(Blockly.Msg.AMB82_MINI_SIMPLE_IP);
 	  this.setInputsInline(!0);
 	  this.setOutput(!0,"String");
 	  this.setTooltip(Blockly.Msg.AMB82_MINI_SIMPLE_TOOLTIP)
@@ -325,6 +325,7 @@ Blockly.Blocks.amb82mini_capture_save_sd={
 	  this.setTooltip(Blockly.Msg.AMB82_MINI_SIMPLE_TOOLTIP)
 	}
 };
+
 
 // EZ Start Kit
 Blockly.Blocks.ez_start_kit={};
