@@ -426,16 +426,6 @@ Blockly.Arduino.amb82mini_rtsp_setting=function(){
 	return"";
 };
 
-Blockly.Arduino.amb82mini_get_wifi_ip=function(){
-	 return["rtsp://"+String(WiFi.localIP())+":554",Blockly.Arduino.ORDER_ATOMIC];
-};
-
-Blockly.Arduino.amb82mini_capture_save_sd=function(){
-	Blockly.Arduino.definitions_.define_amb82mini_capture_save_sd_title="#include \"AmebaFatFS.h\"\nuint32_t img_addr = 0;\nuint32_t img_len = 0;\nAmebaFatFS fs;";
-	 var a=Blockly.Arduino.valueToCode(this,"Name",Blockly.Arduino.ORDER_ATOMIC)||"";
-	 return"fs.begin();\nFile file = fs.open(String(fs.getRootPath()) + String("+a+") + \".jpg\");\ndelay(1000);\nCamera.getImage(CHANNELJPEG, &img_addr, &img_len);\nfile.write((uint8_t*)img_addr, img_len);\nfile.close();\nfs.end();";
-};
-
 
 
 // EZ Start Kit
