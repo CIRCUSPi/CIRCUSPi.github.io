@@ -61,6 +61,10 @@ Blockly.Msg.RABBONI_IMU_DIRECTION = "Get Rabboni tilt direction";
 Blockly.Msg.rabboni_radian = "radian";
 Blockly.Msg.rabboni_angle = "angle";
 Blockly.Msg.rabboni_strength = "strength";
+Blockly.Msg.RABBONI_CONTROL_LED = "Control Rabboni LED";
+Blockly.Msg.rabboni_led_green = "Green";
+Blockly.Msg.rabboni_led_red = "Red";
+Blockly.Msg.rabboni_led_yellow = "Yellow";
 
 // AMB82-mini simple
 Blockly.Msg.AMB82_MINI_SIMPLE_HELPURL = "AMB82-mini simple";

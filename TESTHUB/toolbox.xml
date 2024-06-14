@@ -210,6 +210,7 @@
 			</block>
 			<block type="rabboni_imu_data"></block>
 			<block type="rabboni_imu_direction"></block>
+			<block type="rabboni_control_led"></block>
 		</category>
 		<category id="category_amb82_mini_simple" name="category_amb82_mini_simple">
 			<block type="amb82mini_rtsp_setting">

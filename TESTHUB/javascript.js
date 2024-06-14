@@ -417,7 +417,21 @@ Blockly.Arduino.rabboni_imu_direction=function(){
 	 }
 };
 
-//================================================================
+Blockly.Arduino.rabboni_control_led=function(){
+  var a=this.getFieldValue("LED_COLOR");
+	Blockly.Arduino.definitions_.define_amb82mini_bt_connect_rabboni_led_color="#define UART_SERVICE_UUID      \"FFF0\"\n#define CHARACTERISTIC_UUID_RX \"FFF6\"\n\n#define STRING_BUF_SIZE 100\n\nBLERemoteService* UartService;\nBLERemoteCharacteristic* Rx;\n";
+  Blockly.Arduino.setups_["setup_amb82mini_bt_connect_rabboni_led_color"]="UartService = client->getService(UART_SERVICE_UUID);\n  if (UartService != nullptr) {\n      Rx = UartService->getCharacteristic(CHARACTERISTIC_UUID_RX);\n      if (Rx != nullptr) {\n          Serial.println(\"RX characteristic found\");\n          Rx->setBufferLen(STRING_BUF_SIZE);\n      }\n  }";
+  if (a == "green") {
+    return"Rx->writeString(\"\\x37\\x01\\x00\");\n";
+  }
+  else if (a == "red") {
+    return"Rx->writeString(\"\\x37\\x01\\x01\");\n";
+  }
+	else {
+		return"Rx->writeString(\"\\x37\\x01\\x02\");\n";
+	}
+};
+
 // AMB82-mini simple
 Blockly.Arduino.amb82mini_simple={};
 Blockly.Arduino.amb82mini_rtsp_setting=function(){
@@ -437,8 +451,6 @@ Blockly.Arduino.amb82mini_capture_save_sd=function(){
 	 var a=Blockly.Arduino.valueToCode(this,"Name",Blockly.Arduino.ORDER_ATOMIC)||"";
 	 return"fs.begin();\nFile file = fs.open(String(fs.getRootPath()) + String("+a+") + \".jpg\");\ndelay(1000);\nCamera.getImage(CHANNELJPEG, &img_addr, &img_len);\nfile.write((uint8_t*)img_addr, img_len);\nfile.close();\nfs.end();";
 };
-
-//================================================================
 
 // EZ Start Kit
 Blockly.Arduino.ez_start_kit={};

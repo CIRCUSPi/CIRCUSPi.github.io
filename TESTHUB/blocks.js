@@ -271,7 +271,22 @@ Blockly.Blocks.rabboni_imu_direction={
 	  this.setTooltip(Blockly.Msg.RABBONI_TOOLTIP)
 	}
 };
-//================================================================
+
+
+Blockly.Blocks.rabboni_control_led={
+	init:function(){
+		this.setHelpUrl(Blockly.Msg.RABBONI_HELPURL);
+    this.setColour(Blockly.Blocks.rabboni.HUE1);
+	  this.appendDummyInput()
+	      .appendField(Blockly.Msg.RABBONI_CONTROL_LED)
+	      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.rabboni_led_green,"green"],[Blockly.Msg.rabboni_led_red,"red"],[Blockly.Msg.rabboni_led_yellow,"yellow"]]),"LED_COLOR");
+	  this.setInputsInline(!0);
+		this.setPreviousStatement(!0,null);
+	  this.setNextStatement(!0,null);
+	  this.setTooltip(Blockly.Msg.RABBONI_TOOLTIP)
+	}
+};
+
 // AMB82-mini simple
 Blockly.Blocks.amb82mini_simple={};
 Blockly.Blocks.amb82mini_simple.HUE1=240;
@@ -323,8 +338,6 @@ Blockly.Blocks.amb82mini_capture_save_sd={
 	  this.setTooltip(Blockly.Msg.AMB82_MINI_SIMPLE_TOOLTIP)
 	}
 };
-//================================================================
-
 
 // EZ Start Kit
 Blockly.Blocks.ez_start_kit={};

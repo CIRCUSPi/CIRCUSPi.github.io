@@ -61,6 +61,10 @@ Blockly.Msg.RABBONI_IMU_DIRECTION = "取得Rabboni傾斜方向";
 Blockly.Msg.rabboni_radian = "弧度";
 Blockly.Msg.rabboni_angle = "角度";
 Blockly.Msg.rabboni_strength = "強度";
+Blockly.Msg.RABBONI_CONTROL_LED = "控制Rabboni LED";
+Blockly.Msg.rabboni_led_green = "綠色";
+Blockly.Msg.rabboni_led_red = "紅色";
+Blockly.Msg.rabboni_led_yellow = "黃色";
 
 // AMB82-mini simple
 Blockly.Msg.AMB82_MINI_SIMPLE_HELPURL = "AMB82-mini simple";
