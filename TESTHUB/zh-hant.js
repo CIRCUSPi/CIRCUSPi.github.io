@@ -62,9 +62,10 @@ Blockly.Msg.rabboni_radian = "弧度";
 Blockly.Msg.rabboni_angle = "角度";
 Blockly.Msg.rabboni_strength = "強度";
 Blockly.Msg.RABBONI_CONTROL_LED = "控制Rabboni LED";
-Blockly.Msg.rabboni_led_green = "綠色";
+Blockly.Msg.rabboni_led_off = "關閉";
 Blockly.Msg.rabboni_led_red = "紅色";
 Blockly.Msg.rabboni_led_yellow = "黃色";
+Blockly.Msg.RABBONI_BATT_READ = "電池電量";
 
 // AMB82-mini simple
 Blockly.Msg.AMB82_MINI_SIMPLE_HELPURL = "AMB82-mini simple";
@@ -73,6 +74,15 @@ Blockly.Msg.AMB82_MINI_WIFI_SETTING = "AMB82-mini RTSP Wi-Fi連接";
 Blockly.Msg.AMB82_MINI_SIMPLE_IP = "取得RTSP網址";
 Blockly.Msg.AMB82_MINI_SIMPLE_SAVE_NAME = "拍照儲存名稱";
 Blockly.Msg.AMB82_MINI_SIMPLE_SAVE_SD_CARD = "在SD卡";
+Blockly.Msg.AMB82_MINI_CONTROL_LED = "控制AMB82-mini LED";
+Blockly.Msg.AMB82_MINI_SET_ROTATION = "旋轉畫面";
+Blockly.Msg.AMB82_MINI_SET_MODEL = "使用AI模型";
+Blockly.Msg.AMB82_MINI_READ_INFER_CLASS = "AI辨識到的類別";
+Blockly.Msg.amb82mini_infer_class = "名稱";
+Blockly.Msg.amb82mini_infer_xmin = "xmin";
+Blockly.Msg.amb82mini_infer_xmax = "xmax";
+Blockly.Msg.amb82mini_infer_ymin = "ymin";
+Blockly.Msg.amb82mini_infer_ymax = "ymax";
 
 // ez_start_kit
 Blockly.Msg.CATEGORY_ZE_START_KIT = "EZ Start Kit";

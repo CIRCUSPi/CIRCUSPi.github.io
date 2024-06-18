@@ -279,10 +279,22 @@ Blockly.Blocks.rabboni_control_led={
     this.setColour(Blockly.Blocks.rabboni.HUE1);
 	  this.appendDummyInput()
 	      .appendField(Blockly.Msg.RABBONI_CONTROL_LED)
-	      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.rabboni_led_green,"green"],[Blockly.Msg.rabboni_led_red,"red"],[Blockly.Msg.rabboni_led_yellow,"yellow"]]),"LED_COLOR");
+	      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.rabboni_led_red,"red"],[Blockly.Msg.rabboni_led_yellow,"yellow"],[Blockly.Msg.rabboni_led_off,"off"]]),"LED_COLOR");
 	  this.setInputsInline(!0);
 		this.setPreviousStatement(!0,null);
 	  this.setNextStatement(!0,null);
+	  this.setTooltip(Blockly.Msg.RABBONI_TOOLTIP)
+	}
+};
+
+Blockly.Blocks.rabboni_battery_read={
+	init:function(){
+		this.setHelpUrl(Blockly.Msg.RABBONI_HELPURL);
+    this.setColour(Blockly.Blocks.rabboni.HUE1);
+	  this.appendDummyInput()
+	      .appendField(Blockly.Msg.RABBONI_BATT_READ);
+	  this.setInputsInline(!0);
+	  this.setOutput(!0,"Number");
 	  this.setTooltip(Blockly.Msg.RABBONI_TOOLTIP)
 	}
 };
@@ -304,6 +316,32 @@ Blockly.Blocks.amb82mini_rtsp_setting={
         .setCheck("String")
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField(Blockly.Msg.LINKIT_SET_WIFI_PASSWORD);
+		this.appendDummyInput()
+	      .appendField(Blockly.Msg.AMB82_MINI_SET_ROTATION)
+	      .appendField(new Blockly.FieldDropdown([["OFF","OFF_"], ["ON","ON_"]]),"ROTATION");
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setTooltip(Blockly.Msg.AMB82_MINI_SIMPLE_TOOLTIP)
+  }
+};
+
+Blockly.Blocks.amb82mini_rtsp_yolo_setting={
+	init:function(){
+		this.setHelpUrl(Blockly.Msg.AMB82_MINI_SIMPLE_HELPURL);
+    this.setColour(Blockly.Blocks.amb82mini_simple.HUE1);
+		this.appendDummyInput()
+				.appendField(Blockly.Msg.AMB82_MINI_WIFI_SETTING);
+		this.appendValueInput("SSID")
+				.setCheck("String")
+				.setAlign(Blockly.ALIGN_RIGHT)
+				.appendField(Blockly.Msg.LINKIT_SET_WIFI_SSID);
+		this.appendValueInput("PASSWORD")
+        .setCheck("String")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField(Blockly.Msg.LINKIT_SET_WIFI_PASSWORD);
+		this.appendDummyInput()
+	      .appendField(Blockly.Msg.AMB82_MINI_SET_MODEL)
+	      .appendField(new Blockly.FieldDropdown([["YOLOv4","YOLOv4_"],["YOLOv7","YOLOv7_"]]),"MODEL");
     this.setPreviousStatement(!0);
     this.setNextStatement(!0);
     this.setTooltip(Blockly.Msg.AMB82_MINI_SIMPLE_TOOLTIP)
@@ -338,6 +376,34 @@ Blockly.Blocks.amb82mini_capture_save_sd={
 	  this.setTooltip(Blockly.Msg.AMB82_MINI_SIMPLE_TOOLTIP)
 	}
 };
+
+Blockly.Blocks.amb82mini_control_led={
+	init:function(){
+		this.setHelpUrl(Blockly.Msg.AMB82_MINI_SIMPLE_HELPURL);
+    this.setColour(Blockly.Blocks.amb82mini_simple.HUE1);
+	  this.appendDummyInput()
+	      .appendField(Blockly.Msg.AMB82_MINI_CONTROL_LED)
+	      .appendField(new Blockly.FieldDropdown([["ON","ON_"],["OFF","OFF_"]]),"LED_STATE");
+	  this.setInputsInline(!0);
+		this.setPreviousStatement(!0,null);
+	  this.setNextStatement(!0,null);
+	  this.setTooltip(Blockly.Msg.AMB82_MINI_SIMPLE_TOOLTIP)
+	}
+};
+
+Blockly.Blocks.amb82mini_get_infer_class={
+  init:function(){
+		this.setHelpUrl(Blockly.Msg.AMB82_MINI_SIMPLE_HELPURL);
+    this.setColour(Blockly.Blocks.amb82mini_simple.HUE1);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.AMB82_MINI_READ_INFER_CLASS)
+	      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.amb82mini_infer_class,"class_"],[Blockly.Msg.amb82mini_infer_xmin,"xmin_"],[Blockly.Msg.amb82mini_infer_xmax,"xmax_"],[Blockly.Msg.amb82mini_infer_ymin,"ymin_"],[Blockly.Msg.amb82mini_infer_ymax,"ymax_"]]),"INFER_CHOOSE");
+		this.setInputsInline(!0);
+	  this.setOutput(!0,"String");
+	  this.setTooltip(Blockly.Msg.AMB82_MINI_SIMPLE_TOOLTIP)
+  }
+};
+
 
 // EZ Start Kit
 Blockly.Blocks.ez_start_kit={};

@@ -62,9 +62,10 @@ Blockly.Msg.rabboni_radian = "radian";
 Blockly.Msg.rabboni_angle = "angle";
 Blockly.Msg.rabboni_strength = "strength";
 Blockly.Msg.RABBONI_CONTROL_LED = "Control Rabboni LED";
-Blockly.Msg.rabboni_led_green = "Green";
+Blockly.Msg.rabboni_led_off = "OFF";
 Blockly.Msg.rabboni_led_red = "Red";
 Blockly.Msg.rabboni_led_yellow = "Yellow";
+Blockly.Msg.RABBONI_BATT_READ = "Battery power";
 
 // AMB82-mini simple
 Blockly.Msg.AMB82_MINI_SIMPLE_HELPURL = "AMB82-mini simple";
@@ -73,6 +74,15 @@ Blockly.Msg.AMB82_MINI_WIFI_SETTING = "AMB82-mini RTSP Wi-Fi Connect";
 Blockly.Msg.AMB82_MINI_SIMPLE_IP = "Get RTSP URL";
 Blockly.Msg.AMB82_MINI_SIMPLE_SAVE_NAME = "Save JPG name";
 Blockly.Msg.AMB82_MINI_SIMPLE_SAVE_SD_CARD = "in SD Card";
+Blockly.Msg.AMB82_MINI_CONTROL_LED = "Control AMB82-mini LED";
+Blockly.Msg.AMB82_MINI_SET_ROTATION = "Screen rotation";
+Blockly.Msg.AMB82_MINI_SET_MODEL = "Use AI Model";
+Blockly.Msg.AMB82_MINI_READ_INFER_CLASS = "AI recognition class";
+Blockly.Msg.amb82mini_infer_class = "name";
+Blockly.Msg.amb82mini_infer_xmin = "xmin";
+Blockly.Msg.amb82mini_infer_xmax = "xmax";
+Blockly.Msg.amb82mini_infer_ymin = "ymin";
+Blockly.Msg.amb82mini_infer_ymax = "ymax";
 
 // ez_start_kit
 Blockly.Msg.CATEGORY_ZE_START_KIT = "EZ Start Kit";

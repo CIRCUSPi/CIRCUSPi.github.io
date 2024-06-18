@@ -421,8 +421,8 @@ Blockly.Arduino.rabboni_control_led=function(){
   var a=this.getFieldValue("LED_COLOR");
 	Blockly.Arduino.definitions_.define_amb82mini_bt_connect_rabboni_led_color="#define UART_SERVICE_UUID      \"FFF0\"\n#define CHARACTERISTIC_UUID_RX \"FFF6\"\n\n#define STRING_BUF_SIZE 100\n\nBLERemoteService* UartService;\nBLERemoteCharacteristic* Rx;\n";
   Blockly.Arduino.setups_["setup_amb82mini_bt_connect_rabboni_led_color"]="UartService = client->getService(UART_SERVICE_UUID);\n  if (UartService != nullptr) {\n      Rx = UartService->getCharacteristic(CHARACTERISTIC_UUID_RX);\n      if (Rx != nullptr) {\n          Serial.println(\"RX characteristic found\");\n          Rx->setBufferLen(STRING_BUF_SIZE);\n      }\n  }";
-  if (a == "green") {
-    return"Rx->writeString(\"\\x37\\x01\\x00\");\n";
+  if (a == "off") {
+    return"Rx->writeString(\"\\x37\\x02\\x00\");\n";
   }
   else if (a == "red") {
     return"Rx->writeString(\"\\x37\\x01\\x01\");\n";
@@ -432,24 +432,82 @@ Blockly.Arduino.rabboni_control_led=function(){
 	}
 };
 
+Blockly.Arduino.rabboni_battery_read=function(){
+	Blockly.Arduino.definitions_.define_amb82mini_bt_connect_rabboni_batt_read="#define BATT_SERVICE_UUID   \"180F\"\n#define BATT_LEVEL_UUID     \"2A19\"\n\nBLERemoteService* battService;\nBLERemoteCharacteristic* battChar;";
+  Blockly.Arduino.setups_["setup_amb82mini_bt_connect_rabboni_batt_read"]="battService = client->getService(BATT_SERVICE_UUID);\n  if (battService != nullptr) {\n      battChar = battService->getCharacteristic(BATT_LEVEL_UUID);\n      if (battChar != nullptr) {\n          Serial.println(\"Battery level characteristic found\");\n      }\n  }";
+  return["battChar->readData8()",Blockly.Arduino.ORDER_ATOMIC];
+};
+
 // AMB82-mini simple
 Blockly.Arduino.amb82mini_simple={};
 Blockly.Arduino.amb82mini_rtsp_setting=function(){
 	var a=Blockly.Arduino.valueToCode(this,"SSID",Blockly.Arduino.ORDER_ATOMIC)||"",
-	    b=Blockly.Arduino.valueToCode(this,"PASSWORD",Blockly.Arduino.ORDER_ATOMIC)||"";
+	    b=Blockly.Arduino.valueToCode(this,"PASSWORD",Blockly.Arduino.ORDER_ATOMIC)||"",
+			c=this.getFieldValue("ROTATION");
+	if (c == "ON_") {
+		var rot = "\n    configVID.setRotation(3);\n    configJPEG.setRotation(3);\n";
+	}
+	else {
+		var rot = "\n";
+	}
   Blockly.Arduino.definitions_.define_amb82mini_rtsp_setting="#include \"WiFi.h\"\n#include \"StreamIO.h\"\n#include \"RTSP.h\"\n#include \"VideoStreamOverlay.h\"\n\n\n#define CHANNELVID  0\n#define CHANNELJPEG 1\n\nVideoSetting configVID(VIDEO_FHD, CAM_FPS, VIDEO_H264, 0);\nVideoSetting configJPEG(VIDEO_FHD, CAM_FPS, VIDEO_JPEG, 1);\n\nRTSP rtsp;\nStreamIO videoStreamer(1, 1);\n\nchar ssid[] = "+a+";\nchar pass[] = "+b+";\nint status = WL_IDLE_STATUS;";
-	Blockly.Arduino.setups_["setup_amb82mini_rtsp_wifi_connect_"]="while (status != WL_CONNECTED) {\n        Serial.print(\"Attempting to connect to WPA SSID: \");\n        Serial.println(ssid);\n        status = WiFi.begin(ssid, pass);\n        delay(2000);\n    }\n    Camera.configVideoChannel(CHANNELVID, configVID);\n    Camera.configVideoChannel(CHANNELJPEG, configJPEG);\n    Camera.videoInit();\n\n    rtsp.configVideo(configVID);\n    rtsp.begin();\n\n    videoStreamer.registerInput(Camera.getStream(CHANNELVID));\n    videoStreamer.registerOutput(rtsp);\n    if (videoStreamer.begin() != 0) {\n        Serial.println(\"StreamIO link start failed\");\n    }\n\n    Camera.channelBegin(CHANNELVID);\n    Camera.channelBegin(CHANNELJPEG);\n\n    OSD.configVideo(CHANNELVID, configVID);\n    OSD.begin();";
+	Blockly.Arduino.setups_["setup_amb82mini_rtsp_wifi_connect_"]="while (status != WL_CONNECTED) {\n        Serial.print(\"Attempting to connect to WPA SSID: \");\n        Serial.println(ssid);\n        status = WiFi.begin(ssid, pass);\n        delay(2000);\n    }\n"+rot+"    Camera.configVideoChannel(CHANNELVID, configVID);\n    Camera.configVideoChannel(CHANNELJPEG, configJPEG);\n    Camera.videoInit();\n\n    rtsp.configVideo(configVID);\n    rtsp.begin();\n\n    videoStreamer.registerInput(Camera.getStream(CHANNELVID));\n    videoStreamer.registerOutput(rtsp);\n    if (videoStreamer.begin() != 0) {\n        Serial.println(\"StreamIO link start failed\");\n    }\n\n    Camera.channelBegin(CHANNELVID);\n    Camera.channelBegin(CHANNELJPEG);\n\n    OSD.configVideo(CHANNELVID, configVID);\n    OSD.begin();";
+	return"";
+};
+
+Blockly.Arduino.amb82mini_rtsp_yolo_setting=function(){
+	var a=Blockly.Arduino.valueToCode(this,"SSID",Blockly.Arduino.ORDER_ATOMIC)||"",
+	    b=Blockly.Arduino.valueToCode(this,"PASSWORD",Blockly.Arduino.ORDER_ATOMIC)||"",
+			c=this.getFieldValue("MODEL");
+	if (c == "YOLOv4_") {
+		var rot = "DEFAULT_YOLOV4TINY";
+	}
+	else {
+		var rot = "DEFAULT_YOLOV7TINY";
+	}
+  Blockly.Arduino.definitions_.define_amb82mini_rtsp_setting="#include \"WiFi.h\"\n#include \"StreamIO.h\"\n#include \"VideoStream.h\"\n#include \"RTSP.h\"\n#include \"NNObjectDetection.h\"\n#include \"VideoStreamOverlay.h\"\n\n#define CHANNEL   0\n#define CHANNELNN 3\n\n// Lower resolution for NN processing\n#define NNWIDTH  576\n#define NNHEIGHT 320\n\nVideoSetting config(VIDEO_HD, 30, VIDEO_H264, 0);\nVideoSetting configNN(NNWIDTH, NNHEIGHT, 30, VIDEO_RGB, 0);\nNNObjectDetection ObjDet;\nRTSP rtsp;\nStreamIO videoStreamer(1, 1);\nStreamIO videoStreamerNN(1, 1);\n\nchar ssid[] = "+a+";\nchar pass[] = "+b+";\nint status = WL_IDLE_STATUS;\nString class_name = \"\";\nint class_xmin = -1;\nint class_xmax = -1;\nint class_ymin = -1;\nint class_ymax = -1;\nIPAddress ip;\nint rtsp_portnum;\n\nstruct ObjectDetectionItem {\n    uint8_t index;\n    const char* objectName;\n    uint8_t filter;\n};\n\nObjectDetectionItem itemList[80] = {\n    {0,  \"person\",         1},\n    {1,  \"bicycle\",        1},\n    {2,  \"car\",            1},\n    {3,  \"motorbike\",      1},\n    {4,  \"aeroplane\",      1},\n    {5,  \"bus\",            1},\n    {6,  \"train\",          1},\n    {7,  \"truck\",          1},\n    {8,  \"boat\",           1},\n    {9,  \"traffic light\",  1},\n    {10, \"fire hydrant\",   1},\n    {11, \"stop sign\",      1},\n    {12, \"parking meter\",  1},\n    {13, \"bench\",          1},\n    {14, \"bird\",           1},\n    {15, \"cat\",            1},\n    {16, \"dog\",            1},\n    {17, \"horse\",          1},\n    {18, \"sheep\",          1},\n    {19, \"cow\",            1},\n    {20, \"elephant\",       1},\n    {21, \"bear\",           1},\n    {22, \"zebra\",          1},\n    {23, \"giraffe\",        1},\n    {24, \"backpack\",       1},\n    {25, \"umbrella\",       1},\n    {26, \"handbag\",        1},\n    {27, \"tie\",            1},\n    {28, \"suitcase\",       1},\n    {29, \"frisbee\",        1},\n    {30, \"skis\",           1},\n    {31, \"snowboard\",      1},\n    {32, \"sports ball\",    1},\n    {33, \"kite\",           1},\n    {34, \"baseball bat\",   1},\n    {35, \"baseball glove\", 1},\n    {36, \"skateboard\",     1},\n    {37, \"surfboard\",      1},\n    {38, \"tennis racket\",  1},\n    {39, \"bottle\",         1},\n    {40, \"wine glass\",     1},\n    {41, \"cup\",            1},\n    {42, \"fork\",           1},\n    {43, \"knife\",          1},\n    {44, \"spoon\",          1},\n    {45, \"bowl\",           1},\n    {46, \"banana\",         1},\n    {47, \"apple\",          1},\n    {48, \"sandwich\",       1},\n    {49, \"orange\",         1},\n    {50, \"broccoli\",       1},\n    {51, \"carrot\",         1},\n    {52, \"hot dog\",        1},\n    {53, \"pizza\",          1},\n    {54, \"donut\",          1},\n    {55, \"cake\",           1},\n    {56, \"chair\",          1},\n    {57, \"sofa\",           1},\n    {58, \"pottedplant\",    1},\n    {59, \"bed\",            1},\n    {60, \"diningtable\",    1},\n    {61, \"toilet\",         1},\n    {62, \"tvmonitor\",      1},\n    {63, \"laptop\",         1},\n    {64, \"mouse\",          1},\n    {65, \"remote\",         1},\n    {66, \"keyboard\",       1},\n    {67, \"cell phone\",     1},\n    {68, \"microwave\",      1},\n    {69, \"oven\",           1},\n    {70, \"toaster\",        1},\n    {71, \"sink\",           1},\n    {72, \"refrigerator\",   1},\n    {73, \"book\",           1},\n    {74, \"clock\",          1},\n    {75, \"vase\",           1},\n    {76, \"scissors\",       1},\n    {77, \"teddy bear\",     1},\n    {78, \"hair dryer\",     1},\n    {79, \"toothbrush\",     1},\n};";
+  Blockly.Arduino.definitions_.define_amb82mini_rtsp_setting_sub="void ODPostProcess(std::vector<ObjectDetectionResult> results)\n{\n    uint16_t im_h = config.height();\n    uint16_t im_w = config.width();\n    \n    OSD.createBitmap(CHANNEL);\n\n    if (ObjDet.getResultCount() > 0) {\n        for (int i = 0; i < ObjDet.getResultCount(); i++) {\n            int obj_type = results[i].type();\n            \n            if (itemList[obj_type].filter) {    // check if item should be ignored\n\n                ObjectDetectionResult item = results[i];\n                int xmin = (int)(item.xMin() * im_w);\n                int xmax = (int)(item.xMax() * im_w);\n                int ymin = (int)(item.yMin() * im_h);\n                int ymax = (int)(item.yMax() * im_h);\n                class_name = itemList[obj_type].objectName;\n                class_xmin = xmin;\n                class_xmax = xmax;\n                class_ymin = ymin;\n                class_ymax = ymax;\n                OSD.drawRect(CHANNEL, xmin, ymin, xmax, ymax, 3, OSD_COLOR_WHITE);\n                char text_str[20];\n                snprintf(text_str, sizeof(text_str), \"%s %d\", itemList[obj_type].objectName, item.score());\n                OSD.drawText(CHANNEL, xmin, ymin - OSD.getTextHeight(CHANNEL), text_str, OSD_COLOR_CYAN);\n            }\n            \n        }\n    }\n    else {\n      class_name = \"\";\n      class_xmin = -1;\n      class_xmax = -1;\n      class_ymin = -1;\n      class_ymax = -1;\n    }\n    OSD.update(CHANNEL);\n}";
+	Blockly.Arduino.setups_["setup_amb82mini_rtsp_wifi_connect_"]="while (status != WL_CONNECTED) {\n        Serial.print(\"Attempting to connect to WPA SSID: \");\n        Serial.println(ssid);\n        status = WiFi.begin(ssid, pass);\n        delay(2000);\n    }\n    ip = WiFi.localIP();\n\n    config.setBitrate(2 * 1024 * 1024);\n    Camera.configVideoChannel(CHANNEL, config);\n    Camera.configVideoChannel(CHANNELNN, configNN);\n    Camera.videoInit();\n\n    rtsp.configVideo(config);\n    rtsp.begin();\n    rtsp_portnum = rtsp.getPort();\n\n    ObjDet.configVideo(configNN);\n    ObjDet.setResultCallback(ODPostProcess);\n    ObjDet.modelSelect(OBJECT_DETECTION, "+rot+", NA_MODEL, NA_MODEL);\n    ObjDet.begin();\n\n    videoStreamer.registerInput(Camera.getStream(CHANNEL));\n    videoStreamer.registerOutput(rtsp);\n    if (videoStreamer.begin() != 0) {\n        Serial.println(\"StreamIO link start failed\");\n    }\n    Camera.channelBegin(CHANNEL);\n    videoStreamerNN.registerInput(Camera.getStream(CHANNELNN));\n    videoStreamerNN.setStackSize();\n    videoStreamerNN.setTaskPriority();\n    videoStreamerNN.registerOutput(ObjDet);\n    if (videoStreamerNN.begin() != 0) {\n        Serial.println(\"StreamIO link start failed\");\n    }\n    Camera.channelBegin(CHANNELNN);\n\n    OSD.configVideo(CHANNEL, config);\n    OSD.begin();";
 	return"";
 };
 
 Blockly.Arduino.amb82mini_get_wifi_ip=function(){
-	 return["\"rtsp://\"+String(WiFi.localIP())+\":554\"",Blockly.Arduino.ORDER_ATOMIC];
+	 return["\"rtsp://\"+String(WiFi.localIP()[0])+\".\"+String(WiFi.localIP()[1])+\".\"+String(WiFi.localIP()[2])+\".\"+String(WiFi.localIP()[3])+\":554\"",Blockly.Arduino.ORDER_ATOMIC];
 };
 
 Blockly.Arduino.amb82mini_capture_save_sd=function(){
 	Blockly.Arduino.definitions_.define_amb82mini_capture_save_sd_title="#include \"AmebaFatFS.h\"\nuint32_t img_addr = 0;\nuint32_t img_len = 0;\nAmebaFatFS fs;";
 	 var a=Blockly.Arduino.valueToCode(this,"Name",Blockly.Arduino.ORDER_ATOMIC)||"";
 	 return"fs.begin();\nFile file = fs.open(String(fs.getRootPath()) + String("+a+") + \".jpg\");\ndelay(1000);\nCamera.getImage(CHANNELJPEG, &img_addr, &img_len);\nfile.write((uint8_t*)img_addr, img_len);\nfile.close();\nfs.end();";
+};
+
+Blockly.Arduino.amb82mini_control_led=function(){
+  var a=this.getFieldValue("LED_STATE");
+	Blockly.Arduino.setups_["setup_amb82mini_control_led"]="pinMode(LED_BUILTIN, OUTPUT);\n";
+  if (a == "ON_") {
+    return"digitalWrite(LED_BUILTIN, HIGH);\n";
+  } else {
+		return"digitalWrite(LED_BUILTIN, LOW);\n";
+	}
+};
+
+Blockly.Arduino.amb82mini_get_infer_class=function(){
+	 var a=this.getFieldValue("INFER_CHOOSE");
+	 if (a == "class_") {
+		 return["class_name",Blockly.Arduino.ORDER_ATOMIC];
+	 }
+	 else if (a == "xmin_") {
+		 return["class_xmin",Blockly.Arduino.ORDER_ATOMIC];
+	 }
+	 else if (a == "xmax_") {
+		 return["class_xmax",Blockly.Arduino.ORDER_ATOMIC];
+	 }
+	 else if (a == "ymin_") {
+		 return["class_ymin",Blockly.Arduino.ORDER_ATOMIC];
+	 }
+	 else {
+		 return["class_ymax",Blockly.Arduino.ORDER_ATOMIC];
+	 }
 };
 
 // EZ Start Kit
